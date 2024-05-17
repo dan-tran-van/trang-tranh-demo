@@ -164,3 +164,9 @@ cython_debug/
 
 # Database
 *.sqlite3
+
+# Media
+media/
+
+# Migrations
+trang_tranh/migrations/
