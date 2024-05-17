@@ -168,5 +168,3 @@ cython_debug/
 # Media
 media/
 
-# Migrations
-trang_tranh/migrations/
