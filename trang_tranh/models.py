@@ -136,6 +136,16 @@ class Comic(models.Model):
     def get_absolute_url(self):
         """Returns the URL to access a detail record for this comic series."""
         return reverse("comic-detail", kwargs={"pk": self.pk})
+    
+    def is_valid(self):
+        valid_chapter_counter = 0
+        for chapter in self.comicchapter_set.all():
+            if chapter.is_valid():
+                valid_chapter_counter += 1
+                break
+        
+        return valid_chapter_counter != 0
+    
 
 
 class ComicAuthor(models.Model):
@@ -202,6 +212,16 @@ class ComicTranslation(models.Model):
             )
         ]
 
+    def is_valid(self):
+        valid_chapter_counter = 0
+        for chapter in self.comicchaptertranslation_set.all():
+            if chapter.is_valid():
+                valid_chapter_counter += 1
+                break
+        
+        return valid_chapter_counter != 0
+ 
+
 
 class ComicChapter(models.Model):
     """
@@ -238,6 +258,10 @@ class ComicChapter(models.Model):
         _("published date"), auto_now=False, auto_now_add=True
     )
 
+    def is_valid(self):
+        return self.chapterpage_set.all().count() != 0
+    
+
     def __str__(self):
         """String for representing a comic chapter"""
         return _("Chapter ") + f"{self.chapter_number} - {self.comic}"
@@ -262,6 +286,7 @@ class ComicChapter(models.Model):
                 name="comic_chapter_number_is_null_when_extra_chapter_is_true",
             ),
         ]
+
 
 
 class ComicChapterTranslation(models.Model):
@@ -294,6 +319,10 @@ class ComicChapterTranslation(models.Model):
 
     def __str__(self):
         return _("Chapter ") + f"{self.chapter_number} - {self.comic_translation}"
+    
+    def is_valid(self):
+        return self.chapterpagetranslation_set.all().count() != 0
+ 
 
     class Meta:
         constraints = [
@@ -345,20 +374,6 @@ class ChapterPage(models.Model):
             )
         ]
 
-    def clean(self):
-        if self.page_number > self.chapter.chapterpage_set.all().count() + 1:
-            raise ValidationError(
-                {
-                    "page_number": _(
-                        "Page number can not be larger than the total number of pages"
-                    )
-                }
-            )
-
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        return super().save(*args, **kwargs)
-
 
 class ChapterPageTranslation(models.Model):
     """Model representing a chapter page translation"""
@@ -389,18 +404,4 @@ class ChapterPageTranslation(models.Model):
                 name="unique_chapter_translation_page_number",
             )
         ]
-
-    def clean(self):
-        if self.page_number > self.chapter_translation.chapterpagetranslation_set.all().count() + 1:
-            raise ValidationError(
-                {
-                    "page_number": _(
-                        "Page number can not be larger than the total number of pages"
-                    )
-                }
-            )
-
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        return super().save(*args, **kwargs)
 

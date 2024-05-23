@@ -112,11 +112,13 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+
 USE_TZ = True
 
 LANGUAGES = [
     ("en", _("English")),
-    ("vi", _("Vietnamese"))
+    ("vi", _("Vietnamese")),
+    ("ja", _("Japanese"))
 ]
 
 

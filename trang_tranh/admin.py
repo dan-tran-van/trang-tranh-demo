@@ -40,7 +40,13 @@ class ComicChapterInline(admin.TabularInline):
 
 @admin.register(Comic)
 class ComicAdmin(admin.ModelAdmin):
-    list_display = ("title", "display_author", "publisher", "display_total_chapter")
+    list_display = (
+        "title",
+        "display_author",
+        "publisher",
+        "display_total_chapter",
+        "is_valid",
+    )
     list_filter = ("status", "schedule")
     search_fields = ["title"]
     inlines = [ComicTranslationInline, ComicChapterInline]
@@ -54,7 +60,11 @@ class ComicChapterTranslationInline(admin.TabularInline):
 
 @admin.register(ComicTranslation)
 class ComicTranslationAdmin(admin.ModelAdmin):
-    list_display = ("comic", "language")
+    list_display = (
+        "comic",
+        "language",
+        "is_valid",
+    )
     inlines = [ComicChapterTranslationInline]
 
 
@@ -77,6 +87,7 @@ class ComicChapterAdmin(admin.ModelAdmin):
         "chapter_counter",
         "title",
         "extra_chapter",
+        "is_valid",
     )
     list_filter = ("published_date",)
     search_fields = ["title"]
@@ -108,6 +119,7 @@ class ComicChapterTranslationAdmin(admin.ModelAdmin):
         "chapter_counter",
         "translated_title",
         "extra_chapter",
+        "is_valid",
     )
     search_fields = ["translated_title"]
     list_filter = ("published_date",)

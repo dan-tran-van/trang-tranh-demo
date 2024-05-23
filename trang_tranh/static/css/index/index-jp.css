@@ -1,0 +1,55 @@
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
+  writing-mode: vertical-rl;
+}
+
+:root {
+  --primary-color: #FFB7C5;
+  --background-color: white;
+  --text-color: black;
+  --gray-like-color: rgb(206, 206, 206);
+
+  @media (prefers-color-scheme: dark) {
+    --background-color: black;
+    --text-color: white;
+    --gray-like-color: rgb(39, 39, 39);
+  }
+}
+
+body {
+  margin: 0px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  inline-size: 100vh;
+}
+
+.cherry-bomb-one-regular {
+  font-family: "Cherry Bomb One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nav__logo img {
+  inline-size: 32px;
+}
+.chapter__comic-cover img {
+  border-radius: 8px;
+  aspect-ratio: 2 / 3;
+  inline-size: 160px;
+  flex: 1
+}
+
+.publisher__avatar img {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  inline-size: 40px;
+}
+
+@media (orientation: landscape) {
+
+}
+
+@media (orientation: portrait) {
+  
+}

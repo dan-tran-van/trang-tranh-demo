@@ -1,0 +1,103 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block stylesheets %}
+    {% if LANGUAGE_CODE == 'ja' %}
+        <link rel="stylesheet" href="{% static "css/index/index-jp.css" %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static "css/index/index.css" %}">
+    {% endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+{% endblock stylesheets %}
+{% block javascripts %}{% endblock javascripts %}
+
+{% block content %}
+    {% block naviagtion %}
+        <nav>
+            <div class="nav__logo">
+                <img src="{% static "images/icons/svgs/trang-tranh-logo.svg" %}" alt="Logo">
+                <span class='cherry-bomb-one-regular'>Trang tranh</span>
+            </div>
+       </nav>
+    {% endblock naviagtion %}
+
+    {% block main %}
+       <main>
+            <div class="main__nav-reserved-space"></div>
+            <div class="main__update">
+                {% for chapter in updated_chapters %}
+                    {% if chapter.is_valid %}
+                        {% for translation in chapter.comic.comictranslation_set.all %}
+                            {% for chapter_translation in translation.comicchaptertranslation_set.all %}
+                                {% if forloop.last and translation.language != LANGUAGE_CODE and chapter_translation.chapter_counter != chapter.chapter_counter %}
+                                    <div class="update__chapter">
+                                        <div class="chapter__comic-cover">
+                                            <img src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
+                                        </div>
+
+                                        <div class="chapter__at-glance">
+                                            <div class="at-glance__title">
+                                                {{ chapter.comic.title }}
+                                            </div>
+                                            {% if chapter.extra_chapter %}
+                                                <div class="at-glance__chapter-number">Ex</div>
+                                            {% else %}
+                                                <div class="at-glance__chapter-number">{{ chapter.chapter_number }}</div>
+                                            {% endif %}
+                                            <div class="at-glance__chapter-author">{{ chapter.comic.display_author }}</div>
+                                            <div class="at-glance__publisher">
+                                                <div class="publisher__avatar">
+                                                    <img src="{{ chapter.comic.publisher.avatar.url }}" alt="Publisher avatar">
+                                                </div>
+                                                <div class="publisher__name">
+                                                    {{ chapter.comic.publisher.name }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% elif translation.language == LANGUAGE_CODE and chapter_translation.chapter_counter == chapter.chapter_counter %}
+                                    <div class="update__chapter">
+                                        <div class="chapter__comic-cover">
+                                            <img src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
+                                        </div>
+
+                                        <div class="chapter__at-glance">
+                                            <div class="at-glance__title">
+                                                {{ translation.translated_title }}
+                                            </div>
+                                            {% if chapter_translation.extra_chapter %}
+                                                <div class="at-glance__chapter-number">Ex</div>
+                                            {% else %}
+                                                <div class="at-glance__chapter-number">{{ chapter_translation.chapter_number }}</div>
+                                            {% endif %}
+                                            <div class="at-glance__chapter-author">{{ chapter.comic.display_author }}</div>
+                                            <div class="at-glance__publisher">
+                                                <div class="publisher__avatar">
+                                                    <img src="{{ chapter.comic.publisher.avatar.url }}" alt="Publisher avatar">
+                                                </div>
+                                                <div class="publisher__name">
+                                                    {{ chapter.comic.publisher.name }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="main__query-reserved-space"></div>
+       </main>
+    {% endblock main %}
+    <div class="query">
+        <form action="">
+            <input type="search">
+        </form>
+    </div>
+ 
+{% endblock content %}
