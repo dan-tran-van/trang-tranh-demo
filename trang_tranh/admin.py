@@ -2,13 +2,14 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .models import (
-    ChapterPage,
-    ChapterPageTranslation,
+    Author,
+    AuthorTranslation,
+    Chapter,
+    ChapterTranslation,
     Comic,
-    ComicAuthor,
-    ComicChapter,
-    ComicChapterTranslation,
     ComicTranslation,
+    Page,
+    PageTranslation,
     User,
     UserProfile,
 )
@@ -26,14 +27,15 @@ admin.site.register(User, UserAdmin)
 # admin.site.register(UserProfile)
 
 
+
 class ComicTranslationInline(admin.TabularInline):
     model = ComicTranslation
     extra = 0
     show_change_link = True
 
 
-class ComicChapterInline(admin.TabularInline):
-    model = ComicChapter
+class ChapterInline(admin.TabularInline):
+    model = Chapter
     extra = 0
     show_change_link = True
 
@@ -49,11 +51,11 @@ class ComicAdmin(admin.ModelAdmin):
     )
     list_filter = ("status", "schedule")
     search_fields = ["title"]
-    inlines = [ComicTranslationInline, ComicChapterInline]
+    inlines = [ComicTranslationInline, ChapterInline]
 
 
-class ComicChapterTranslationInline(admin.TabularInline):
-    model = ComicChapterTranslation
+class ChapterTranslationInline(admin.TabularInline):
+    model = ChapterTranslation
     extra = 0
     show_change_link = True
 
@@ -63,71 +65,92 @@ class ComicTranslationAdmin(admin.ModelAdmin):
     list_display = (
         "comic",
         "language",
+        "title",
         "is_valid",
+        "display_authors",
     )
-    inlines = [ComicChapterTranslationInline]
+    inlines = [ChapterTranslationInline]
 
 
-@admin.register(ComicAuthor)
-class ComicAuthorAdmin(admin.ModelAdmin):
-    search_fields = ["pen_name"]
+@admin.register(AuthorTranslation)
+class AuthorTranslationAdmin(admin.ModelAdmin):
+    list_display = (
+        "author",
+        "language",
+        "pen_name",
+    )
 
-
-class ChapterPageInline(admin.TabularInline):
-    model = ChapterPage
+class AuthorTranslationInline(admin.TabularInline):
+    model = AuthorTranslation
     extra = 0
     show_change_link = True
 
 
-@admin.register(ComicChapter)
-class ComicChapterAdmin(admin.ModelAdmin):
+
+@admin.register(Author)
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = (
+        "pen_name",
+        "default_language",
+    )
+    search_fields = ["pen_name"]
+    inlines = [AuthorTranslationInline]
+
+
+class PageInline(admin.TabularInline):
+    model = Page
+    extra = 0
+    show_change_link = True
+
+
+@admin.register(Chapter)
+class ChapterAdmin(admin.ModelAdmin):
     list_display = (
         "comic",
-        "chapter_number",
-        "chapter_counter",
+        "number",
+        "counter",
         "title",
-        "extra_chapter",
+        "extra",
         "is_valid",
     )
     list_filter = ("published_date",)
     search_fields = ["title"]
-    inlines = [ChapterPageInline]
+    inlines = [PageInline, ChapterTranslationInline]
 
 
-@admin.register(ChapterPage)
-class ChapterPageAdmin(admin.ModelAdmin):
-    list_display = ("chapter", "display_chapter_counter", "page_number")
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    list_display = ("chapter", "display_chapter_counter", "number")
     search_fields = [
         "chapter__comic__title",
-        "page_number",
-        "chapter__chapter_number",
-        "chapter__chapter_counter",
+        "number",
+        "chapter__number",
+        "chapter__counter",
     ]
 
 
-class ChapterPageTranslationInline(admin.TabularInline):
-    model = ChapterPageTranslation
+class PageTranslationInline(admin.TabularInline):
+    model = PageTranslation
     extra = 0
     show_change_link = True
 
 
-@admin.register(ComicChapterTranslation)
-class ComicChapterTranslationAdmin(admin.ModelAdmin):
+@admin.register(ChapterTranslation)
+class ChapterTranslationAdmin(admin.ModelAdmin):
     list_display = (
         "comic_translation",
-        "chapter_number",
-        "chapter_counter",
-        "translated_title",
-        "extra_chapter",
+        "display_chapter_number",
+        "display_chapter_counter",
+        "title",
         "is_valid",
-    )
-    search_fields = ["translated_title"]
+   )
+    search_fields = ["title"]
     list_filter = ("published_date",)
-    inlines = [ChapterPageTranslationInline]
+    inlines = [PageTranslationInline]
 
 
-@admin.register(ChapterPageTranslation)
-class ChapterPageTranslationAdmin(admin.ModelAdmin):
+@admin.register(PageTranslation)
+class PageTranslationAdmin(admin.ModelAdmin):
     pass
 
 

@@ -8,7 +8,7 @@
   --primary-color: #FFB7C5;
   --background-color: white;
   --text-color: black;
-  --gray-like-color: rgb(206, 206, 206);
+  --gray-like-color: rgb(229, 229, 229);
 
   @media (prefers-color-scheme: dark) {
     --background-color: black;
@@ -62,6 +62,8 @@ main {
   inline-size: calc(100vw - 480px);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  padding: 8px;
+  gap: 8px;
 }
 
 .main__nav-reserved-space,
@@ -73,6 +75,20 @@ main {
 
 .nav__logo img {
   inline-size: 32px;
+}
+
+.update__chapter {
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  border-radius: 8px;
+  block-size: fit-content;
+  inline-size: fit-content;
+}
+
+.update__chapter:hover {
+  background-color: var(--gray-like-color);
 }
 
 .chapter__comic-cover img {
@@ -92,12 +108,7 @@ main {
   inline-size: 40px;
 }
 
-.update__chapter {
-  padding: 12px;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
+
 
 @media (orientation: landscape) {
   main {

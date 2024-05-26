@@ -1,3 +1,4 @@
+from typing import Iterable
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -39,7 +40,7 @@ class Comic(models.Model):
     Model representing a comic series.
     """
 
-    title = models.CharField(max_length=200, help_text=_("Enter a comic title"))
+    title = models.CharField(_("title"), max_length=200)
 
     vertical_cover = models.ImageField(
         _("vertical cover"),
@@ -55,6 +56,8 @@ class Comic(models.Model):
         height_field=None,
         width_field=None,
         max_length=None,
+        blank=True,
+        null=True,
     )
 
     square_cover = models.ImageField(
@@ -67,7 +70,7 @@ class Comic(models.Model):
         null=True,
     )
 
-    author = models.ManyToManyField("ComicAuthor", verbose_name=_("comic author"))
+    author = models.ManyToManyField("Author", verbose_name=_("author"))
 
     read_count = models.PositiveIntegerField(_("read count"), default=0, editable=False)
 
@@ -79,9 +82,7 @@ class Comic(models.Model):
         "UserProfile", verbose_name=_("publisher"), on_delete=models.PROTECT
     )
 
-    summary = models.TextField(
-        _("comic summary"), max_length=1000, blank=True, null=True
-    )
+    summary = models.TextField(_("summary"), max_length=1000, blank=True, null=True)
 
     default_language = models.CharField(
         _("default language"), max_length=10, choices=settings.LANGUAGES, default="en"
@@ -100,7 +101,7 @@ class Comic(models.Model):
     )
 
     schedule = models.CharField(
-        _("serializing schedule"),
+        _("schedule"),
         max_length=1,
         default="w",
         choices=SERIALIZED_SCHEDULE,
@@ -108,7 +109,7 @@ class Comic(models.Model):
     )
 
     status = models.CharField(
-        _("series status"),
+        _("status"),
         max_length=1,
         choices=SERIALIZED_STATUS,
         default="o",
@@ -128,35 +129,99 @@ class Comic(models.Model):
 
     display_author.short_description = "Author"
 
+    def display_authors(self):
+        representative_authors = []
+        for author in self.author.all():
+            if author.authortranslation_set.all():
+                found = False
+                for translation in author.authortranslation_set.all():
+                    if translation.language == self.default_language:
+                        representative_authors.append(translation.pen_name)
+                        found = True
+                        break
+                if found == False:
+                    representative_authors.append(author.pen_name)
+            else:
+                representative_authors.append(author.pen_name)
+        
+        return " | ".join(representative_authors)
+
+
+
     def display_total_chapter(self):
-        return self.comicchapter_set.all().count()
+        return self.chapter_set.all().count()
 
     display_total_chapter.short_description = "Total chapter"
 
     def get_absolute_url(self):
         """Returns the URL to access a detail record for this comic series."""
         return reverse("comic-detail", kwargs={"pk": self.pk})
-    
+
     def is_valid(self):
         valid_chapter_counter = 0
-        for chapter in self.comicchapter_set.all():
+        for chapter in self.chapter_set.all():
             if chapter.is_valid():
                 valid_chapter_counter += 1
                 break
-        
+
         return valid_chapter_counter != 0
-    
 
 
-class ComicAuthor(models.Model):
+class Author(models.Model):
     pen_name = models.CharField(
         _("pen name"), max_length=200, help_text=_("Enter the (pen) name of the author")
+    )
+
+    default_language = models.CharField(
+        _("default language"),
+        max_length=10,
+        choices=settings.LANGUAGES,
+        default="en",
     )
 
     def __str__(self):
         """String for representing the comic author"""
         return self.pen_name
 
+
+class AuthorTranslation(models.Model):
+    author = models.ForeignKey(
+        "Author", verbose_name=_("author"), on_delete=models.PROTECT
+    )
+
+    language = models.CharField(
+        _("translation language"),
+        max_length=10,
+        choices=settings.LANGUAGES,
+        default="en",
+    )
+
+    pen_name = models.CharField(_("pen name"), max_length=200)
+
+    def clean(self):
+        if self.language == self.author.default_language:
+            raise ValidationError(
+                {
+                    "language": _(
+                        "Translation language can not be the same as the default language"
+                    )
+                }
+            )
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.language} - {self.author}    "
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                fields=['author', 'language'],
+                name='unique_author_language',
+            )
+        ]
 
 class ComicTranslation(models.Model):
     """
@@ -174,17 +239,34 @@ class ComicTranslation(models.Model):
         default="en",
     )
 
-    translated_title = models.CharField(
+    title = models.CharField(
         _("translated title"),
         max_length=200,
         help_text=_("Enter a translated title for the comic"),
     )
 
-    translated_summary = models.TextField(
+    summary = models.TextField(
         _("translated summary"),
         max_length=1000,
         help_text=_("Enter a translated summary for the comic"),
     )
+
+    def display_authors(self):
+        representative_authors = []
+        for author in self.comic.author.all():
+            if author.authortranslation_set.all():
+                found = False
+                for translation in author.authortranslation_set.all():
+                    if translation.language == self.language:
+                        representative_authors.append(translation.pen_name)
+                        found = True
+                        break
+                if found == False:
+                    representative_authors.append(author.pen_name)
+            else:
+                representative_authors.append(author.pen_name)
+        
+        return ", ".join(representative_authors)
 
     def __str__(self):
         """String for representing the comic translation"""
@@ -214,16 +296,15 @@ class ComicTranslation(models.Model):
 
     def is_valid(self):
         valid_chapter_counter = 0
-        for chapter in self.comicchaptertranslation_set.all():
+        for chapter in self.chaptertranslation_set.all():
             if chapter.is_valid():
                 valid_chapter_counter += 1
                 break
-        
+
         return valid_chapter_counter != 0
- 
 
 
-class ComicChapter(models.Model):
+class Chapter(models.Model):
     """
     Model representing a comic chapter.
     """
@@ -233,24 +314,24 @@ class ComicChapter(models.Model):
     )
 
     cover = models.ImageField(
-        _("chapter cover"),
+        _("cover"),
         upload_to="chapter-covers/",
         height_field=None,
         width_field=None,
         max_length=None,
     )
-    title = models.CharField(_("chapter title"), max_length=200)
+    title = models.CharField(_("title"), max_length=200)
 
-    chapter_number = models.PositiveSmallIntegerField(
-        _("chapter number"),
+    number = models.PositiveSmallIntegerField(
+        _("number"),
         default=1,
         blank=True,
         null=True,
     )
 
-    chapter_counter = models.PositiveSmallIntegerField(_("chapter counter"), default=1)
+    counter = models.PositiveSmallIntegerField(_("counter"), default=1)
 
-    extra_chapter = models.BooleanField(_("extra chapter"), default=False)
+    extra = models.BooleanField(_("is extra chapter?"), default=False)
 
     read_count = models.PositiveIntegerField(_("read count"), default=0, editable=False)
 
@@ -259,38 +340,40 @@ class ComicChapter(models.Model):
     )
 
     def is_valid(self):
-        return self.chapterpage_set.all().count() != 0
-    
+        return self.page_set.all().count() != 0
 
     def __str__(self):
         """String for representing a comic chapter"""
-        return _("Chapter ") + f"{self.chapter_number} - {self.comic}"
+        return _("Chapter ") + f"{self.number} - {self.comic}"
 
     class Meta:
         constraints = [
             UniqueConstraint(
-                fields=["comic", "chapter_number"],
-                name="unique_comic_chapter_number",
+                fields=["comic", "number"],
+                name="unique_chapter_number",
             ),
             UniqueConstraint(
-                fields=["comic", "chapter_counter"],
-                name="unique_comic_chapter_counter",
+                fields=["comic", "counter"],
+                name="unique_chapter_counter",
             ),
             UniqueConstraint(
-                fields=["comic", "chapter_counter", "chapter_number"],
-                name="unique_comic_chapter_counter_and_chapter_number",
+                fields=["comic", "counter", "number"],
+                name="unique_chapter_counter_and_chapter_number",
             ),
             CheckConstraint(
-                check=(Q(chapter_number__isnull=True) & Q(extra_chapter__exact=True))
-                | (Q(chapter_number__isnull=False) & Q(extra_chapter__exact=False)),
-                name="comic_chapter_number_is_null_when_extra_chapter_is_true",
+                check=(Q(number__isnull=True) & Q(extra__exact=True))
+                | (Q(number__isnull=False) & Q(extra__exact=False)),
+                name="chapter_number_is_null_when_extra_chapter_is_true",
             ),
         ]
 
 
-
-class ComicChapterTranslation(models.Model):
+class ChapterTranslation(models.Model):
     """Model representing a chapter translation"""
+
+    chapter = models.ForeignKey(
+        "Chapter", verbose_name=_("chapter"), on_delete=models.PROTECT
+    )
 
     comic_translation = models.ForeignKey(
         "ComicTranslation",
@@ -298,93 +381,93 @@ class ComicChapterTranslation(models.Model):
         on_delete=models.PROTECT,
     )
 
-    chapter_number = models.PositiveSmallIntegerField(
-        _("chapter number"),
-        default=1,
-        blank=True,
-        null=True,
-    )
-
-    translated_title = models.CharField(_("translated title"), max_length=200)
+    title = models.CharField(_("translated title"), max_length=200)
 
     published_date = models.DateField(
         _("published date"), auto_now=False, auto_now_add=True
     )
 
-    chapter_counter = models.PositiveSmallIntegerField(_("chapter counter"), default=1)
-
     read_count = models.PositiveIntegerField(_("read count"), default=0, editable=False)
 
-    extra_chapter = models.BooleanField(_("extra chapter"), default=False)
+    def display_chapter_counter(self):
+        return self.chapter.counter
+
+    display_chapter_counter.short_description = "counter"
+
+    def display_chapter_number(self):
+        return self.chapter.number
+
+    display_chapter_number.short_description = "number"
 
     def __str__(self):
-        return _("Chapter ") + f"{self.chapter_number} - {self.comic_translation}"
-    
+        return _("Chapter ") + f"{self.chapter.number} - {self.comic_translation}"
+
     def is_valid(self):
-        return self.chapterpagetranslation_set.all().count() != 0
- 
+        return self.pagetranslation_set.all().count() != 0
 
     class Meta:
         constraints = [
             UniqueConstraint(
-                fields=["comic_translation", "chapter_number"],
-                name="unique_comic_translation_chapter_number",
-            ),
-            UniqueConstraint(
-                fields=["comic_translation", "chapter_counter"],
-                name="unique_comic_translation_chapter_counter",
-            ),
-            UniqueConstraint(
-                fields=["comic_translation", "chapter_counter", "chapter_number"],
-                name="comic_translation_chapter_counter_and_chapter_number",
-            ),
+                fields=["chapter", "comic_translation"],
+                name="unique_chapter_per_comic_translation",
+            )
         ]
 
+    def clean(self) -> None:
+        if self.chapter.comic != self.comic_translation.comic:
+            raise ValidationError(
+                _("Chapter's comic must be the same as Comic translation's comic")
+            )
 
-class ChapterPage(models.Model):
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
+
+
+class Page(models.Model):
     """Model representing the default language chapter page"""
 
     chapter = models.ForeignKey(
-        "ComicChapter", verbose_name=_("comic chapter"), on_delete=models.PROTECT
+        "Chapter", verbose_name=_("chapter"), on_delete=models.PROTECT
     )
 
-    page_image = models.ImageField(
-        _("page image"),
+    image = models.ImageField(
+        _("image"),
         upload_to="page-images/",
         height_field=None,
         width_field=None,
         max_length=None,
     )
 
-    page_number = models.PositiveSmallIntegerField(_("page number"), default=1)
+    number = models.PositiveSmallIntegerField(_("number"), default=1)
 
     def display_chapter_counter(self):
-        return self.chapter.chapter_counter
+        return self.chapter.counter
 
     display_chapter_counter.short_description = "Chapter counter"
 
     def __str__(self):
-        return _("Page ") + f"{self.page_number} - {self.chapter}"
+        return _("Page ") + f"{self.number} - {self.chapter}"
 
     class Meta:
         constraints = [
             UniqueConstraint(
-                fields=["chapter", "page_number"],
-                name="unique_chapter_page_number",
+                fields=["chapter", "number"],
+                name="unique_page_number",
             )
         ]
 
 
-class ChapterPageTranslation(models.Model):
+class PageTranslation(models.Model):
     """Model representing a chapter page translation"""
 
     chapter_translation = models.ForeignKey(
-        "ComicChapterTranslation",
+        "ChapterTranslation",
         verbose_name=_("chapter translation"),
         on_delete=models.PROTECT,
     )
 
-    page_image = models.ImageField(
+    image = models.ImageField(
         _("page image"),
         upload_to="page-image-translations/",
         height_field=None,
@@ -392,16 +475,15 @@ class ChapterPageTranslation(models.Model):
         max_length=None,
     )
 
-    page_number = models.PositiveSmallIntegerField(_("page number"), default=1)
+    number = models.PositiveSmallIntegerField(_("page number"), default=1)
 
     def __str__(self):
-        return _("Page ") + f"{self.page_number} - {self.chapter_translation}"
+        return _("Page ") + f"{self.number} - {self.chapter_translation}"
 
     class Meta:
         constraints = [
             UniqueConstraint(
-                fields=["chapter_translation", "page_number"],
-                name="unique_chapter_translation_page_number",
+                fields=["chapter_translation", "number"],
+                name="unique_page_translation_number",
             )
         ]
-
