@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static "css/comic-translation-detail/comic-translation-detail.css" %}">
+{% endblock stylesheets %}
+
+{% block main %}
+    <main>
+        <div class="main__nav-reserved-space"></div>
+        <div class="main__content">
+            <div class="content__start">
+                <div class="start__nav"></div>
+                <div class="start__overview">
+                    <div class="overview__comic-cover">
+                        {% if comic_translation.comic.horizontal_cover %}
+                            <img src="{{ comic_translation.comic.horizontal_cover.url }}" alt="Comic cover">
+                        {% else %}
+                            <img src="{{ comic_translation.comic.vertical_cover.url }}" alt="Comic cover">
+                        {% endif %}
+                    </div>               
+                    <div class="overview__at-glance">
+                        <div class="at-glance__comic-title">
+                            {{ comic_translation.title }}
+                        </div>
+                        <div class="at-glance__comic-authors">
+                            {{ comic_translation.display_authors }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+{% endblock main  %}

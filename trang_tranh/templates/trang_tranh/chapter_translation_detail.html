@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% block stylesheets %}{% endblock stylesheets %}
+{% block title %}
+    <title>#{{ chapter_translation.chapter.number }} - {{ chapter_translation.comic_translation.title }} | Trang tranh</title>
+{% endblock title %}
+{% block javascripts %}{% endblock javascripts %}
+{% block meta %}{% endblock meta %}
+
+
+
+{% block content %}
+    {% for page in chapter_translation.pagetranslation_set.all %}
+        <img src="{{ page.image.url }}" alt="Page image">
+    {% endfor %}
+{% endblock content %}

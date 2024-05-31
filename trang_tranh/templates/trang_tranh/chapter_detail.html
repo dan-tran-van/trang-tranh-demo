@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% block stylesheets %}{% endblock stylesheets %}
+{% block title %}
+    <title>#{{ chapter.number }} - {{ chapter.comic.title }} | Trang tranh</title>
+{% endblock title %}
+{% block javascripts %}{% endblock javascripts %}
+{% block meta %}{% endblock meta %}
+
+{% block content %}
+    {% for page in chapter.page_set.all %}
+        <img src="{{ page.image.url }}" alt="Page image">
+    {% endfor %}
+{% endblock content %}

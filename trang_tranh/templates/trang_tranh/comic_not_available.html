@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% load i18n %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+    <p>{% translate "Comic only available in the following languages:" %}</p>
+    <ul>
+        <li>{{ comic.get_default_language_display }}</li>
+        {% for comic_translaion in comic.comictranslation_set.all %}
+            <li>{{ comic_translation.get_language_display }}</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

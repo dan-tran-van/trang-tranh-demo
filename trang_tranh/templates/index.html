@@ -3,15 +3,19 @@
 {% load static %}
 {% get_current_language as LANGUAGE_CODE %}
 
+
+{% block fonts %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+{% endblock fonts %}
+
 {% block stylesheets %}
     {% if LANGUAGE_CODE == 'ja' %}
         <link rel="stylesheet" href="{% static "css/index/index-jp.css" %}">
     {% else %}
         <link rel="stylesheet" href="{% static "css/index/index.css" %}">
     {% endif %}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
 {% endblock stylesheets %}
 {% block javascripts %}{% endblock javascripts %}
 
@@ -19,9 +23,33 @@
     {% block naviagtion %}
         <nav>
             <div class="nav__logo">
-                <img src="{% static "images/icons/svgs/trang-tranh-logo.svg" %}" alt="Logo">
-                <span class='cherry-bomb-one-regular' class="logo__brand-name">Trang tranh</span>
+                <a href="{% url "index" %}">
+                    <img src="{% static "images/icons/svgs/trang-tranh-logo.svg" %}" alt="Logo">
+                    <span class='cherry-bomb-one-regular' class="logo__brand-name">Trang tranh</span>
+                </a>
             </div>
+            {% block nav__home %}
+                <div class="nav__element nav__home nav__element--active">
+                    <a href="{% url "index" %}">
+                        <img src="{% static "images/icons/svgs/nav/home_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Home">
+                        <div class="nav__description">{% translate "Home" %}</div>
+                    </a>
+                </div>
+            {% endblock nav__home %}
+
+            {% block nav__feed %}
+                <div class="nav__element nav__feed">
+                    <a href="">
+                        <img src="{% static "images/icons/svgs/nav/alternate_email_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Feed">
+                        <div class="nav__description">{% translate "Feed" %}</div>
+                    </a>
+                </div>
+
+            {% endblock nav__feed %}
+
+            {% block nav__notifications %}
+
+            {% endblock nav__notifications %}
        </nav>
     {% endblock naviagtion %}
 
@@ -31,54 +59,59 @@
             <div class="main__update">
                 {% for chapter in updated_chapters %}
                     {% if chapter.comic.default_language == LANGUAGE_CODE %}
-                        <div class="update__chapter">
-                            <div class="chapter__comic-cover">
-                                <img src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
+                        <a href="{{ chapter.get_absolute_url }}">
+                            <div class="update__chapter">
+                                <div class="chapter__comic-cover">
+                                    <img src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
+                                </div>
+                                <div class="chapter__at-glance">
+                                    <div class="at-glance__title">
+                                        {{ chapter.comic.title }}
+                                    </div>
+                                    <div class="at-glance__chapter-number">
+                                        {{ chapter.number }}
+                                    </div>
+                                    <div class="at-glance__authors">
+                                        {{ chapter.comic.display_authors }}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="chapter__at-glance">
-                                <div class="at-glance__title">
-                                    {{ chapter.comic.title }}
-                                </div>
-                                <div class="at-glance__chapter-number">
-                                    {{ chapter.number }}
-                                </div>
-                                <div class="at-glance__authors">
-                                    {{ chapter.comic.display_authors }}
-                                </div>
-                            </div>
-                        </div>
+                        </a>
                     {% elif chapter.comic.default_language != LANGUAGE_CODE and chapter.chaptertranslation_set.all %}
                         {% for translation in chapter.chaptertranslation_set.all %}
                             {% if translation.comic_translation.language == LANGUAGE_CODE and translation.is_valid %}
-                                <div class="update__chapter">
-                                    <div class="chapter__comic-cover">
-                                        <img src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
+                                <a href="{{ translation.get_absolute_url }}">
+                                    <div class="update__chapter">
+                                        <div class="chapter__comic-cover">
+                                            <img src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
+                                        </div>
+                                        <div class="chapter__at-glance">
+                                            <div class="at-glance__title">
+                                                {{ translation.comic_translation.title }}
+                                            </div>
+                                            <div class="at-glance__chapter-number">
+                                                {{ chapter.number }}
+                                            </div>
+                                            <div class="at-glance__authors">
+                                                {{ translation.comic_translation.display_authors }}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="chapter__at-glance">
-                                        <div class="at-glance__title">
-                                            {{ translation.comic_translation.title }}
-                                        </div>
-                                        <div class="at-glance__chapter-number">
-                                            {{ chapter.number }}
-                                        </div>
-                                        <div class="at-glance__authors">
-                                            {{ translation.comic_translation.display_authors }}
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
                             {% endif %}
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
             </div>
             <div class="main__query-reserved-space"></div>
-       </main>
+            {% block query %}
+                <div class="query">
+                    <form action="">
+                        <input type="search">
+                    </form>
+                </div>
+            {% endblock query %}
+        </main>
     {% endblock main %}
-    {% block query %}
-        <div class="query">
-            <form action="">
-                <input type="search">
-            </form>
-        </div>
-    {% endblock query %}
+
 {% endblock content %}

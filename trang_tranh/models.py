@@ -1,14 +1,12 @@
-from typing import Iterable
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import CheckConstraint, Q, UniqueConstraint
+from django.db.models.functions import Lower
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.db.models import CheckConstraint
-from django.db.models.functions import Lower
-from django.db.models import Q
-from django.db.models import UniqueConstraint
-from django.core.exceptions import ValidationError
+
 # Create your models here.
 
 
@@ -143,10 +141,8 @@ class Comic(models.Model):
                     representative_authors.append(author.pen_name)
             else:
                 representative_authors.append(author.pen_name)
-        
+
         return " | ".join(representative_authors)
-
-
 
     def display_total_chapter(self):
         return self.chapter_set.all().count()
@@ -211,17 +207,18 @@ class AuthorTranslation(models.Model):
     def save(self, *args, **kwargs):
         self.full_clean()
         return super().save(*args, **kwargs)
-    
+
     def __str__(self):
         return f"{self.language} - {self.author}    "
 
     class Meta:
         constraints = [
             UniqueConstraint(
-                fields=['author', 'language'],
-                name='unique_author_language',
+                fields=["author", "language"],
+                name="unique_author_language",
             )
         ]
+
 
 class ComicTranslation(models.Model):
     """
@@ -265,8 +262,8 @@ class ComicTranslation(models.Model):
                     representative_authors.append(author.pen_name)
             else:
                 representative_authors.append(author.pen_name)
-        
-        return ", ".join(representative_authors)
+
+        return " | ".join(representative_authors)
 
     def __str__(self):
         """String for representing the comic translation"""
@@ -367,6 +364,9 @@ class Chapter(models.Model):
             ),
         ]
 
+    def get_absolute_url(self):
+        return reverse("chapter-detail", kwargs={"pk": self.pk})
+
 
 class ChapterTranslation(models.Model):
     """Model representing a chapter translation"""
@@ -422,6 +422,15 @@ class ChapterTranslation(models.Model):
     def save(self, *args, **kwargs):
         self.full_clean()
         return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(
+            "chapter-translation-detail",
+            kwargs={
+                "pk": self.chapter.pk,
+                "lang": self.comic_translation.language,
+            },
+        )
 
 
 class Page(models.Model):
