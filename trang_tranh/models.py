@@ -1,3 +1,4 @@
+from typing import Any
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
@@ -31,6 +32,10 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("profile-detail", kwargs={"pk": self.pk})
+    
 
 
 class Comic(models.Model):
@@ -367,6 +372,11 @@ class Chapter(models.Model):
     def get_absolute_url(self):
         return reverse("chapter-detail", kwargs={"pk": self.pk})
 
+    @property
+    def sorted_page_set(self):
+        return self.page_set.order_by('number')
+
+
 
 class ChapterTranslation(models.Model):
     """Model representing a chapter translation"""
@@ -431,6 +441,12 @@ class ChapterTranslation(models.Model):
                 "lang": self.comic_translation.language,
             },
         )
+    
+    @property
+    def sorted_page_set(self):
+        return self.pagetranslation_set.order_by('number')
+
+
 
 
 class Page(models.Model):
@@ -496,3 +512,92 @@ class PageTranslation(models.Model):
                 name="unique_page_translation_number",
             )
         ]
+
+
+class Post(models.Model):
+    user_profile = models.ForeignKey(
+        "UserProfile", verbose_name=_("user profile"), on_delete=models.CASCADE
+    )
+    text_content = models.TextField(_("text content"), max_length=1000)
+    created_time = models.DateTimeField(
+        _("created time"), auto_now=False, auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        _("last modified"), auto_now=True, auto_now_add=False
+    )
+
+    WRITING_MODE = (
+        ("h-tb", _("horizontal-tb")),
+        ("v-rl", _("vertical-rl")),
+        ("v-lr", _("vertical-lr")),
+    )
+
+    writing_mode = models.CharField(
+        _("writing mode"),
+        max_length=10,
+        choices=WRITING_MODE,
+        default="h-tb",
+    )
+
+    like = models.IntegerField(_("like count"), editable=False, default=0)
+
+    reply_to = models.ForeignKey(
+        "self",
+        verbose_name=_("reply to"),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        return str(self.id)
+
+    def get_absolute_url(self):
+        return reverse("post-detail", kwargs={"pk": self.pk})
+
+    
+
+class PostMedia(models.Model):
+    post = models.ForeignKey(
+        "Post", verbose_name=_("post media"), on_delete=models.CASCADE
+    )
+
+    image = models.ImageField(
+        _("image"),
+        upload_to="post-images",
+        height_field=None,
+        width_field=None,
+        max_length=None,
+    )
+
+    alt_text = models.TextField(_("alternative text"), max_length=1000)
+
+
+class Language(models.Model):
+    name = models.CharField(
+        _("name"),
+        max_length=10,
+        choices=settings.LANGUAGES,
+    )
+
+    WRITING_MODE = (
+        ("h-tb", _("horizontal-tb")),
+        ("v-rl", _("vertical-rl")),
+        ("v-lr", _("vertical-lr")),
+    )
+
+    writing_mode = models.CharField(
+        _("writing mode"), max_length=10, choices=WRITING_MODE
+    )
+
+    class Meta:
+        constraints = [UniqueConstraint(fields=["name"], name="unique_language")]
+
+    def __str__(self):
+        return self.get_name_display()
+
+class Notification(models.Model):
+    user_profile = models.ForeignKey("UserProfile", verbose_name=_("user profile"), on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user_profile

@@ -8,8 +8,11 @@ from .models import (
     ChapterTranslation,
     Comic,
     ComicTranslation,
+    Language,
     Page,
     PageTranslation,
+    Post,
+    PostMedia,
     User,
     UserProfile,
 )
@@ -25,7 +28,6 @@ admin.site.register(User, UserAdmin)
 # admin.site.register(ComicChapterTranslation)
 # admin.site.register(Language)
 # admin.site.register(UserProfile)
-
 
 
 class ComicTranslationInline(admin.TabularInline):
@@ -80,11 +82,11 @@ class AuthorTranslationAdmin(admin.ModelAdmin):
         "pen_name",
     )
 
+
 class AuthorTranslationInline(admin.TabularInline):
     model = AuthorTranslation
     extra = 0
     show_change_link = True
-
 
 
 @admin.register(Author)
@@ -143,10 +145,41 @@ class ChapterTranslationAdmin(admin.ModelAdmin):
         "display_chapter_counter",
         "title",
         "is_valid",
-   )
+    )
     search_fields = ["title"]
     list_filter = ("published_date",)
     inlines = [PageTranslationInline]
+
+
+class PostMediaInline(admin.TabularInline):
+    model = PostMedia
+    show_change_link = True
+    extra = 0
+
+class PostInline(admin.TabularInline):
+    model = Post
+    show_change_link = True
+    extra = 0
+
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "user_profile",
+        "writing_mode",
+        "created_time",
+        "last_modified",
+        "like",
+        "reply_to",
+    )
+    inlines = [PostMediaInline, PostInline]
+
+@admin.register(Language)
+class LanguageAdmin(admin.ModelAdmin):
+    pass
+
+
 
 
 @admin.register(PageTranslation)

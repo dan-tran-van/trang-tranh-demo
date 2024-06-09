@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static "css/notifications/notifications.css" %}">
+{% endblock stylesheets %}
+
+{% block nav__home %}
+    <div class="nav__element nav__home">
+        <a href="{% url "index" %}">
+            <div class="nav__icon">
+                <img src="{% static "images/icons/svgs/nav/home_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Home">
+            </div>
+            <div class="nav__description">{% translate "Home" %}</div>
+        </a>
+    </div>
+{% endblock nav__home %}
+
+{% block nav__notifications %}
+    <div class="nav__element nav__notifications nav__element--active">
+        <a href="{% url "notifications" %}">
+            <div class="nav__icon">
+                <img src="{% static "images/icons/svgs/notifications_24dp_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Notifications icon">
+            </div>
+            <div class="nav__description">{% translate "Notifications" %}</div>
+        </a>
+    </div>
+
+{% endblock nav__notifications %}
+ 
+
+
+{% block main %}
+
+{% endblock main %}

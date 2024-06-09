@@ -1,14 +1,51 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
-{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static "css/chapter-detail/chapter-detail.css" %}">
+{% endblock stylesheets %}
 {% block title %}
     <title>#{{ chapter.number }} - {{ chapter.comic.title }} | Trang tranh</title>
 {% endblock title %}
 {% block javascripts %}{% endblock javascripts %}
-{% block meta %}{% endblock meta %}
+{% block meta %}
+    <meta property="og:title" content="#{{ chapter.number }} - {{ chapter.comic.title }} | Trang tranh">
+    <meta property="og:type" content="book">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{{ chapter.cover.url }}">
+{% endblock meta %}
 
 {% block content %}
-    {% for page in chapter.page_set.all %}
-        <img src="{{ page.image.url }}" alt="Page image">
-    {% endfor %}
+   <div class="interaction previous-page">
+        <a href=
+            "
+            {% if request.META.HTTP_REFERER != request.build_absolute_uri %}
+                {{ request.META.HTTP_REFERER }}     
+            {% else %}
+                {% url "index" %}
+            {% endif %}
+            "
+        >
+            <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Previous page">
+        </a>
+    </div>
+    <div class="interaction comic-detail">
+        <a href="{{ chapter.comic.get_absolute_url }}">
+            <img src="{% static "images/icons/svgs/info_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="">
+        </a>
+    </div>
+    <div class="interaction share">
+        <img src="{% static "images/icons/svgs/share_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Share">
+    </div>
+    <div class="interaction settings">
+        <img src="{% static "images/icons/svgs/settings_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Settings">
+    </div>
+
+    <div class="pages pages--vertical">
+        {% for page in chapter.sorted_page_set.all %}
+            <img src="{{ page.image.url }}" alt="Page image">
+        {% endfor %}
+    </div>
+
 {% endblock content %}

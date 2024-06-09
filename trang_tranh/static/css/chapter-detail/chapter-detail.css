@@ -1,0 +1,70 @@
+/* general */
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
+}
+
+:root {
+  --background-color: white;
+  --text-color: black;
+  --transparent-color: rgba(198, 198, 198, 0.75);
+  --icon-filter: invert(0%) sepia(8%) saturate(7491%) hue-rotate(179deg) brightness(100%) contrast(100%);
+  @media (prefers-color-scheme: dark) {
+    --background-color: black;
+    --text-color: white;
+    --transparent-color: rgba(49, 49, 49, 0.75);
+    --icon-filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(192deg) brightness(107%) contrast(103%);
+  }
+}
+
+body {
+  margin: 0px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.interaction {
+  position: fixed;
+  padding: 12px;
+  inline-size: fit-content;
+  aspect-ratio: 1 / 1;
+  background-color: var(--transparent-color);
+  border-radius: 8px;
+}
+
+.previous-page {
+  top: 12px;
+  left: 12px;
+}
+
+.comic-detail {
+  top: 12px;
+  right: 12px;
+}
+
+.share {
+  bottom: 12px;
+  left: 12px;
+}
+
+.settings {
+  bottom: 12px;
+  right: 12px;
+}
+
+.interaction img {
+  filter: var(--icon-filter);
+}
+
+.pages {
+  display: flex;
+}
+
+.pages img {
+  inline-size: 70%;
+}
+
+.pages--vertical {
+  flex-direction: column;
+  align-items: center;
+}

@@ -3,16 +3,40 @@
 {% load static %}
 {% get_current_language as LANGUAGE_CODE %}
 
+{% block title %}
+    <title>{{ comic_translation.title }} | Trang tranh</title>
+{% endblock title %}
+
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static "css/comic-translation-detail/comic-translation-detail.css" %}">
+    <link rel="stylesheet" href="{% static "css/comic-detail/comic-detail.css" %}">
 {% endblock stylesheets %}
+
+{% block meta %}
+{% endblock meta %}
+
+{% block nav__home %}
+    <div class="nav__element nav__home">
+        <a href="{% url "index" %}">
+            <div class="nav__icon">
+                <img src="{% static "images/icons/svgs/nav/home_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Home">
+            </div>
+            <div class="nav__description">{% translate "Home" %}</div>
+        </a>
+    </div>
+{% endblock nav__home %}
+
+
 
 {% block main %}
     <main>
         <div class="main__nav-reserved-space"></div>
         <div class="main__content">
             <div class="content__start">
-                <div class="start__nav"></div>
+                <div class="start__nav">
+                    <a href="{% url "index" %}">
+                        <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Previous page" class="icon--filtered">
+                    </a>
+                </div>
                 <div class="start__overview">
                     <div class="overview__comic-cover">
                         {% if comic_translation.comic.horizontal_cover %}
@@ -22,16 +46,86 @@
                         {% endif %}
                     </div>               
                     <div class="overview__at-glance">
-                        <div class="at-glance__comic-title">
-                            {{ comic_translation.title }}
+                        <div class="at-glance__first">
+                            <div class="first__comic-title">
+                                <h1>
+                                    {{ comic_translation.title }}
+                                </h1>
+                            </div>
+                            <div class="first__comic-authors">
+                                <span>
+                                    {{ comic_translation.display_authors }}
+                                </span>
+                            </div>
                         </div>
-                        <div class="at-glance__comic-authors">
-                            {{ comic_translation.display_authors }}
+                        <div class="at-glance__last">
+                            <div class="last__read-count">
+                                <img src="{% static "images/icons/svgs/bar_chart_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Read count icon" class="icon--filtered">
+                                <span>
+                                    {{ comic_translation.comic.read_count }}
+                                </span>
+ 
+                            </div>
+                            <div class="last__publisher">
+                                <div class="publisher__avatar">
+                                    <img src="{{ comic_translation.comic.publisher.avatar.url }}" alt="Publisher avatar">
+                                </div>
+                                <div class="publisher__name">
+                                    {{ comic_translation.comic.publisher.name }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="start__more-info">
+                    <div class="more-info more-info__header">
+                        <h2>{% translate "About" %}</h2>
+                    </div>
+                    <div class="more-info more-info__summary">
+                        <h3>{% translate "Summary" %}</h3>
+                        <p>{{ comic_translation.summary }}</p>
+                    </div>
+                    <div class="more-info more-info__status">
+                        <h3>{% translate "Status" %}</h3>
+                        <p>{{ comic_translation.comic.get_status_display }}</p>
+                    </div>
+                    <div class="more-info more-info__schedule">
+                        <h3>{% translate "Schedule" %}</h3>
+                        <p>{{ comic_translation.comic.get_schedule_display }}</p>
+                    </div>
+                </div>
             </div>
+            <div class="content__end">
+                <div class="end__interactions">
 
+                </div>
+                <div class="end__chapter-pagination">
+
+                </div>
+                <div class="end__chapters">
+                    {% for chapter_translation in comic_translation.chaptertranslation_set.all %}
+                        {% if chapter_translation.is_valid %}
+                            <a href="{{ chapter_translation.get_absolute_url }}">
+                                <div class="chapter">
+                                    <div class="chapter__cover">
+                                        <img src="{{ chapter_translation.chapter.cover.url }}" alt="Chapter cover">
+                                    </div>
+                                    <div class="chapter__info">
+                                        <div class="info__number">
+                                            #{{ chapter_translation.chapter.number }}
+                                        </div>
+                                        <div class="info__title">
+                                            {{ chapter_translation.title }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </main>
-{% endblock main  %}
+{% endblock main %}
+
+

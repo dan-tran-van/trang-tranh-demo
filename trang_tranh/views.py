@@ -1,15 +1,16 @@
+from django.contrib.auth.decorators import login_required, permission_required
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .models import Chapter, Comic
+from .models import Chapter, Comic, Post, UserProfile
 
 # Create your views here.
 
 
 def index(request):
     """View function for home page of site."""
-    updated_chapters = Chapter.objects.all().order_by("-published_date")[:5]
+    updated_chapters = Chapter.objects.all().order_by("-published_date")[:20]
     context = {
         "updated_chapters": updated_chapters,
     }
@@ -18,6 +19,9 @@ def index(request):
 
 def comic_detail(request, pk):
     comic = get_object_or_404(Comic, pk=pk)
+    if not comic.is_valid():
+        raise Http404()
+
     if comic.default_language == request.LANGUAGE_CODE:
         context = {
             "comic": comic,
@@ -58,6 +62,8 @@ def comic_detail(request, pk):
 
 def chapter_detail(request, pk):
     chapter = get_object_or_404(Chapter, pk=pk)
+    if not chapter.is_valid():
+        raise Http404()
 
     if chapter.comic.default_language == request.LANGUAGE_CODE:
         context = {
@@ -110,3 +116,35 @@ def chapter_translation_detail(request, pk, lang):
                 raise Http404()
         else:
             raise Http404()
+
+
+def feed(request):
+    new_posts = Post.objects.all().order_by("-created_time")[:5]
+
+    context = {
+        "new_posts": new_posts,
+    }
+    return render(request, "trang_tranh/feed.html", context=context)
+
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    context = {
+        "post": post,
+    }
+
+    return render(request, "trang_tranh/post_detail.html", context=context)
+
+def profile_detail(request, pk):
+    profile = get_object_or_404(UserProfile, pk=pk)
+    
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, "trang_tranh/profile_detail.html", context=context)
+
+@login_required
+def notification(request):
+    return render(request, "trang_tranh/notifications.html")

@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static "css/post-detail/post-detail.css" %}">
+{% endblock stylesheets %}
+{% block javascripts %}{% endblock javascripts %}
+
+{% block main %}
+    <main>
+        <div class="main__nav-reserved-space"></div>
+        <div class="main__post">
+            <div class="post__nav"></div>
+            <div class="post__header">
+                <div class="header__user-avatar">
+                    <img src="{{ post.user_profile.avatar.url }}" alt="User avatar">
+                </div>
+                <div class="header__user-name">
+                    <span>{{ post.user_profile.name }}</span>
+                </div>
+            </div>
+
+            <div class="post__content">
+                {% if post.reply_to %}
+                    <div class="content__reply-to">
+                        {% translate "Replying to " %}
+                        <a href="{{ post.reply_to.get_absolute_url }}">{{ post.reply_to.user_profile }}</a>
+                    </div>
+                {% endif %}
+                <div class="content__text">
+                    <p>{{ post.text_content }}</p>
+                </div>
+                {% if post.postmedia_set.all %}
+                    <div class="content__media">
+                        {% for media in post.postmedia_set.all %}
+                            <img src="{{ media.image.url }}" alt="{{ media.alt_text }}">
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="post__footer">
+                <div class="footer__like">
+                    <span>{{ post.like }}</span>
+                </div>
+                <div class="footer__reply">
+                    <span>{{ post.post_set.all.count }}</span>
+                </div>
+                <div class="footer__share"></div>
+            </div>
+        </div>
+        <div class="main__reply-reserved-space"></div>
+        <div class="replies">
+            {% for reply in post.post_set.all %}
+                <div class="reply">
+                    <div class="reply__header">
+                        <div class="header__user-avatar"></div>
+                        <div class="header__user-name">
+                            <span>{{ reply.user_profile }}</span>
+                        </div>
+                    </div>
+
+                    <div class="reply__content">
+                        <div class="content__text">
+                            <p>{{ reply.text_content }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    
+{% endblock main %}
