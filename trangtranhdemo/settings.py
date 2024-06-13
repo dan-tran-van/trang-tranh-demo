@@ -156,3 +156,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Substituting a custom User model
 # https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#substituting-a-custom-user-model
 AUTH_USER_MODEL = 'trang_tranh.User'
+
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE = True
+
+# SECURE_SSL_REDIRECT = True
+
+# SECURE_HSTS_SECONDS = 3600
+
+# SECURE_HSTS_PRELOAD = True
+
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
