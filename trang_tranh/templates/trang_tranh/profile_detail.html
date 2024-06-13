@@ -2,6 +2,10 @@
 {% load i18n %}
 {% load static %}
 
+{% block title %}
+    <title>{{ profile.name }} {% translate "(@" %}{{ profile.user.username }}{% translate ")" %} | Trang tranh</title>
+{% endblock title %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{% static "css/profile-detail/profile-detail.css" %}">
 {% endblock stylesheets %}
