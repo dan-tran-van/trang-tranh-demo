@@ -136,15 +136,21 @@ def post_detail(request, pk):
 
     return render(request, "trang_tranh/post_detail.html", context=context)
 
+
 def profile_detail(request, pk):
     profile = get_object_or_404(UserProfile, pk=pk)
-    
+
     context = {
-        'profile': profile,
+        "profile": profile,
     }
 
     return render(request, "trang_tranh/profile_detail.html", context=context)
 
+
 @login_required
 def notification(request):
     return render(request, "trang_tranh/notifications.html")
+
+
+def settings(request):
+    return render(request, "trang_tranh/settings.html")

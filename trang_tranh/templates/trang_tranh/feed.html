@@ -38,10 +38,14 @@
                         <div class="header__warper">
                             <div class="warper__user">
                                 <div class="user__avatar">
-                                    <img src="{{ post.user_profile.avatar.url }}" alt="User avatar">
+                                    <a href="{{ post.user_profile.get_absolute_url }}">
+                                        <img src="{{ post.user_profile.avatar.url }}" alt="User avatar">
+                                    </a>
                                 </div>
                                 <div class="user__name">
-                                    <span>{{ post.user_profile.name }}</span>
+                                    <a href="{{ post.user_profile.get_absolute_url }}">
+                                        <span>{{ post.user_profile.name }}</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +53,10 @@
                     {% if post.reply_to %}
                         <div class="post__reply-to">
                             <div class="reply-to__warper">
-                                {% translate "Repplying to" %} {{ post.reply_to.user_profile.name }}
+                                {% translate "Repplying to" %} 
+                                <a href="{{ post.reply_to.get_absolute_url }}">
+                                    {{ post.reply_to.user_profile.name }}
+                                </a>
                             </div>
                         </div>
                     {% endif %}
@@ -74,12 +81,14 @@
                                     {{ post.like }}
                                 </div>
                             </div>
-                            <div class="warper__interaction warper__reply">
-                                <img src="{% static "images/icons/svgs/reply_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Reply icon" class="gray--filtered">
-                                <div class="reply__count">
-                                    {{ post.postmedia_set.all.count }}
+                            <a href="{{ post.get_absolute_url }}">
+                                <div class="warper__interaction warper__reply">
+                                    <img src="{% static "images/icons/svgs/reply_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Reply icon" class="gray--filtered">
+                                    <div class="reply__count">
+                                        {{ post.post_set.all.count }}
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                             <div class="warper__interaction warper__share">
                                 <img src="{% static "images/icons/svgs/share_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Share icon" class="gray--filtered">
                             </div>

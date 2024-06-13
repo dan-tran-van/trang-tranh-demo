@@ -54,6 +54,9 @@
 
             {% endblock nav__feed %}
 
+            {% block nav__create %}
+            {% endblock nav__create %}
+
             {% block nav__notifications %}
                 <div class="nav__element nav__notifications">
                     <a href="{% url "notifications" %}">
@@ -65,6 +68,9 @@
                 </div>
 
             {% endblock nav__notifications %}
+
+            {% block nav__account %}
+            {% endblock nav__account %}
        </nav>
     {% endblock naviagtion %}
 

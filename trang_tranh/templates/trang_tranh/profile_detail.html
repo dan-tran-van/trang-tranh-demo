@@ -90,7 +90,10 @@
                     {% if post.reply_to %}
                         <div class="post__reply-to">
                             <div class="reply-to__warper">
-                                {% translate "Repplying to" %} {{ post.reply_to.user_profile.name }}
+                                {% translate "Repplying to" %}
+                                <a href="{{ post.reply_to.get_absolute_url }}">
+                                    {{ post.reply_to.user_profile.name }}
+                                </a>
                             </div>
                         </div>
                     {% endif %}
@@ -115,12 +118,15 @@
                                     {{ post.like }}
                                 </div>
                             </div>
-                            <div class="warper__interaction warper__reply">
-                                <img src="{% static "images/icons/svgs/reply_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Reply icon" class="gray--filtered">
-                                <div class="reply__count">
-                                    {{ post.postmedia_set.all.count }}
+                            
+                            <a href="{{ post.get_absolute_url }}">
+                                <div class="warper__interaction warper__reply">
+                                    <img src="{% static "images/icons/svgs/reply_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Reply icon" class="gray--filtered">
+                                    <div class="reply__count">
+                                        {{ post.post_set.all.count }}
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                             <div class="warper__interaction warper__share">
                                 <img src="{% static "images/icons/svgs/share_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Share icon" class="gray--filtered">
                             </div>
@@ -144,21 +150,21 @@
             </div>
             <div class="query__element query__to-you query__element--active">
                 <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/recommend_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Recommend icon" class="icon--filtered">
+                    <img src="{% static "images/icons/svgs/account_circle_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Account icon" class="icon--filtered">
                 </div>
-                <div class="element__description">{% translate "To you" %}</div>
+                <div class="element__description">{% translate "Account" %}</div>
             </div>
             <div class="query__element query__trending">
                 <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/local_fire_department_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Trending icon" class="icon--filtered">
+                    <img src="{% static "images/icons/svgs/calendar_month_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Update icon" class="icon--filtered">
                 </div>
-                <div class="element__description">{% translate "Trending" %}</div>
+                <div class="element__description">{% translate "Updates" %}</div>
             </div>
             <div class="query__element query__following">
                 <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/person_check_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Following icon" class="icon--filtered">
+                    <img src="{% static "images/icons/svgs/library_books_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Library icon" class="icon--filtered">
                 </div>
-                <div class="element__description">{% translate "Following" %}</div>
+                <div class="element__description">{% translate "Library" %}</div>
             </div>
         </div>
     </main>

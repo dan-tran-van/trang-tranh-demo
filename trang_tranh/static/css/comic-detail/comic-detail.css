@@ -136,6 +136,13 @@ a {
   color: var(--strong-gray-color);
 }
 
+.more-info__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px
+}
+
 
 @media (orientation: landscape) {
 
@@ -221,12 +228,39 @@ a {
     justify-content: center;
     display: grid;
     grid-template-columns: minmax(600px, 600px) minmax(200px, 600px);
-    padding: 32px;
+    padding: 20px;
   }
 
   .content__start,
   .content__end {
     padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .start__nav {
+    padding-block: 8px;
+  }
+
+
+  .end__interactions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .interaction {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .interaction:hover {
+    background-color: var(--hover-color);
   }
 
 
