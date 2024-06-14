@@ -18,15 +18,7 @@
 
 {% block content %}
    <div class="interaction previous-page">
-        <a href=
-            "
-            {% if request.META.HTTP_REFERER != request.build_absolute_uri %}
-                {{ request.META.HTTP_REFERER }}     
-            {% else %}
-                {% url "index" %}
-            {% endif %}
-            "
-        >
+        <a href="javascript:history.go(-1)">
             <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Previous page">
         </a>
     </div>

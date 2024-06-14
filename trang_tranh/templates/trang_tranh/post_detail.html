@@ -11,6 +11,17 @@
 {% endblock stylesheets %}
 {% block javascripts %}{% endblock javascripts %}
 
+{% block nav__start %}
+    <div class="nav__element nav__back">
+        <a href="javascript:history.go(-1)">
+            <div class="nav__icon">
+                <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Back icon">
+            </div>
+            <div class="nav__description">{% translate "Back" %}</div>
+        </a>
+    </div>
+{% endblock nav__start %}
+
 {% block nav__home %}
     <div class="nav__element nav__home">
         <a href="{% url "index" %}">
@@ -96,7 +107,7 @@
                             <pre>{{ reply.text_content }}</pre>
                         </div>
 
-                        {% if post.postmedia_set.all %}
+                        {% if reply.postmedia_set.all %}
                             <div class="content__media content__media--{{ reply.writing_mode }}">
                                 {% for media in reply.postmedia_set.all %}
                                     <img src="{{ media.image.url }}" alt="{{ media.alt_text }}">

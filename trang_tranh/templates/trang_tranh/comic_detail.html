@@ -14,6 +14,17 @@
 {% block meta %}
 {% endblock meta %}
 
+{% block nav__start %}
+    <div class="nav__element nav__back">
+        <a href="javascript:history.go(-1)">
+            <div class="nav__icon">
+                <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Back icon">
+            </div>
+            <div class="nav__description">{% translate "Back" %}</div>
+        </a>
+    </div>
+{% endblock nav__start %}
+
 {% block nav__home %}
     <div class="nav__element nav__home">
         <a href="{% url "index" %}">
@@ -32,11 +43,6 @@
         <div class="main__nav-reserved-space"></div>
         <div class="main__content">
             <div class="content__start">
-                <div class="start__nav">
-                    <a href="{% url "index" %}">
-                        <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Previous page" class="icon--filtered">
-                    </a>
-                </div>
                 <div class="start__overview">
                     <div class="overview__comic-cover">
                         {% if comic.horizontal_cover %}

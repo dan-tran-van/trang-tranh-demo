@@ -25,14 +25,16 @@
 {% block content %}
     {% block naviagtion %}
         <nav>
-            <div class="nav__logo">
-                <a href="{% url "index" %}">
-                    <div class="logo__image">
-                        <img src="{% static "images/icons/svgs/trang-tranh-logo.svg" %}" alt="Logo">
-                    </div>
-                    <span class='cherry-bomb-one-regular logo__brand-name'>Trang tranh</span>
-                </a>
-            </div>
+            {% block nav__start %}
+                <div class="nav__logo">
+                    <a href="{% url "index" %}">
+                        <div class="logo__image">
+                            <img src="{% static "images/icons/svgs/trang-tranh-logo.svg" %}" alt="Logo">
+                        </div>
+                        <span class='cherry-bomb-one-regular logo__brand-name'>Trang tranh</span>
+                    </a>
+                </div>
+            {% endblock nav__start %}
 
             {% block nav__home %}
                 <div class="nav__element nav__home nav__element--active">
