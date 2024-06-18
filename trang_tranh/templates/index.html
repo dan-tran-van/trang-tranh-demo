@@ -155,37 +155,40 @@
                 </div>
             </div>
             <div class="main__query-reserved-space"></div>
-            <div class="query">
-                <div class="query__search">
-                    <div class="search__search-bar">
-                        <form action="">
-                            <input type="search">
-                        </form>
-                    </div>
-                    <div class="search__btn">
-                        <img src="{% static "images/icons/svgs/search_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Search icon" class="icon--filtered">
-                    </div>
-                </div>
-                <div class="query__element query__to-you query__element--active">
-                    <div class="element__icon">
-                        <img src="{% static "images/icons/svgs/recommend_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Recommend icon" class="icon--filtered">
-                    </div>
-                    <div class="element__description">{% translate "To you" %}</div>
-                </div>
-                <div class="query__element query__trending">
-                    <div class="element__icon">
-                        <img src="{% static "images/icons/svgs/local_fire_department_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Trending icon" class="icon--filtered">
-                    </div>
-                    <div class="element__description">{% translate "Trending" %}</div>
-                </div>
-                <div class="query__element query__following">
-                    <div class="element__icon">
-                        <img src="{% static "images/icons/svgs/person_check_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Following icon" class="icon--filtered">
-                    </div>
-                    <div class="element__description">{% translate "Following" %}</div>
-                </div>
-            </div>
+
         </main>
     {% endblock main %}
 
+    {% block query %}
+        <div class="query">
+            <div class="query__search">
+                <div class="search__search-bar">
+                    <form action="">
+                        <input type="search">
+                    </form>
+                </div>
+                <div class="search__btn">
+                    <img src="{% static "images/icons/svgs/search_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Search icon" class="icon--filtered">
+                </div>
+            </div>
+            <div class="query__element query__to-you query__element--active">
+                <div class="element__icon">
+                    <img src="{% static "images/icons/svgs/recommend_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Recommend icon" class="icon--filtered">
+                </div>
+                <div class="element__description">{% translate "To you" %}</div>
+            </div>
+            <div class="query__element query__trending">
+                <div class="element__icon">
+                    <img src="{% static "images/icons/svgs/local_fire_department_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Trending icon" class="icon--filtered">
+                </div>
+                <div class="element__description">{% translate "Trending" %}</div>
+            </div>
+            <div class="query__element query__following">
+                <div class="element__icon">
+                    <img src="{% static "images/icons/svgs/person_check_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Following icon" class="icon--filtered">
+                </div>
+                <div class="element__description">{% translate "Following" %}</div>
+            </div>
+        </div>
+    {% endblock query %}
 {% endblock content %}

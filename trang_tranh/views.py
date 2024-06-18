@@ -146,6 +146,15 @@ def profile_detail(request, pk):
 
     return render(request, "trang_tranh/profile_detail.html", context=context)
 
+def profile_chapter_updates(request, pk):
+    profile = get_object_or_404(UserProfile, pk=pk)
+
+    context = {
+        "profile": profile,
+    }
+
+    return render(request, "trang_tranh/profile_chapter_updates.html", context=context)
+
 
 @login_required
 def notification(request):

@@ -13,6 +13,7 @@ urlpatterns = [
     path("feed", views.feed, name="feed"),
     path("post/<int:pk>", views.post_detail, name="post-detail"),
     path("profile/<int:pk>", views.profile_detail, name="profile-detail"),
+    path("profile/<int:pk>/updates", views.profile_chapter_updates, name="profile-chapter-update"),
     path("notifications", views.notification, name="notifications"),
     path("settings", views.settings, name="settings"),
 ]

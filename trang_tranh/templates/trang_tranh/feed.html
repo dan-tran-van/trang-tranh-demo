@@ -56,7 +56,7 @@
                     {% if post.reply_to %}
                         <div class="post__reply-to">
                             <div class="reply-to__warper">
-                                {% translate "Repplying to" %} 
+                                {% translate "Replying to" %} 
                                 <a href="{{ post.reply_to.get_absolute_url }}">
                                     {{ post.reply_to.user_profile.name }}
                                 </a>
@@ -135,3 +135,5 @@
     </main>
 
 {% endblock main %}
+
+{% block query %}{% endblock query %}
