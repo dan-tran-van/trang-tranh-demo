@@ -92,9 +92,7 @@ a {
   inline-size: fit-content;
 }
 
-.update__chapter:hover {
-  background-color: var(--gray-like-color);
-}
+
 
 .chapter__comic-cover img {
   border-radius: 8px;
@@ -140,6 +138,14 @@ a {
 .publisher__name {
   color: var(--strong-gray-color);
   font-size: 12px;
+}
+
+.query__element--active {
+  background-color: var(--gray-like-color);
+}
+
+.nav__element--active {
+  background-color: var(--gray-like-color);
 }
 
 
@@ -190,15 +196,9 @@ a {
     inline-size: 28px;
   }
 
-  @media (pointer: fine) {
-    .nav__element:hover {
-      background-color: var(--hover-color);
-    }
-  }
 
-  .nav__element--active {
-    background-color: var(--gray-like-color);
-  }
+
+
 
   @media (max-width: 1400px) {
 
@@ -304,13 +304,7 @@ a {
     border-radius: 8px;
   }
 
-  .query__element--active {
-    background-color: var(--gray-like-color);
-  }
 
-  .query__element:hover {
-    background-color: var(--hover-color);
-  }
 
   .element__icon {
     display: flex;
@@ -344,6 +338,11 @@ a {
     display: none;
   }
 
+  .nav__element {
+    border-radius: 8px;
+    padding: 8px;
+  }
+
   main {
     inline-size: 100%;
     padding: 12px;
@@ -370,16 +369,6 @@ a {
     padding: 8px;
   }
 
-  @media (pointer: fine) {
-    .query__element:hover {
-      background-color: var(--hover-color);
-    }
-  }
-
-  .query__element--active {
-    background-color: var(--gray-like-color);
-  }
-
   .query .query__element .element__description {
     display: none;
   }
@@ -395,5 +384,18 @@ a {
     justify-content: center;
   }
 
+}
 
+@media (pointer: fine) {
+  .nav__element:hover {
+    background-color: var(--hover-color);
+  }
+
+  .update__chapter:hover {
+    background-color: var(--gray-like-color);
+  }
+
+  .query__element:hover {
+    background-color: var(--hover-color);
+  }
 }
