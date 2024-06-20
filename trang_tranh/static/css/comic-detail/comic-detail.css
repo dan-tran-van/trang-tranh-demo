@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+
 :root {
   --primary-color: #FFB7C5;
   --background-color: white;
@@ -13,6 +14,7 @@
   --icon-filter: invert(0%) sepia(8%) saturate(7491%) hue-rotate(179deg) brightness(100%) contrast(100%);
   --primary-color-filter: invert(71%) sepia(20%) saturate(1192%) hue-rotate(307deg) brightness(120%) contrast(102%);
   --hover-color: rgb(222, 222, 222);
+  --gray-filter: invert(47%) sepia(0%) saturate(1%) hue-rotate(171deg) brightness(106%) contrast(88%);
 
   @media (prefers-color-scheme: dark) {
     --background-color: black;
@@ -49,8 +51,7 @@ body {
 }
 
 main {
-  position: absolute;
-  z-index: -1;
+  position: static;
   display: flex;
   flex-direction: row;
 }
@@ -81,8 +82,15 @@ a {
 /* site specific */
 
 .start__overview {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+}
+
+.overview__comic-cover {
+  flex: 1;
+  display: flex;
+  justify-items: center;
+  align-items: center;
 }
 
 .overview__comic-cover img {
@@ -93,6 +101,7 @@ a {
 }
 
 .overview__at-glance {
+  flex: 1;
   display: grid;
   grid-template-rows: 1fr 1fr;
   aspect-ratio: 2 / 1;
@@ -181,13 +190,14 @@ a {
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  padding: 8px;
   border-radius: 8px;
 }
 
-.interaction:hover {
-  background-color: var(--hover-color);
+.interaction img {
+  filter: var(--gray-filter);
 }
+
+
 
 
 .end__chapters {
@@ -205,11 +215,6 @@ a {
   border-radius: 8px;
 }
 
-@media (pointer: fine) {
-  .chapter:hover {
-    background-color: var(--hover-color);
-  }
-}
 
 
 .chapter__cover img {
@@ -278,11 +283,6 @@ a {
 
 
 
-  @media (pointer: fine) {
-    .nav__element:hover {
-      background-color: var(--hover-color);
-    }
-  }
 
   .nav__element--active {
     background-color: var(--gray-like-color);
@@ -322,12 +322,12 @@ a {
 @media (orientation: portrait) {
   main {
     inline-size: 100%;
-    padding-block: 60px;
+    padding-block: 50px;
   }
 
   nav {
     inline-size: 100%;
-    block-size: 60px;
+    block-size: 50px;
     display: flex;
     align-items: center;
     background-color: var(--background-color);
@@ -367,13 +367,22 @@ a {
     border-block-start-color: var(--gray-like-color);
     border-block-start-width: 1px;
     border-block-start-style: solid;
-    block-size: 60px;
+    block-size: 50px;
   }
 
 }
 
 @media (pointer: fine) {
+
   .nav__element:hover {
+    background-color: var(--hover-color);
+  }
+
+  .interaction img:hover {
+    filter: var(--icon-filter);
+  }
+
+  .chapter:hover {
     background-color: var(--hover-color);
   }
 }

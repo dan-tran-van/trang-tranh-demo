@@ -322,7 +322,7 @@ a {
     display: flex;
     flex-direction: row;
     inline-size: 100%;
-    block-size: 60px;
+    block-size: 50px;
     align-items: center;
     justify-content: space-around;
     border-block-start-width: 1px;
@@ -346,7 +346,7 @@ a {
   main {
     inline-size: 100%;
     padding: 12px;
-    padding-block: 60px;
+    padding-block: 50px;
   }
 
   .query {
@@ -359,7 +359,7 @@ a {
     display: flex;
     flex-direction: row;
     inline-size: 100%;
-    block-size: 60px;
+    block-size: 50px;
     align-items: center;
     gap: 12px;
   }
