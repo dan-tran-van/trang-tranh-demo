@@ -409,7 +409,8 @@ a {
 
   .main__posts {
     inline-size: 100%;
-    padding-block: 50px;
+    padding-block-end: 50px;
+    padding-block-start: 80px;
   }
 
   .post {
@@ -427,6 +428,8 @@ a {
     border-block-end-style: solid;
   }
 
+
+
   .query {
     position: fixed;
     top: 0px;
@@ -435,20 +438,22 @@ a {
     border-block-end-color: var(--gray-like-color);
     border-block-end-style: solid;
     display: flex;
+    flex: none;
+    overflow: scroll;
     flex-direction: row;
     inline-size: 100%;
-    block-size: 50px;
+    block-size: 80px;
     align-items: center;
     gap: 12px;
   }
 
   .query__element {
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 8px;
-  }
-
-  .query .query__element .element__description {
-    display: none;
   }
 
   .query__search .search__search-bar {
