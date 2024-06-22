@@ -41,7 +41,11 @@
 
     <div class="pages pages--vertical">
         {% for page in chapter_translation.sorted_page_set.all %}
-            <img src="{{ page.image.url }}" alt="Page image">
+            {% if page.webp_image %}
+                <img loading="lazy" src="{{ page.webp_image.url }}" alt="Page image">
+            {% else %}
+                <img loading="lazy" src="{{ page.image.url }}" alt="Page image">
+            {% endif %}
         {% endfor %}
     </div>
 

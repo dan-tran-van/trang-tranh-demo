@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import CheckConstraint, Q, UniqueConstraint
 from django.db.models.functions import Lower
+from django_resized import ResizedImageField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -32,10 +33,9 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def get_absolute_url(self):
         return reverse("profile-detail", kwargs={"pk": self.pk})
-    
 
 
 class Comic(models.Model):
@@ -374,8 +374,7 @@ class Chapter(models.Model):
 
     @property
     def sorted_page_set(self):
-        return self.page_set.order_by('number')
-
+        return self.page_set.order_by("number")
 
 
 class ChapterTranslation(models.Model):
@@ -441,12 +440,10 @@ class ChapterTranslation(models.Model):
                 "lang": self.comic_translation.language,
             },
         )
-    
+
     @property
     def sorted_page_set(self):
-        return self.pagetranslation_set.order_by('number')
-
-
+        return self.pagetranslation_set.order_by("number")
 
 
 class Page(models.Model):
@@ -459,9 +456,18 @@ class Page(models.Model):
     image = models.ImageField(
         _("image"),
         upload_to="page-images/",
-        height_field=None,
-        width_field=None,
+        # height_field=None,
+        # width_field=None,
         max_length=None,
+    )
+
+    webp_image = ResizedImageField(
+        verbose_name="webp image",
+        upload_to="webp-page-images/",
+        force_format="WEBP",
+        quality=100,
+        blank=True,
+        null=True,
     )
 
     number = models.PositiveSmallIntegerField(_("number"), default=1)
@@ -495,10 +501,21 @@ class PageTranslation(models.Model):
     image = models.ImageField(
         _("page image"),
         upload_to="page-image-translations/",
-        height_field=None,
-        width_field=None,
+        # height_field=None,
+        # width_field=None,
         max_length=None,
     )
+    
+    webp_image = ResizedImageField(
+        verbose_name="webp image",
+        upload_to="webp-page-image-translations/",
+        force_format="WEBP",
+        quality=100,
+        blank=True,
+        null=True,
+    )
+
+
 
     number = models.PositiveSmallIntegerField(_("page number"), default=1)
 
@@ -555,7 +572,6 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("post-detail", kwargs={"pk": self.pk})
 
-    
 
 class PostMedia(models.Model):
     post = models.ForeignKey(
@@ -596,8 +612,11 @@ class Language(models.Model):
     def __str__(self):
         return self.get_name_display()
 
+
 class Notification(models.Model):
-    user_profile = models.ForeignKey("UserProfile", verbose_name=_("user profile"), on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(
+        "UserProfile", verbose_name=_("user profile"), on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.user_profile
