@@ -3,19 +3,12 @@
 {% load i18n %}
 
 {% block title %}{% endblock title %}
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static "css/settings/settings.css" %}">
+{% endblock stylesheets %}
 {% block javascripts %}{% endblock javascripts %}
 
-{% block nav__start %}
-    <div class="nav__element nav__back">
-        <a href="javascript:history.go(-1)">
-            <div class="nav__icon">
-                <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Back icon">
-            </div>
-            <div class="nav__description">{% translate "Back" %}</div>
-        </a>
-    </div>
-{% endblock nav__start %}
+
 
 {% block nav__home %}
     <div class="nav__element nav__home">
@@ -28,3 +21,61 @@
     </div>
 {% endblock nav__home %}
 
+{% block nav__settings %}
+    <div class="nav__element nav__element--active nav__settings {% if user.is_authenticated %}nav__settings--authenticated{% endif %}">
+        <a href="{% url "settings" %}">
+            <div class="nav__icon">
+                <img src="{% static "images/icons/svgs/settings_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Settings" %}">
+            </div>
+            <div class="nav__description">{% translate "Settings" %}</div>
+        </a>
+    </div>
+{% endblock nav__settings %}
+
+
+{% block main %}
+    <main>
+        <div class="settings">
+            <h3>{% translate "Settings" %}</h3>
+
+            {% if user.is_authenticated %}
+                <a href="{% url "logout" %}">
+                    <div class="settings__entry settings__logout">
+                        {% translate "Log out" %}
+                    </div>
+                </a>
+                <a href="">
+                    <div class="settings__entry settings__edit-profile">
+                        {% translate "Edit profile" %}
+                    </div>
+                </a>
+            {% else %}
+                <a href="{% url "login" %}">
+                    <div class="settings__entry settings__login">
+                        {% translate "Log in" %}
+                    </div>
+                </a>
+            {% endif %}
+            <a href="">
+                <div class="settings__entry settings__language">
+                    {% translate "Language" %}
+                </div>
+            </a>
+        </div>
+
+    </main>
+{% endblock main %}
+
+{% block query %}
+<div class="query">
+    <div class="query__search">
+        <div class="search__search-bar">
+            <input type="search" placeholder="{% translate "Search settings" %}">
+        </div>
+        <div class="search__btn">
+            <img src="{% static "images/icons/svgs/search_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Search icon" class="icon--filtered">
+        </div>
+    </div>
+</div>
+
+{% endblock query %}

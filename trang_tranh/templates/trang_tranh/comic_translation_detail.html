@@ -99,6 +99,15 @@
                         <h3>{% translate "Schedule" %}</h3>
                         <p>{{ comic_translation.comic.get_schedule_display }}</p>
                     </div>
+                    <div class="more-info more-info__genres">
+                        <h3>{% translate "Genres" %}</h3>
+                            <div class="genre-list">
+                            {% for genre in comic_translation.comic.genre.all %}
+                                    <span class="genre-list__genre">{{ genre.get_name_display }}</span>
+                            {% empty %}
+                            {% endfor %}
+                            </div>
+                    </div>
                 </div>
             </div>
             <div class="content__end">

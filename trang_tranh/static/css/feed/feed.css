@@ -401,6 +401,19 @@ a {
     padding: 8px;
   }
 
+  .nav__account .nav__icon img {
+    inline-size: 24px;
+    aspect-ratio: 1/1;
+  }
+
+  .nav__login {
+    display: none;
+  }
+
+  .nav__settings--authenticated {
+    display: none;
+  }
+
   .main {
     inline-size: 100vw;
     position: static;

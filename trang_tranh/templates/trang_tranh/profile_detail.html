@@ -11,40 +11,125 @@
 {% endblock stylesheets %}
 {% block javascripts %}{% endblock javascripts %}
 
-{% block nav__start %}
-    <div class="nav__element nav__back">
-        <a href="javascript:history.go(-1)">
-            <div class="nav__icon">
-                <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Back icon">
-            </div>
-            <div class="nav__description">{% translate "Back" %}</div>
-        </a>
-    </div>
-{% endblock nav__start %}
+{% block naviagtion %}
+    <nav class="{% if user.id == profile.user.id %}nav--my-profile {% else %}nav--not-my-profile{% endif %}">
+        {% block nav__start %}
+            {% if user.id != profile.user.id %}
+                <div class="nav__element nav__back">
+                    <a href="javascript:history.go(-1)">
+                        <div class="nav__icon">
+                            <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Back icon">
+                        </div>
+                        <div class="nav__description">{% translate "Back" %}</div>
+                    </a>
+                </div>
+            {% else %}
+                <div class="nav__logo">
+                    <a href="{% url "index" %}">
+                        <div class="logo__image">
+                            <img src="{% static "images/icons/svgs/trang-tranh-logo.svg" %}" alt="Logo">
+                        </div>
+                        <span class='cherry-bomb-one-regular logo__brand-name'>Trang tranh</span>
+                    </a>
+                </div>
+            {% endif %}
+        {% endblock nav__start %}
 
-{% block nav__home %}
-    <div class="nav__element nav__home">
-        <a href="{% url "index" %}">
-            <div class="nav__icon">
-                <img src="{% static "images/icons/svgs/nav/home_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Home">
+        {% block nav__home %}
+            <div class="nav__element nav__home">
+                <a href="{% url "index" %}">
+                    <div class="nav__icon">
+                        <img src="{% static "images/icons/svgs/nav/home_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Home">
+                    </div>
+                    <div class="nav__description">{% translate "Home" %}</div>
+                </a>
             </div>
-            <div class="nav__description">{% translate "Home" %}</div>
-        </a>
-    </div>
-{% endblock nav__home %}
+        {% endblock nav__home %}
+
+        {% block nav__feed %}
+            <div class="nav__element nav__feed">
+                <a href="{% url "feed" %}">
+                    <div class="nav__icon">
+                        <img src="{% static "images/icons/svgs/nav/alternate_email_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Feed">
+                    </div>
+                    <div class="nav__description">{% translate "Feed" %}</div>
+                </a>
+            </div>
+
+        {% endblock nav__feed %}
+
+        {% block nav__create %}
+        {% endblock nav__create %}
+
+        {% block nav__notifications %}
+            <div class="nav__element nav__notifications">
+                <a href="{% url "notifications" %}">
+                    <div class="nav__icon">
+                        <img src="{% static "images/icons/svgs/notifications_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Notifications icon">
+                    </div>
+                    <div class="nav__description">{% translate "Notifications" %}</div>
+                </a>
+            </div>
+
+        {% endblock nav__notifications %}
+
+        {% block nav__account %}
+            {% if user.is_authenticated %}
+                <div class="nav__element {% if user.id == profile.user.id %}nav__element--active{% endif %} {% if user.userprofile.avatar %}nav__account {% else %}nav__login{% endif %} ">
+                    <a href="{{ user.userprofile.get_absolute_url }}">
+                        <div class="nav__icon">
+                            {% if user.userprofile.avatar %}
+                            <img src="{{ user.userprofile.avatar.url }}" alt="{% translate "Profile avatar" %}">
+                            {% else %}
+                            <img src="{% static "images/icons/svgs/account_circle_24dp_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Profile avatar holder">
+                            {% endif %}
+                        </div>
+                        <div class="nav__description">{{ user.userprofile.name }}</div>
+                    </a>
+                </div>
+            {% else %}
+                <div class="nav__element nav__login">
+                    <a href="{% url "login" %}">
+                        <div class="nav__icon">
+                            <img src="{% static "images/icons/svgs/account_circle_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Account icon" %}">
+                        </div>
+                        <div class="nav__description">{% translate "Login" %}</div>
+                    </a>
+                </div>
+            {% endif %}
+        {% endblock nav__account %}
+
+        {% block nav__settings %}
+            <div class="nav__element nav__settings {% if user.is_authenticated %}nav__settings--authenticated{% endif %}">
+                <a href="{% url "settings" %}">
+                    <div class="nav__icon">
+                        <img src="{% static "images/icons/svgs/settings_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Settings" %}">
+                    </div>
+                    <div class="nav__description">{% translate "Settings" %}</div>
+                </a>
+            </div>
+        {% endblock nav__settings %}
+    </nav>
+{% endblock naviagtion %}
+
+
+
 
 
 
 {% block main %}
     <main>
-        <div class="main__profile">
-            <div class="profile__nav"></div>
+        <div class="main__profile {% if user.id == profile.user.id %}main__profile--my-profile{% endif %}">
             <div class="profile__at-glance">
                 <div class="at-glance__container">
                     <div class="container__start">
                         <div class="start__brief">
                             <div class="brief__avatar">
-                                <img src="{{ profile.avatar.url }}" alt="User avatar">
+                                {% if profile.avatar %}
+                                <img loading="lazy" src="{{ profile.avatar.url }}" alt="User avatar">
+                                {% else %}
+                                <img src="{% static "images/icons/svgs/account_circle_24dp_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="User avatar holder" class="icon--filtered" >
+                                {% endif %}
                             </div>
                             <div class="brief__name">
                                 <div class="name__name">
@@ -55,12 +140,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="start__bio">
-                            {{ profile.bio }}
-                        </div>
-                    </div>
-                    <div class="container__end">
-                        <div class="end__follow-info">
+                        <div class="start__follow-info">
                             <div class="follow-info follow-info__followers">
                                 <div class="follow-info__counter">
                                     0
@@ -78,23 +158,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="end__action">
+                        <div class="start__action">
                             <div class="action__follow-btn">
                                 {% translate "Follow" %}
                             </div>
 
                         </div>
+
+                    </div>
+                    <div class="container__end container__end--{{ profile.bio_writing_mode }}">
+                        <div class="end__bio end__bio--{{ profile.bio_writing_mode }}">
+                            {% if profile.bio %}
+                                {{ profile.bio }}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
             
-            {% for post in profile.post_set.all|dictsortreversed:"created_time" %}
+            {% for post in profile_posts %}
                 <div class="post">
                     <div class="post__header">
                         <div class="header__warper">
                             <div class="warper__user">
                                 <div class="user__avatar">
-                                    <img src="{{ post.user_profile.avatar.url }}" alt="User avatar">
+                                    <img loading="lazy" src="{{ post.user_profile.avatar.url }}" alt="User avatar">
                                 </div>
                                 <div class="user__name">
                                     <span>{{ post.user_profile.name }}</span>
@@ -120,7 +208,11 @@
                         {% if post.postmedia_set.all %}
                             <div class="content__media content__media--{{ post.writing_mode }}">
                                 {% for media in post.postmedia_set.all %}
-                                    <img src="{{ media.image.url }}" alt="{{ media.alt_text }}">
+                                    {% if media.webp_image %}
+                                        <img loading="lazy" src="{{ media.webp_image.url }}" alt="{{ media.alt_text }}">
+                                    {% else %}
+                                        <img loading="lazy" src="{{ media.image.url }}" alt="{{ media.alt_text }}">
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         {% endif %}
@@ -148,15 +240,21 @@
  
                         </div>
                    </div>
+                {% if profile_posts.has_next and forloop.last %}
+                <div hx-get="{{ profile.get_absolute_url }}?page={{ profile_posts.next_page_number }}"
+                    hx-swap="beforeend" hx-target=".main__profile" hx-select=".post"
+                    hx-trigger="revealed" style="block-size: 1px">
+                </div>
+                {% endif %}
                 </div>
             {% empty %}
             {% endfor %}
         </div>
-        <div class="query">
+        <div class="query {% if user.id == profile.user.id %}query--my-profile{% endif %}">
             <div class="query__search">
                 <div class="search__search-bar">
                     <form action="">
-                        <input type="search">
+                        <input type="search" placeholder="{% translate "Search in profile" %}">
                     </form>
                 </div>
                 <div class="search__btn">

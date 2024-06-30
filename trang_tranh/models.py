@@ -1,13 +1,13 @@
-from typing import Any
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import CheckConstraint, Q, UniqueConstraint
-from django.db.models.functions import Lower
-from django_resized import ResizedImageField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django_resized import ResizedImageField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -16,9 +16,46 @@ class User(AbstractUser):
     pass
 
 
+GENRES = (
+    ("adventure", _("Adventure")),
+    ("sci-fi", _("Science Fiction")),
+    ("mystery", _("Mystery")),
+    ("fantasy", _("Fantasy")),
+    ("action", _("Action")),
+    ("romance", _("Romance")),
+)
+
+WRITING_MODE = (
+        ("h-tb", _("horizontal-tb")),
+        ("v-rl", _("vertical-rl")),
+        ("v-lr", _("vertical-lr")),
+    )
+
+class Genre(models.Model):
+    name = models.CharField(
+        _("name"),
+        max_length=100,
+        choices=GENRES,
+    )
+
+    class Meta:
+        verbose_name = _("Genre")
+        verbose_name_plural = _("Genres")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("Genre_detail", kwargs={"pk": self.pk})
+
+
 class UserProfile(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, verbose_name=_("user"), on_delete=models.CASCADE
+    )
     name = models.CharField(_("profile name"), max_length=200)
+    email_confirmed = models.BooleanField(default=False)
+
     avatar = models.ImageField(
         _("profile avatar"),
         upload_to="profile-avatars/",
@@ -29,13 +66,21 @@ class UserProfile(models.Model):
         blank=True,
         null=True,
     )
-    bio = models.TextField(_("profile bio"), max_length=500)
+    bio = models.TextField(_("profile bio"), max_length=500, blank=True, null=True)
+    bio_writing_mode = models.CharField(_("bio writing mode"), max_length=50, choices=WRITING_MODE, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse("profile-detail", kwargs={"pk": self.pk})
+
+
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance, name=instance.username)
+    instance.userprofile.save()
 
 
 class Comic(models.Model):
@@ -119,6 +164,8 @@ class Comic(models.Model):
         help_text=_("Serializing status"),
     )
 
+    genre = models.ManyToManyField("Genre", verbose_name=_("genre"))
+
     def __str__(self):
         """String for representing the comic"""
         return f"{self.title} - {self.publisher}"
@@ -142,7 +189,7 @@ class Comic(models.Model):
                         representative_authors.append(translation.pen_name)
                         found = True
                         break
-                if found == False:
+                if not found:
                     representative_authors.append(author.pen_name)
             else:
                 representative_authors.append(author.pen_name)
@@ -263,7 +310,7 @@ class ComicTranslation(models.Model):
                         representative_authors.append(translation.pen_name)
                         found = True
                         break
-                if found == False:
+                if not found:
                     representative_authors.append(author.pen_name)
             else:
                 representative_authors.append(author.pen_name)
@@ -505,7 +552,7 @@ class PageTranslation(models.Model):
         # width_field=None,
         max_length=None,
     )
-    
+
     webp_image = ResizedImageField(
         verbose_name="webp image",
         upload_to="webp-page-image-translations/",
@@ -514,8 +561,6 @@ class PageTranslation(models.Model):
         blank=True,
         null=True,
     )
-
-
 
     number = models.PositiveSmallIntegerField(_("page number"), default=1)
 
@@ -531,6 +576,7 @@ class PageTranslation(models.Model):
         ]
 
 
+
 class Post(models.Model):
     user_profile = models.ForeignKey(
         "UserProfile", verbose_name=_("user profile"), on_delete=models.CASCADE
@@ -543,11 +589,7 @@ class Post(models.Model):
         _("last modified"), auto_now=True, auto_now_add=False
     )
 
-    WRITING_MODE = (
-        ("h-tb", _("horizontal-tb")),
-        ("v-rl", _("vertical-rl")),
-        ("v-lr", _("vertical-lr")),
-    )
+    
 
     writing_mode = models.CharField(
         _("writing mode"),
@@ -561,6 +603,22 @@ class Post(models.Model):
     reply_to = models.ForeignKey(
         "self",
         verbose_name=_("reply to"),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
+    about_comic = models.ForeignKey(
+        "Comic",
+        verbose_name=_("about comic"),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
+    about_chapter = models.ForeignKey(
+        "Chapter",
+        verbose_name=_("about chapter"),
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -586,6 +644,15 @@ class PostMedia(models.Model):
         max_length=None,
     )
 
+    webp_image = ResizedImageField(
+        verbose_name="webp image",
+        upload_to="webp-post-images/",
+        force_format="WEBP",
+        quality=100,
+        blank=True,
+        null=True,
+    )
+
     alt_text = models.TextField(_("alternative text"), max_length=1000)
 
 
@@ -596,11 +663,7 @@ class Language(models.Model):
         choices=settings.LANGUAGES,
     )
 
-    WRITING_MODE = (
-        ("h-tb", _("horizontal-tb")),
-        ("v-rl", _("vertical-rl")),
-        ("v-lr", _("vertical-lr")),
-    )
+    
 
     writing_mode = models.CharField(
         _("writing mode"), max_length=10, choices=WRITING_MODE

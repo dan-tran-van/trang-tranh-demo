@@ -46,9 +46,9 @@
                 <div class="start__overview">
                     <div class="overview__comic-cover">
                         {% if comic.horizontal_cover %}
-                            <img src="{{ comic.horizontal_cover.url }}" alt="Comic cover">
+                            <img loading='lazy' src="{{ comic.horizontal_cover.url }}" alt="Comic cover">
                         {% else %}
-                            <img src="{{ comic.vertical_cover.url }}" alt="Comic cover">
+                            <img loading='lazy' src="{{ comic.vertical_cover.url }}" alt="Comic cover">
                         {% endif %}
                     </div>               
                     <div class="overview__at-glance">
@@ -74,7 +74,7 @@
                             <div class="last__publisher">
                                 <div class="publisher__avatar">
                                     <a href="{{ comic.publisher.get_absolute_url }}">
-                                        <img src="{{ comic.publisher.avatar.url }}" alt="Publisher avatar">
+                                        <img loading='lazy' src="{{ comic.publisher.avatar.url }}" alt="Publisher avatar">
                                     </a>
                                 </div>
                                 <div class="publisher__name">
@@ -103,6 +103,15 @@
                         <h3>{% translate "Schedule" %}</h3>
                         <p>{{ comic.get_schedule_display }}</p>
                     </div>
+                    <div class="more-info more-info__genres">
+                        <h3>{% translate "Genres" %}</h3>
+                            <div class="genre-list">
+                            {% for genre in comic.genre.all %}
+                                    <span class="genre-list__genre">{{ genre.get_name_display }}</span>
+                            {% empty %}
+                            {% endfor %}
+                            </div>
+                    </div>
                 </div>
             </div>
             <div class="content__end">
@@ -130,7 +139,7 @@
                             <a href="{{ chapter.get_absolute_url }}">
                                 <div class="chapter">
                                     <div class="chapter__cover">
-                                        <img src="{{ chapter.cover.url }}" alt="Chapter cover">
+                                        <img loading='lazy' src="{{ chapter.cover.url }}" alt="Chapter cover">
                                     </div>
                                     <div class="chapter__info">
                                         <div class="info__number">

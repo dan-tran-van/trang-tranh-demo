@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'trang_tranh.apps.TrangTranhConfig'
+    'trang_tranh.apps.TrangTranhConfig',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'trangtranhdemo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -168,3 +169,15 @@ SESSION_COOKIE_SECURE = True
 # SECURE_HSTS_PRELOAD = True
 
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "tranvandanmail3@gmail.com"
+EMAIL_HOST_PASSWORD = "iiqg znbf unlo qnio"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Đàn tranvandanmail3@gmail.com"

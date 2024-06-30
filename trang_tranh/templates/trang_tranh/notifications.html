@@ -34,3 +34,17 @@
 {% block main %}
 
 {% endblock main %}
+
+{% block query %}
+<div class="query">
+    <div class="query__search">
+        <div class="search__search-bar">
+            <input type="search" placeholder="{% translate "Search notifications" %}">
+        </div>
+        <div class="search__btn">
+            <img src="{% static "images/icons/svgs/search_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Search icon" class="icon--filtered">
+        </div>
+    </div>
+</div>
+{% endblock query %}
+

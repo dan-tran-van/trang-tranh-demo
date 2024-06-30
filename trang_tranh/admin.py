@@ -8,6 +8,7 @@ from .models import (
     ChapterTranslation,
     Comic,
     ComicTranslation,
+    Genre,
     Language,
     Page,
     PageTranslation,
@@ -28,6 +29,11 @@ admin.site.register(User, UserAdmin)
 # admin.site.register(ComicChapterTranslation)
 # admin.site.register(Language)
 # admin.site.register(UserProfile)
+
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
+    pass
+
 
 
 class ComicTranslationInline(admin.TabularInline):

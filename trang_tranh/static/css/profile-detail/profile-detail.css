@@ -17,8 +17,13 @@
   --icon-filter: invert(0%) sepia(8%) saturate(7491%) hue-rotate(179deg) brightness(100%) contrast(100%);
   --primary-color-filter: invert(71%) sepia(20%) saturate(1192%) hue-rotate(307deg) brightness(120%) contrast(102%);
   --hover-color: rgb(222, 222, 222);
+  --profile-bio-color: rgb(238, 238, 238);
+  --profile-bio-stroke-color:  #6969697e;
 
   @media (prefers-color-scheme: dark) {
+
+    --profile-bio-stroke-color: #7E7E7E;
+    --profile-bio-color: #101010;
     --background-color: black;
     --text-color: white;
     --gray-like-color: rgb(39, 39, 39);
@@ -130,6 +135,18 @@ a {
   background-color: var(--hover-color);
 }
 
+.query__element--active {
+  background-color: var(--gray-like-color);
+}
+
+.container__end--v-rl {
+  writing-mode: vertical-rl;
+}
+
+.name__username {
+  color: gray;
+  font-size: 12px;
+}
 
 
 @media (orientation: landscape) {
@@ -179,12 +196,6 @@ a {
 
 
 
-  @media (pointer: fine) {
-    .nav__element:hover {
-      background-color: var(--hover-color);
-    }
-  }
-
   .nav__element--active {
     background-color: var(--gray-like-color);
   }
@@ -218,37 +229,68 @@ a {
   }
 
   .at-glance__container {
-    padding-block: 12px;
-    inline-size: 500px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: row;
     border-block-end-style: solid;
     border-block-end-color: var(--strong-gray-color);
     border-block-end-width: 1px;
   }
 
-  .name__username {
-    color: gray;
-    font-size: 12px;
-  }
+
 
   .container__start {
+    padding: 12px;
+    block-size: 250px;
+    aspect-ratio: 1 / 1;
     display: grid;
     gap: 12px;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr;
   }
 
   .container__end {
-    display: grid;
-    grid-template-rows: 3fr 2fr;
+    padding: 12px;
+    aspect-ratio: 1 /1 ;
   }
 
-  .end__action {
+  .container__end--h-tb,
+  .container__end--None {
+    block-size: 250px;
+
+  }
+
+  .container__end--v-rl {
+    inline-size: 250px;
+  };
+
+  .end__bio {
+    padding: 12px;
+    aspect-ratio: 1 /1 ;
+    background-color: var(--profile-bio-color);
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--profile-bio-stroke-color);
+  }
+
+  .end__bio--h-tb,
+  .end__bio--None,
+  .end__bio--v-rl,
+  .end__bio--v-lr {
+    padding: 12px;
+    aspect-ratio: 1 /1 ;
+    background-color: var(--profile-bio-color);
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--profile-bio-stroke-color);
+  }
+
+  .start__action {
     display: flex;
     padding: 12px;
   }
 
-  .end__follow-info {
+  .start__follow-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
@@ -425,9 +467,7 @@ a {
     border-radius: 8px;
   }
 
-  .query__element--active {
-    background-color: var(--gray-like-color);
-  }
+
 
   .query__element:hover {
     background-color: var(--hover-color);
@@ -453,8 +493,18 @@ a {
     border-block-end-style: solid;
   }
 
+  nav.nav--my-profile {
+    position: fixed;
+    bottom: 0px;
+    justify-content: space-around;
+    border-block-end-width: 0px;
+    border-block-start-width: 1px;
+    border-block-start-color: var(--gray-like-color);
+    border-block-start-style: solid;
+  }
+
   .nav__element {
-    padding: 12px;
+    padding: 8px;
     border-radius: 8px;
   }
 
@@ -466,11 +516,25 @@ a {
     display: none;
   }
 
-  .nav__home,
-  .nav__feed,
-  .nav__notifications {
+  .nav--not-my-profile .nav__home,
+  .nav--not-my-profile .nav__feed,
+  .nav--not-my-profile .nav__notifications,
+  .nav--not-my-profile .nav__account,
+  .nav--not-my-profile .nav__login,
+  .nav--not-my-profile .nav__settings {
     display: none;
   }
+
+  .nav__account .nav__icon img {
+    inline-size: 24px;
+    aspect-ratio: 1/1;
+  }
+
+  .nav--my-profile .nav__account,
+  .nav--my-profile .nav__login {
+    display: none;
+  }
+
 
   .post-interaction__description {
     display: none;
@@ -596,9 +660,18 @@ a {
     inline-size: 100%;
   }
 
-  .profile__at-glance {
-    padding: 10px;
+  .main__profile.main__profile--my-profile {
+    padding-block-start: 80px;
+    padding-block-end: 50px;
   }
+
+  .profile__at-glance {
+  }
+
+  .at-glance__container {
+    padding: 24px;
+  }
+
 
   .container__start {
     gap: 12px;
@@ -627,17 +700,34 @@ a {
 
   .container__end {
     display: flex;
+    aspect-ratio: 1 /1;
+    background-color: var(--profile-bio-color);
+    border-radius: 8px;
+    padding: 12px;
+    border-style: solid;
+    border-color: var(--profile-bio-stroke-color);
+    border-width: 2px;
     flex-direction: column;
   }
 
-  .end__follow-info {
+  .container__end--h-tb,
+  .container__end--None {
+    inline-size: 100%;
+  }
+
+  .container__end--v-rl {
+    block-size: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  .start__follow-info {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 12px;
   }
 
-  .end__action {
+  .start__action {
     padding: 12px;
     display: flex;
     align-items: center;
@@ -677,6 +767,14 @@ a {
     gap: 12px;
   }
 
+  .query.query--my-profile {
+    top: 0px;
+    border-block-start-width: 0px;
+    border-block-end-width: 1px;
+    border-block-end-color: var(--gray-like-color);
+    border-block-end-style: solid;
+  }
+
   .query__element {
     border-radius: 8px;
     display: flex;
@@ -695,5 +793,15 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+@media (pointer: fine) {
+  .nav__element:hover {
+    background-color: var(--hover-color);
+  }
+
+  .query__element:hover {
+    background-color: var(--hover-color);
   }
 }

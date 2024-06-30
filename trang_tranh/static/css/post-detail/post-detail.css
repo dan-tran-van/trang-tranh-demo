@@ -343,12 +343,23 @@ a {
 
   .nav__home,
   .nav__feed,
-  .nav__notifications {
+  .nav__notifications,
+  .nav__account,
+  .nav__login,
+  .nav__settings {
     display: none;
   }
 
+  .post-interaction {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+
   .post-interaction__description {
-    display: none;
+    color: gray;
+    /* display: none; */
   }
 
   .main__post {
@@ -356,7 +367,7 @@ a {
   }
 
   .main__replies {
-    padding-block-end: 50px;
+    padding-block-end: 80px;
   }
 
   .warper__user {
@@ -453,7 +464,7 @@ a {
     align-items: center;
     justify-content: space-around;
     inline-size: 100%;
-    block-size: 50px;
+    block-size: 80px;
     bottom: 0px;
     flex-direction: row;
     position: fixed;

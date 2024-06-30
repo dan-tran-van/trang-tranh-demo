@@ -153,7 +153,8 @@ a {
   border-radius: 50%;
 }
 
-.more-info p {
+.more-info p,
+.more-info .genre-list {
   padding: 12px;
   color: var(--strong-gray-color);
 }
@@ -163,6 +164,12 @@ a {
   flex-direction: row;
   align-items: center;
   gap: 12px
+}
+
+.genre-list__genre {
+  background-color: var(--gray-like-color);
+  padding: 8px;
+  border-radius: 4px;
 }
 
 .content__start,
@@ -352,7 +359,11 @@ a {
 
   .nav__home,
   .nav__feed,
-  .nav__notifications {
+  .nav__notifications,
+  .nav__account,
+  .nav__login,
+  .nav__settings,
+  .nav__account--avatar-holder {
     display: none;
   }
 
@@ -383,6 +394,9 @@ a {
   }
 
   .chapter:hover {
+    background-color: var(--hover-color);
+  }
+  .genre-list__genre:hover {
     background-color: var(--hover-color);
   }
 }

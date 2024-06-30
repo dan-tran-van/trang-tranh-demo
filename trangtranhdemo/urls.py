@@ -14,14 +14,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from trang_tranh import views
+from django.contrib.auth import views as auth_views
+from trang_tranh.forms import CustomAuthForm
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
 
@@ -29,9 +33,29 @@ urlpatterns = [
 #     path('', include('trang_tranh.urls'))
 # )
 
+urlpatterns += [path("", include("trang_tranh.urls"))]
+
 urlpatterns += [
-    path("", include('trang_tranh.urls'))
+    path("accounts/login/", auth_views.LoginView.as_view(authentication_form=CustomAuthForm), name="login"),
 ]
+
+urlpatterns += [
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/signup/", views.signup, name="signup"),
+    path(
+        "account_activation_sent/",
+        views.account_activation_sent,
+        name="account-activation-sent",
+    ),
+    path(
+        "activate/<uidb64>/<token>/",
+        views.activate,
+        name="activate",
+    ),
+]
+
+
+
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

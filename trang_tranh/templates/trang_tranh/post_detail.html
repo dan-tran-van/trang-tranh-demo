@@ -44,7 +44,7 @@
                     <div class="warper__user">
                         <div class="user__avatar">
                             <a href="{{ post.user_profile.get_absolute_url }}">
-                                <img src="{{ post.user_profile.avatar.url }}" alt="User avatar">
+                                <img loading="lazy" src="{{ post.user_profile.avatar.url }}" alt="User avatar">
                             </a>
                         </div>
                         <div class="user__name">
@@ -73,7 +73,11 @@
                 {% if post.postmedia_set.all %}
                     <div class="content__media content__media--{{ post.writing_mode }}">
                         {% for media in post.postmedia_set.all %}
-                            <img src="{{ media.image.url }}" alt="{{ media.alt_text }}">
+                            {% if media.webp_image %}
+                                <img loading="lazy" src="{{ media.webp_image.url }}" alt="{{ media.alt_text }}">
+                            {% else %}
+                                <img loading="lazy" src="{{ media.image.url }}" alt="{{ media.alt_text }}">
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -84,13 +88,14 @@
         </div>
         {% if post.post_set.all %}
             <div class="main__replies">
-                {% for reply in post.post_set.all %}
+                {% for reply in new_replies %}
+                <div class="reply__post">
                     <div class="post__header">
                         <div class="header__warper">
                             <div class="warper__user">
                                 <div class="user__avatar">
                                     <a href="{{ reply.user_profile.get_absolute_url }}">
-                                        <img src="{{ reply.user_profile.avatar.url }}" alt="User avatar">
+                                        <img loading="lazy" src="{{ reply.user_profile.avatar.url }}" alt="User avatar">
                                     </a>
                                 </div>
                                 <div class="user__name">
@@ -110,7 +115,11 @@
                         {% if reply.postmedia_set.all %}
                             <div class="content__media content__media--{{ reply.writing_mode }}">
                                 {% for media in reply.postmedia_set.all %}
-                                    <img src="{{ media.image.url }}" alt="{{ media.alt_text }}">
+                                    {% if media.webp_image %}
+                                        <img loading="lazy" src="{{ media.webp_image.url }}" alt="{{ media.alt_text }}">
+                                    {% else %}
+                                        <img loading="lazy" src="{{ media.image.url }}" alt="{{ media.alt_text }}">
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         {% endif %}
@@ -135,9 +144,18 @@
                                 <img src="{% static "images/icons/svgs/share_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Share icon" class="gray--filtered">
                             </div>
                         </div>
-                    </div>                   
+                    </div>
+                    {% if new_replies.has_next and forloop.last %}
+                        <div hx-get="{{ post.get_absolute_url }}?page={{ new_replies.next_page_number }}"
+                            hx-swap="beforeend" hx-target=".main__replies" hx-select=".reply__post"
+                            hx-trigger="revealed" style="block-size: 1px">
+                        </div>
+                    {% endif %}
+                </div>
                 {% endfor %}
             </div>
+        {% else %}
+            <div class="main__replies"></div>
         {% endif %}
 
         <div class="main__post-interactions">

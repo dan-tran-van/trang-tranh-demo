@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+  <p>Logged out!</p>
+  <div>
+    <a href="{% url "index" %}">{% translate "Go to home page" %}</a>
+  </div>
+  <div>
+    <a href="{% url 'login'%}">{% translate "Click here to login again." %}</a>
+  </div>
+{% endblock %}

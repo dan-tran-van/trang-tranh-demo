@@ -21,6 +21,18 @@
     {% endif %}
 {% endblock stylesheets %}
 {% block javascripts %}{% endblock javascripts %}
+{% block script %}
+    <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+{% endblock script %}
+
+{% block style %}
+    <style>
+        .nav__account .nav__icon img {
+        filter: none;
+        border-radius: 50%;
+        }
+    </style>
+{% endblock style %}
 
 {% block content %}
     {% block naviagtion %}
@@ -75,7 +87,41 @@
             {% endblock nav__notifications %}
 
             {% block nav__account %}
+                {% if user.is_authenticated %}
+                    <div class="nav__element {% if user.userprofile.avatar %}nav__account {% else %}nav__account--avatar-holder{% endif %} ">
+                        <a href="{{ user.userprofile.get_absolute_url }}">
+                            <div class="nav__icon">
+                                {% if user.userprofile.avatar %}
+                                <img src="{{ user.userprofile.avatar.url }}" alt="{% translate "Profile avatar" %}">
+                                {% else %}
+                                <img src="{% static "images/icons/svgs/account_circle_24dp_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Profile avatar holder">
+                                {% endif %}
+                            </div>
+                            <div class="nav__description">{{ user.userprofile.name }}</div>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="nav__element nav__login">
+                        <a href="{% url "login" %}">
+                            <div class="nav__icon">
+                                <img src="{% static "images/icons/svgs/account_circle_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Account icon" %}">
+                            </div>
+                            <div class="nav__description">{% translate "Login" %}</div>
+                        </a>
+                    </div>
+                {% endif %}
             {% endblock nav__account %}
+
+            {% block nav__settings %}
+                <div class="nav__element nav__settings {% if user.is_authenticated %}nav__settings--authenticated{% endif %}">
+                    <a href="{% url "settings" %}">
+                        <div class="nav__icon">
+                            <img src="{% static "images/icons/svgs/settings_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Settings" %}">
+                        </div>
+                        <div class="nav__description">{% translate "Settings" %}</div>
+                    </a>
+                </div>
+            {% endblock nav__settings %}
        </nav>
     {% endblock naviagtion %}
 
@@ -96,7 +142,7 @@
                             <a href="{{ chapter.get_absolute_url }}" class="update">
                                 <div class="update__chapter">
                                     <div class="chapter__comic-cover">
-                                        <img src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
+                                        <img loading='lazy' src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
                                     </div>
                                     <div class="chapter__at-glance">
                                         <div class="at-glance__title">
@@ -110,7 +156,9 @@
                                         </div>
                                         <div class="at-glance__publisher">
                                             <div class="publisher__avatar">
-                                                <img src="{{ chapter.comic.publisher.avatar.url }}" alt="Publisher avatar">
+                                                {% if chapter.comic.publisher.avatar %}
+                                                <img loading='lazy' src="{{ chapter.comic.publisher.avatar.url }}" alt="Publisher avatar">
+                                                {% endif %}
                                             </div>
                                             <div class="publisher__name">
                                                 <span>{{ chapter.comic.publisher.name }}</span>
@@ -118,14 +166,21 @@
                                         </div>
                                     </div>
                                 </div>
+                            {% if updated_chapters.has_next and forloop.last %}
+                            <span hx-get="{% url 'index' %}?page={{ updated_chapters.next_page_number }}"
+                                hx-swap="beforeend" hx-target=".update__chapters" hx-select=".update"
+                                hx-trigger="revealed">
+                            </span>
+                            {% endif %}
                             </a>
+
                         {% elif chapter.comic.default_language != LANGUAGE_CODE and chapter.chaptertranslation_set.all %}
                             {% for translation in chapter.chaptertranslation_set.all %}
                                 {% if translation.comic_translation.language == LANGUAGE_CODE and translation.is_valid %}
                                     <a href="{{ translation.get_absolute_url }}" class="update">
                                         <div class="update__chapter">
                                             <div class="chapter__comic-cover">
-                                                <img src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
+                                                <img loading='lazy' src="{{ chapter.comic.vertical_cover.url }}" alt="Comic cover">
                                             </div>
                                             <div class="chapter__at-glance">
                                                 <div class="at-glance__title">
@@ -139,7 +194,9 @@
                                                 </div>
                                                 <div class="at-glance__publisher">
                                                     <div class="publisher__avatar">
-                                                        <img src="{{ translation.chapter.comic.publisher.avatar.url }}" alt="Publisher avatar">
+                                                        {% if translation.chapter.comic.publisher.avatar %}
+                                                        <img loading='lazy' src="{{ translation.chapter.comic.publisher.avatar.url }}" alt="Publisher avatar">
+                                                        {% endif %}
                                                     </div>
                                                     <div class="publisher__name">
                                                         <span>{{ translation.chapter.comic.publisher.name }}</span>
@@ -147,7 +204,14 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    {% if updated_chapters.has_next %}
+                                    <span hx-get="{% url 'index' %}?page={{ updated_chapters.next_page_number }}"
+                                        hx-swap="beforeend" hx-target=".update__chapters" hx-select=".update"
+                                        hx-trigger="revealed">
+                                    </span>
+                                    {% endif %}
                                     </a>
+
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
@@ -164,18 +228,18 @@
             <div class="query__search">
                 <div class="search__search-bar">
                     <form action="">
-                        <input type="search">
+                        <input type="search" placeholder="{% translate "Search" %}">
                     </form>
                 </div>
                 <div class="search__btn">
                     <img src="{% static "images/icons/svgs/search_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Search icon" class="icon--filtered">
                 </div>
             </div>
-            <div class="query__element query__to-you query__element--active">
+            <div class="query__element query__new query__element--active">
                 <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/recommend_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Recommend icon" class="icon--filtered">
+                    <img src="{% static "images/icons/svgs/hourglass_top_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="New icon" class="icon--filtered">
                 </div>
-                <div class="element__description">{% translate "To you" %}</div>
+                <div class="element__description">{% translate "New" %}</div>
             </div>
             <div class="query__element query__trending">
                 <div class="element__icon">
