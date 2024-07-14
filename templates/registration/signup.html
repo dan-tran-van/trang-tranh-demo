@@ -1,22 +1,27 @@
 {% extends "base_generic.html" %}
+{% load i18n %}
+{% load static %}
 
 {% block content %}
-    <h2>Sign up</h2>
-    <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-        <p>
-        {{ field }}
-        {% comment %} {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %} {% endcomment %}
-        {% for error in field.errors %}
-            <p style="color: red">{{ error }}</p>
+
+    {% if user.is_authenticated %}
+        <p>{% translate "You're logged in as " %} <a href="{{ user.get_absolute_url }}">{{ user.uesrprofile.name }}</a></p>
+        <p>{% translate "You need to log out before create another account" %}</p>
+        <a href="{% url "logout" %}?next={{ request.path }}">Log out?</a>
+    {% else %}
+        <h2>Sign up</h2>
+        <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <p>
+            {{ field }}
+            {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            </p>
         {% endfor %}
-        </p>
-    {% endfor %}
-        <button type="submit">Sign up</button>
-    </form>
-    <a href="{% url "login" %}">Log in</a>
-  
+            <button type="submit">Sign up</button>
+        </form>
+        <a href="{% url "login" %}">Log in</a>
+    {% endif %}
 {% endblock content %}

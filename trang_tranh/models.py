@@ -41,6 +41,9 @@ class Genre(models.Model):
     class Meta:
         verbose_name = _("Genre")
         verbose_name_plural = _("Genres")
+        constraints = [
+            UniqueConstraint(fields=['name'],name="unique_genre_name")
+        ]
 
     def __str__(self):
         return self.name

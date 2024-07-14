@@ -30,7 +30,7 @@ h2,
 h3,
 h4,
 h6 {
-  /* margin: 0px; */
+  margin: 4px;
 }
 
 body {
@@ -84,6 +84,7 @@ a {
 .start__overview {
   display: flex;
   flex-direction: column;
+  aspect-ratio: 1 / 1;
 }
 
 .overview__comic-cover {
@@ -380,6 +381,7 @@ a {
     border-block-start-style: solid;
     block-size: 50px;
   }
+
 
 }
 
