@@ -6,7 +6,11 @@ from .settings import BASE_DIR
 # Configure the domain name using the environment variable
 # that Azure automatically creates for us.
 # ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
-ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME'],os.environ['CUSTOM_HOSTNAME']]
+
+if 'CUSTOM_HOSTNAME' in os.environ:
+    ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME'],os.environ['CUSTOM_HOSTNAME']]
+else:
+    ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']]
 
 HOST_DOMAIN = "https://" + os.environ['WEBSITE_HOSTNAME'] if 'WEBSITE_HOSTNAME' in os.environ else ""
 
