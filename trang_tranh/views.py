@@ -1,29 +1,28 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.paginator import Paginator
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
-from django.urls import reverse
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
+from django.urls import reverse, reverse_lazy
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext as _
-from django.utils.encoding import force_str
-from django.utils.http import urlsafe_base64_decode
+from django.views.generic.edit import FormView
 
-
-from .forms import SignUpForm
-from .models import Chapter, Comic, Post, UserProfile, User
+from .forms import PostForm, SignUpForm
+from .models import Chapter, Comic, Post, PostMedia, User, UserProfile
 from .tokens import account_activation_token
-
+from django.core.exceptions import ValidationError
 # Create your views here.
 
 
 def index(request):
     """View function for home page of site."""
     page_number = request.GET.get("page", 1)
-    paginator = Paginator(Chapter.objects.all().order_by("-published_date"), 10)
+    paginator = Paginator(Chapter.objects.all().order_by("-published_date"), 20)
     updated_chapters = paginator.get_page(page_number)
     context = {
         "updated_chapters": updated_chapters,
@@ -236,3 +235,45 @@ def activate(request, uidb64, token):
         return render(request, "registration/account_activation_complete.html")
     else:
         return render(request, "registration/account_activation_invalid.html")
+
+
+@login_required
+def post_create(request):
+    render(request, "trang_tranh/post_form.html")
+
+
+class PostCreateView(LoginRequiredMixin, FormView):
+    form_class = PostForm
+    template_name = "trang_tranh/post_form.html"
+    success_url = reverse_lazy("index")
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        text_content = form.cleaned_data["text_content"]
+        images = form.cleaned_data["media"]
+        try:
+            user_profile = get_object_or_404(UserProfile, user=self.request.user)
+            new_post = Post(user_profile=user_profile, text_content=text_content)
+            new_post.save()
+            for i in images:
+                new_post_media = PostMedia(post=new_post, image=i, alt_text="test")
+                new_post_media.save()
+            return super().form_valid(form)
+        except :
+            raise ValidationError("Error")
+
+
+@login_required
+def post_update(request, pk):
+    pass
+
+
+def post_delete(request, pk):
+    pass

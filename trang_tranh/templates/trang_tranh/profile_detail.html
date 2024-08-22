@@ -7,9 +7,12 @@
 {% endblock title %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static "css/profile-detail/profile-detail.css" %}">
+    {% if LANGUAGE_CODE == 'ja' %}
+        <link rel="stylesheet" href="{% static "css/profile-detail/profile-detail-jp.css" %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static "css/profile-detail/profile-detail.css" %}">
+    {% endif %}
 {% endblock stylesheets %}
-{% block javascripts %}{% endblock javascripts %}
 
 {% block naviagtion %}
     <nav class="{% if user.id == profile.user.id %}nav--my-profile {% else %}nav--not-my-profile{% endif %}">
@@ -59,6 +62,14 @@
         {% endblock nav__feed %}
 
         {% block nav__create %}
+            <div class="nav__element nav__create">
+                    <a>
+                        <div class="nav__icon">
+                            <img src="{% static "images/icons/svgs/nav/add_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Feed">
+                        </div>
+                        <div class="nav__description">{% translate "Create" %}</div>
+                    </a>
+                </div>
         {% endblock nav__create %}
 
         {% block nav__notifications %}
@@ -84,7 +95,7 @@
                             <img src="{% static "images/icons/svgs/account_circle_24dp_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Profile avatar holder">
                             {% endif %}
                         </div>
-                        <div class="nav__description">{{ user.userprofile.name }}</div>
+                        <div class="nav__description">{% translate "Profile" %}</div>
                     </a>
                 </div>
             {% else %}
@@ -136,7 +147,8 @@
                                     {{ profile.name }}
                                 </div>
                                 <div class="name__username">
-                                    @{{ profile.user.username }}
+                                    <span class="username__address-sign">@</span>
+                                    {{ profile.user.username }}
                                 </div>
                             </div>
                         </div>
@@ -261,24 +273,27 @@
                     <img src="{% static "images/icons/svgs/search_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Search icon" class="icon--filtered">
                 </div>
             </div>
-            <div class="query__element query__to-you query__element--active">
-                <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/account_circle_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Account icon" class="icon--filtered">
+            <div class="query__filters">
+                <div class="query__element query__to-you query__element--active">
+                    <div class="element__icon">
+                        <img src="{% static "images/icons/svgs/account_circle_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Account icon" class="icon--filtered">
+                    </div>
+                    <div class="element__description">{% translate "Account" %}</div>
                 </div>
-                <div class="element__description">{% translate "Account" %}</div>
-            </div>
-            <div class="query__element query__trending">
-                <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/calendar_month_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Update icon" class="icon--filtered">
+                <div class="query__element query__trending">
+                    <div class="element__icon">
+                        <img src="{% static "images/icons/svgs/calendar_month_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Update icon" class="icon--filtered">
+                    </div>
+                    <div class="element__description">{% translate "Updates" %}</div>
                 </div>
-                <div class="element__description">{% translate "Updates" %}</div>
-            </div>
-            <div class="query__element query__following">
-                <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/library_books_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Library icon" class="icon--filtered">
+                <div class="query__element query__following">
+                    <div class="element__icon">
+                        <img src="{% static "images/icons/svgs/library_books_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Library icon" class="icon--filtered">
+                    </div>
+                    <div class="element__description">{% translate "Library" %}</div>
                 </div>
-                <div class="element__description">{% translate "Library" %}</div>
-            </div>
+                </div>
+            
         </div>
     </main>
 {% endblock main %}

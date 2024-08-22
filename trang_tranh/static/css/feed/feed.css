@@ -460,6 +460,12 @@ a {
     gap: 12px;
   }
 
+  .query__filters {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+  }
+
   .query__element {
     border-radius: 8px;
     display: flex;

@@ -1,0 +1,221 @@
+/* | general */
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --primary-color: #FFB7C5;
+  --background-color: white;
+  --text-color: black;
+  --gray-like-color: rgb(229, 229, 229);
+  --strong-gray-color: gray;
+  --icon-filter: invert(0%) sepia(8%) saturate(7491%) hue-rotate(179deg) brightness(100%) contrast(100%);
+  --primary-color-filter: invert(71%) sepia(20%) saturate(1192%) hue-rotate(307deg) brightness(120%) contrast(102%);
+  --hover-color: rgb(222, 222, 222);
+
+  @media (prefers-color-scheme: dark) {
+    --background-color: black;
+    --text-color: white;
+    --gray-like-color: rgb(39, 39, 39);
+    --icon-filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(192deg) brightness(107%) contrast(103%);
+    --hover-color: rgb(72, 72, 72);
+  }
+}
+
+body {
+  margin: 0px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.cherry-bomb-one-regular {
+  font-family: "Cherry Bomb One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+nav {
+  position: fixed;
+  background-color: var(--background-color);
+
+}
+
+main {
+  inline-size: 100vw;
+  block-size: 100vh;
+}
+
+.icon--filtered {
+  filter: var(--icon-filter);
+}
+
+.gray--filtered {
+  filter: invert(47%) sepia(0%) saturate(1%) hue-rotate(171deg) brightness(106%) contrast(88%);
+  ;
+}
+
+
+.nav__logo img {
+  inline-size: 36px;
+}
+
+.logo__brand-name {
+  font-size: 24px;
+}
+
+
+a:link,
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.nav__element img {
+  filter: var(--icon-filter);
+}
+
+/* site specific */
+
+label {
+  display: none;
+}
+
+@media (orientation: landscape) {
+  nav {
+    inline-size: 280px;
+    block-size: 100vh;
+    border-inline-end-color: var(--gray-like-color);
+    border-inline-end-style: solid;
+    border-inline-end-width: 1px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @media (max-width: 1400px) {
+      inline-size: 80px;
+      align-items: center;
+    }
+  }
+
+  .nav__logo {
+    padding: 12px;
+  }
+
+  .nav__logo a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav__element a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    block-size: fit-content;
+  }
+
+  .nav__element {
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .nav__icon img {
+    inline-size: 28px;
+  }
+
+  .nav__element--active {
+    background-color: var(--gray-like-color);
+  }
+
+  @media (max-width: 1400px) {
+
+    .nav__description,
+    .logo__brand-name {
+      display: none;
+    }
+  }
+
+  /* site specific */
+
+  main {
+    padding-inline: 280px;
+  }
+
+  @media (max-width: 1400px) {
+    main {
+      padding-inline-start: 80px;
+    }
+  }
+
+  .query {
+    position: fixed;
+    inline-size: 280px;
+    block-size: 100vh;
+    background-color: var(--background-color);
+    right: 0px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 2;
+    border-inline-start-color: var(--gray-like-color);
+    border-inline-start-style: solid;
+    border-inline-start-width: 1px;
+  }
+
+}
+
+
+
+@media (orientation: portrait) {
+  nav {
+    inline-size: 100%;
+    block-size: 50px;
+    display: flex;
+    align-items: center;
+    background-color: var(--background-color);
+    flex-direction: row;
+    border-block-end-width: 1px;
+    border-block-end-color: var(--gray-like-color);
+    border-block-end-style: solid;
+  }
+
+  .nav__element {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .nav__description {
+    display: none;
+  }
+
+  .nav__logo {
+    display: none;
+  }
+
+  .nav__home,
+  .nav__feed,
+  .nav__notifications,
+  .nav__account,
+  .nav__login,
+  .nav__settings {
+    display: none;
+  }
+
+
+
+}
+
+@media (pointer: fine) {
+  .nav__element:hover {
+    background-color: var(--hover-color);
+  }
+
+
+}

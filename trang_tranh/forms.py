@@ -26,24 +26,23 @@ class CustomAuthForm(AuthenticationForm):
     password = forms.CharField(widget=PasswordInput(attrs={"placeholder": "Password"}))
 
 # Create custom file file for multiple uploads
-class MultipleFileInput(forms.ClearableFileInput):
+class MultipleImageInput(forms.ClearableFileInput):
     allow_multiple_selected = True
 
 
-class MultipleFileField(forms.FileField):
+class MultipleImageField(forms.FileField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault("widget", MultipleFileInput())
+        kwargs.setdefault("widget", MultipleImageInput())
         super().__init__(*args, **kwargs)
 
     def clean(self, data, initial=None):
-        single_file_clean = super().clean
+        single_image_clean = super().clean
         if isinstance(data, (list, tuple)):
-            result = [single_file_clean(d, initial) for d in data]
+            result = [single_image_clean(d, initial) for d in data]
         else:
-            result = single_file_clean(data, initial)
+            result = single_image_clean(data, initial)
         return result
 
-class NewPostForm(forms.Form):
-
-    media = MultipleFileField()
-    pass
+class PostForm(forms.Form):
+    text_content = forms.CharField(widget=forms.Textarea(), max_length=500, required=True)
+    media = MultipleImageField(required=False)

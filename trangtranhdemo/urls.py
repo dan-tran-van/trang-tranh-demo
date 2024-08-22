@@ -29,11 +29,11 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
 ]
 
-# urlpatterns += i18n_patterns(
-#     path('', include('trang_tranh.urls'))
-# )
+urlpatterns += i18n_patterns(
+    path('', include('trang_tranh.urls'))
+)
 
-urlpatterns += [path("", include("trang_tranh.urls"))]
+# urlpatterns += [path("", include("trang_tranh.urls"))]
 
 urlpatterns += [
     path("accounts/login/", auth_views.LoginView.as_view(authentication_form=CustomAuthForm), name="login"),

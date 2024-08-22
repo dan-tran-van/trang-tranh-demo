@@ -580,11 +580,18 @@ class PageTranslation(models.Model):
 
 
 
+
 class Post(models.Model):
+    POST_VISIBILITY = (
+        ("p", _("Public")),
+        ("f", _("Followers")),
+        ("ff", _("Following followers")),
+        ("o", _("Only me"))
+    )
     user_profile = models.ForeignKey(
         "UserProfile", verbose_name=_("user profile"), on_delete=models.CASCADE
     )
-    text_content = models.TextField(_("text content"), max_length=1000)
+    text_content = models.TextField(_("text content"), max_length=500)
     created_time = models.DateTimeField(
         _("created time"), auto_now=False, auto_now_add=True
     )
@@ -625,6 +632,12 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         blank=True,
         null=True,
+    )
+
+    visibility = models.CharField(
+        max_length=20,
+        choices=POST_VISIBILITY,
+        default="public",
     )
 
     def __str__(self):

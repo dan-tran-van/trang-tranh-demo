@@ -7,9 +7,12 @@
 {% endblock title %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static "css/post-detail/post-detail.css" %}">
+    {% if LANGUAGE_CODE == 'ja' %}
+        <link rel="stylesheet" href="{% static "css/post-detail/post-detail-jp.css" %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static "css/post-detail/post-detail.css" %}">
+    {% endif %}
 {% endblock stylesheets %}
-{% block javascripts %}{% endblock javascripts %}
 
 {% block nav__start %}
     <div class="nav__element nav__back">

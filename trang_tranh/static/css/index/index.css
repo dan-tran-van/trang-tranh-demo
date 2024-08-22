@@ -153,7 +153,33 @@ a {
   background-color: var(--gray-like-color);
 }
 
+.create-dialog[open] {
+  inline-size: 200px;
+  background-color: var(--gray-like-color);
+  border-radius: 8px;
+  border-color: var(--gray-like-color);
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
 
+.create-dialog::backdrop {
+  background-color: var(--background-color);
+  opacity: 0.75;
+}
+
+.create-dialog__item a {
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.create-dialog[open] button {
+  position: fixed;
+  bottom: 80px;
+  right: 50%;
+}
 
 @media (orientation: landscape) {
 
@@ -168,6 +194,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    overflow: scroll;
 
     @media (max-width: 1400px) {
       inline-size: 80px;
@@ -200,8 +227,6 @@ a {
   .nav__icon img {
     inline-size: 28px;
   }
-
-
 
 
 
@@ -386,6 +411,11 @@ a {
     gap: 12px;
   }
 
+  .query__filters {
+    display: flex;
+    flex-direction: row;
+  }
+
   .query__element {
     border-radius: 8px;
     display: flex;
@@ -423,6 +453,14 @@ a {
   }
 
   .query__element:hover {
+    background-color: var(--hover-color);
+  }
+
+  .nav__create:hover {
+    cursor: pointer;
+  }
+
+  .create-dialog__item a:hover {
     background-color: var(--hover-color);
   }
 }

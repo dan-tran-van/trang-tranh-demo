@@ -6,9 +6,12 @@
     <title>{% translate "Feed" %} | Trang tranh</title>
 {% endblock title %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static "css/feed/feed.css" %}">
+    {% if LANGUAGE_CODE == 'ja' %}
+        <link rel="stylesheet" href="{% static "css/feed/feed-jp.css" %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static "css/feed/feed.css" %}">
+    {% endif %}
 {% endblock stylesheets %}
-{% block javascripts %}{% endblock javascripts %}
 
 {% block nav__home %}
     <div class="nav__element nav__home">
@@ -60,6 +63,9 @@
                                 <a href="{{ post.reply_to.get_absolute_url }}">
                                     {{ post.reply_to.user_profile.name }}
                                 </a>
+                                <span>
+                                    {% translate "" %}
+                                </span>
                             </div>
                         </div>
                     {% endif %}
@@ -124,17 +130,26 @@
                 </div>
             </div>
 
-            <div class="query__element query__trending query__element--active">
-                <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/local_fire_department_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Trending icon" class="icon--filtered">
+            <div class="query__filters">
+                {% comment %} <div class="query__element query__to-you ">
+                    <div class="element__icon">
+                        <img src="{% static "images/icons/svgs/recommend_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Recommend icon" %}" class="icon--filtered">
+                    </div>
+                    <div class="element__description">{% translate "To you" %}</div>
                 </div>
-                <div class="element__description">{% translate "Trending" %}</div>
-            </div>
-            <div class="query__element query__following">
-                <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/person_check_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Following icon" class="icon--filtered">
+                 {% endcomment %}
+                <div class="query__element query__trending">
+                    <div class="element__icon">
+                        <img src="{% static "images/icons/svgs/local_fire_department_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Trending icon" class="icon--filtered">
+                    </div>
+                    <div class="element__description">{% translate "Trending" %}</div>
                 </div>
-                <div class="element__description">{% translate "Following" %}</div>
+                <div class="query__element query__following query__element--active">
+                    <div class="element__icon">
+                        <img src="{% static "images/icons/svgs/person_check_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Following icon" class="icon--filtered">
+                    </div>
+                    <div class="element__description">{% translate "Following" %}</div>
+                </div>
             </div>
         </div>
     </main>

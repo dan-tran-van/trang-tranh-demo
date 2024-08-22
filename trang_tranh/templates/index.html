@@ -20,7 +20,9 @@
         <link rel="stylesheet" href="{% static "css/index/index.css" %}">
     {% endif %}
 {% endblock stylesheets %}
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script type="module" src={% static "js/generic/NavCreate.js" %}></script>
+{% endblock javascripts %}
 {% block script %}
     <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
 {% endblock script %}
@@ -72,6 +74,14 @@
             {% endblock nav__feed %}
 
             {% block nav__create %}
+                <div class="nav__element nav__create">
+                    <a>
+                        <div class="nav__icon">
+                            <img src="{% static "images/icons/svgs/nav/add_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Feed">
+                        </div>
+                        <div class="nav__description">{% translate "Create" %}</div>
+                    </a>
+                </div>
             {% endblock nav__create %}
 
             {% block nav__notifications %}
@@ -97,7 +107,7 @@
                                 <img src="{% static "images/icons/svgs/account_circle_24dp_FILL1_wght400_GRAD0_opsz24.svg" %}" alt="Profile avatar holder">
                                 {% endif %}
                             </div>
-                            <div class="nav__description">{{ user.userprofile.name }}</div>
+                            <div class="nav__description">{% translate "Profile" %}</div>
                         </a>
                     </div>
                 {% else %}
@@ -235,24 +245,40 @@
                     <img src="{% static "images/icons/svgs/search_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Search icon" class="icon--filtered">
                 </div>
             </div>
-            <div class="query__element query__new query__element--active">
-                <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/hourglass_top_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="New icon" class="icon--filtered">
+            <div class="query__filters">
+                <div class="query__element query__new query__element--active">
+                    <div class="element__icon">
+                        <img src="{% static "images/icons/svgs/hourglass_top_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="New icon" class="icon--filtered">
+                    </div>
+                    <div class="element__description">{% translate "New" %}</div>
                 </div>
-                <div class="element__description">{% translate "New" %}</div>
-            </div>
-            <div class="query__element query__trending">
-                <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/local_fire_department_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Trending icon" class="icon--filtered">
+                <div class="query__element query__trending">
+                    <div class="element__icon">
+                        <img src="{% static "images/icons/svgs/local_fire_department_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Trending icon" class="icon--filtered">
+                    </div>
+                    <div class="element__description">{% translate "Trending" %}</div>
                 </div>
-                <div class="element__description">{% translate "Trending" %}</div>
-            </div>
-            <div class="query__element query__following">
-                <div class="element__icon">
-                    <img src="{% static "images/icons/svgs/person_check_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Following icon" class="icon--filtered">
+                <div class="query__element query__following">
+                    <div class="element__icon">
+                        <img src="{% static "images/icons/svgs/person_check_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Following icon" class="icon--filtered">
+                    </div>
+                    <div class="element__description">{% translate "Following" %}</div>
                 </div>
-                <div class="element__description">{% translate "Following" %}</div>
             </div>
+            
         </div>
     {% endblock query %}
+
+    {% block nav_create_dialog %}
+        <dialog class="create-dialog">
+            <button autofocus class="create-dialog__close-btn">X</button>
+            <div class="create-dialog__item create-dialog__post">
+                <a href={% url "post-create" %}>{% translate "Post" %}</a>
+            </div>
+            <div class="create-dialog__item create-dialog__comic">
+                <a href="">{% translate "Comic" %}</a>
+            </div>
+
+        </dialog>
+    {% endblock nav_create_dialog %}
 {% endblock content %}
