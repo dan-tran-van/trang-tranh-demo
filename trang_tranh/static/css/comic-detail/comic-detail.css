@@ -364,6 +364,7 @@ a {
   .nav__account,
   .nav__login,
   .nav__settings,
+  .nav__create,
   .nav__account--avatar-holder {
     display: none;
   }

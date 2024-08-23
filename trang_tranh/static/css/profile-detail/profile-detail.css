@@ -495,12 +495,12 @@ a {
 
   nav.nav--my-profile {
     position: fixed;
-    bottom: 0px;
+    top: 0px;
     justify-content: space-around;
-    border-block-end-width: 0px;
+    /* border-block-end-width: 0px;
     border-block-start-width: 1px;
     border-block-start-color: var(--gray-like-color);
-    border-block-start-style: solid;
+    border-block-start-style: solid; */
   }
 
   .nav__element {
@@ -521,7 +521,8 @@ a {
   .nav--not-my-profile .nav__notifications,
   .nav--not-my-profile .nav__account,
   .nav--not-my-profile .nav__login,
-  .nav--not-my-profile .nav__settings {
+  .nav--not-my-profile .nav__settings,
+  .nav--not-my-profile .nav__create {
     display: none;
   }
 
@@ -661,8 +662,8 @@ a {
   }
 
   .main__profile.main__profile--my-profile {
-    padding-block-start: 80px;
-    padding-block-end: 50px;
+    /* padding-block-start: 80px; */
+    /* padding-block-end: 50px; */
   }
 
   .profile__at-glance {
@@ -768,11 +769,11 @@ a {
   }
 
   .query.query--my-profile {
-    top: 0px;
-    border-block-start-width: 0px;
-    border-block-end-width: 1px;
-    border-block-end-color: var(--gray-like-color);
-    border-block-end-style: solid;
+    /* bottom: 0px; */
+    /* border-block-start-width: 0px; */
+    /* border-block-end-width: 1px; */
+    /* border-block-end-color: var(--gray-like-color); */
+    /* border-block-end-style: solid; */
   }
 
   .query__filters {

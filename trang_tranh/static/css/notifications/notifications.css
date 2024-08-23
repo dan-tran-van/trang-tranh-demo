@@ -70,6 +70,10 @@ a {
   filter: var(--icon-filter);
 }
 
+.nav__element--active {
+  background-color: var(--gray-like-color);
+}
+
 @media (orientation: landscape) {
 
   /* general */
@@ -123,10 +127,6 @@ a {
   }
 
 
-
-  .nav__element--active {
-    background-color: var(--gray-like-color);
-  }
 
   @media (max-width: 1400px) {
 
@@ -191,16 +191,16 @@ a {
 @media (orientation: portrait) {
   nav {
     position: fixed;
-    bottom: 0px;
+    top: 0px;
     display: flex;
     flex-direction: row;
     inline-size: 100%;
     block-size: 50px;
     align-items: center;
     justify-content: space-around;
-    border-block-start-width: 1px;
-    border-block-start-color: var(--gray-like-color);
-    border-block-start-style: solid;
+    border-block-end-width: 1px;
+    border-block-end-color: var(--gray-like-color);
+    border-block-end-style: solid;
   }
 
   .nav__description {
@@ -238,11 +238,11 @@ a {
 
   .query {
     position: fixed;
-    top: 0px;
+    bottom: 0px;
     background-color: var(--background-color);
-    border-block-end-width: 1px;
-    border-block-end-color: var(--gray-like-color);
-    border-block-end-style: solid;
+    border-block-start-width: 1px;
+    border-block-start-color: var(--gray-like-color);
+    border-block-start-style: solid;
     display: flex;
     flex: none;
     overflow: scroll;

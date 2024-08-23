@@ -177,7 +177,7 @@ a {
 
 .create-dialog[open] button {
   position: fixed;
-  bottom: 80px;
+  top: 80px;
   right: 50%;
 }
 
@@ -349,16 +349,16 @@ a {
 
   nav {
     position: fixed;
-    bottom: 0px;
+    top: 0px;
     display: flex;
     flex-direction: row;
     inline-size: 100%;
     block-size: 50px;
     align-items: center;
     justify-content: space-around;
-    border-block-start-width: 1px;
-    border-block-start-color: var(--gray-like-color);
-    border-block-start-style: solid;
+    border-block-end-width: 1px;
+    border-block-end-color: var(--gray-like-color);
+    border-block-end-style: solid;
   }
 
   .nav__description {
@@ -390,17 +390,17 @@ a {
   main {
     inline-size: 100%;
     padding: 12px;
-    padding-block-start: 80px;
-    padding-block-end: 50px;
+    padding-block-start: 50px;
+    padding-block-end: 80px;
   }
 
   .query {
     position: fixed;
-    top: 0px;
+    bottom: 0px;
     background-color: var(--background-color);
-    border-block-end-width: 1px;
-    border-block-end-color: var(--gray-like-color);
-    border-block-end-style: solid;
+    border-block-start-width: 1px;
+    border-block-start-color: var(--gray-like-color);
+    border-block-start-style: solid;
     display: flex;
     flex: none;
     overflow: scroll;
