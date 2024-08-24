@@ -46,5 +46,5 @@ class MultipleImageField(forms.FileField):
         return result
 
 class PostForm(forms.Form):
-    text_content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': _("What's on your mind?")}), max_length=500, required=True)
+    text_content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': _("What's on your mind?"), 'dir': "auto", "rows": "1"}), max_length=500, required=True)
     media = MultipleImageField(required=False)

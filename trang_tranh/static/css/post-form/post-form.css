@@ -179,6 +179,7 @@ label {
 
   .form-wrapper {
     inline-size: 100%;
+    overflow: scroll  ;
   }
 
   .form-wrapper--h-tb {
@@ -222,14 +223,18 @@ label {
     border-block-start-style: solid;
   }
 
+  .form--h-tb {
+    /* padding-block-end: 40px; */
+  }
+
   form textarea {
     background-color: var(--background-color);
     color: var(--text-color);
     border: none;
     inline-size: 500px;
     resize: none;
-    border-radius: 4px;
-    padding: 8px;
+    /* border-radius: 4px; */
+    /* padding: 8px; */
   }
 
   form textarea:focus-visible {
