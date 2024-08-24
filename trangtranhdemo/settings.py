@@ -42,12 +42,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "trang_tranh.apps.TrangTranhConfig",
     "django_cleanup.apps.CleanupConfig",
-    "corsheaders",
+    # "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
+    # "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
