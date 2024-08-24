@@ -44,7 +44,7 @@
                 {% csrf_token %}
                 {{ form }}
                 <div class="photo-preview"></div>
-                <input type="submit" value="submit">
+                <input id="form-submit-element" type="submit" value="submit">
             </form>
             
             {% if form.errors %}
@@ -68,6 +68,20 @@
         <div class="writing-mode-choice" data-writing-mode-choice="h-tb">{% translate "Horizontal | Top -> Bottom" %}</div>
         <div class="writing-mode-choice" data-writing-mode-choice="v-rl">{% translate "Vertical | Right -> Left" %}</div>
         <div class="writing-mode-choice" data-writing-mode-choice="v-lr">{% translate "Vertical | Left -> Right" %}</div>
+    </dialog>
+
+    <dialog id="photo-limit-error-dialog">
+        <button id="photo-limit-error-dialog-close-btn" >{% translate "Close" %}</button>
+        <div>
+            {% translate "You can only upload up to 10 photos!" %}
+        </div>
+    </dialog>
+
+    <dialog id="not-images-error-dialog">
+        <button id="not-images-error-dialog-close-btn" >{% translate "Close" %}</button>
+        <div>
+            {% translate "All files must be images" %}
+        </div>
     </dialog>
 
 

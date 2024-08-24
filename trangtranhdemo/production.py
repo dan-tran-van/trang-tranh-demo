@@ -5,7 +5,6 @@ from .settings import BASE_DIR
 
 # Configure the domain name using the environment variable
 # that Azure automatically creates for us.
-# ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
 
 
 if "CUSTOM_HOSTNAME" in os.environ:
@@ -32,7 +31,6 @@ if "CUSTOM_DOMAIN" in os.environ:
 elif "WEBSITE_HOSTNAME" in os.environ:
     CSRF_TRUSTED_ORIGINS = [HOST_DOMAIN]
 
-# CSRF_TRUSTED_ORIGINS = ['http://' + os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
 DEBUG = False
 SECRET_KEY = os.getenv("SECRET_KEY")
 
@@ -108,6 +106,3 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 # EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 # EMAIL_PORT = 587
 # DEFAULT_FROM_EMAIL = f"Đàn {EMAIL_HOST_USER}"
-
-# AZURE_CUSTOM_DOMAIN_URL = f"https://{AZURE_CUSTOM_DOMAIN}"
-# CORS_ALLOWED_ORIGINS = [AZURE_CUSTOM_DOMAIN_URL]

@@ -399,6 +399,9 @@ a {
   .content__media img {
     border-radius: 8px;
     inline-size: 100%;
+    border-width: 1px;
+    border-color: var(--gray-like-color);
+    border-style: solid;
   }
 
   .content__media--v-rl {
@@ -630,6 +633,9 @@ a {
   .content__media img {
     border-radius: 8px;
     inline-size: 100%;
+    border-width: 1px;
+    border-color: var(--gray-like-color);
+    border-style: solid;
   }
 
   .content__media--v-rl {

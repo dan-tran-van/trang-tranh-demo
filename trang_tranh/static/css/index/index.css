@@ -176,9 +176,6 @@ a {
 }
 
 .create-dialog[open] button {
-  position: fixed;
-  top: 80px;
-  right: 50%;
 }
 
 @media (orientation: landscape) {
