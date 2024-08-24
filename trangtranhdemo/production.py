@@ -20,7 +20,7 @@ CUSTOM_DOMAIN = "https://" + os.environ['CUSTOM_HOSTNAME'] if 'CUSTOM_HOSTNAME' 
 
 STATIC_DOMAIN = "https://" + os.environ['STATIC_HOSTNAME'] if 'STATIC_HOSTNAME' in os.environ else ""
 
-if 'CUSTOM_DOMAIN' in os.environ:
+if 'CUSTOM_HOSTNAME' in os.environ:
     CSRF_TRUSTED_ORIGINS = [HOST_DOMAIN, CUSTOM_DOMAIN]
 elif 'WEBSITE_HOSTNAME' in os.environ:
     CSRF_TRUSTED_ORIGINS = [HOST_DOMAIN]
