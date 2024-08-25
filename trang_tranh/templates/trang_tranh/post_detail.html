@@ -161,30 +161,31 @@
             <div class="main__replies"></div>
         {% endif %}
 
-        <div class="main__post-interactions">
-            <div class="post-interaction post-interaction__post-like">
-                <img src="{% static "images/icons/svgs/favorite_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Favorite icon" class="gray--filtered">
-                <div class="post-interaction__description">
-                    {{ post.like }}
-                </div>
-            </div>
-            <div class="post-interaction post-interaction__post-reply">
-                <img src="{% static "images/icons/svgs/reply_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Reply icon" class="gray--filtered">
-                <div class="post-interaction__description">
-                    {{ post.post_set.all.count }}
-                </div>
-            </div>
-            <div class="post-interaction post-interaction__share-post">
-                <img src="{% static "images/icons/svgs/share_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Share icon" class="gray--filtered">
-                <div class="post-interaction__description">
-                    {% translate "Share" %}
-                </div>
-            </div>
-
-        </div>
+        
     </main>
     
 {% endblock main %}
 
 
-{% block query %}{% endblock query %}
+{% block query %}
+    <div class="main__post-interactions">
+        <div class="post-interaction post-interaction__post-like">
+            <img src="{% static "images/icons/svgs/favorite_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Favorite icon" class="gray--filtered">
+            <div class="post-interaction__description">
+                {{ post.like }}
+            </div>
+        </div>
+        <div class="post-interaction post-interaction__post-reply">
+            <img src="{% static "images/icons/svgs/reply_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Reply icon" class="gray--filtered">
+            <div class="post-interaction__description">
+                {{ post.post_set.all.count }}
+            </div>
+        </div>
+        <div class="post-interaction post-interaction__share-post">
+            <img src="{% static "images/icons/svgs/share_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Share icon" class="gray--filtered">
+            <div class="post-interaction__description">
+                {% translate "Share" %}
+            </div>
+        </div>
+    </div>
+{% endblock query %}

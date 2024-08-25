@@ -14,10 +14,12 @@ const PhotoLimitErrorDialogCloseBtn = document.querySelector("#photo-limit-error
 const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
 const NotImagesErrorDialog = document.querySelector("#not-images-error-dialog");
 const NotImagesErrorDialogCloseBtn = document.querySelector("#not-images-error-dialog-close-btn");
+const WritingModeElem = document.querySelector("#id_writing_mode");
 
 window.addEventListener("load", (e) => {
     TextArea.value = '';
     FileElem.value = '';
+    WritingModeElem.value = selectedWritingMode;
 })
 
 let selectedWritingMode = "h-tb";
@@ -48,6 +50,7 @@ WritingModeChoices.forEach((Choice) => {
             Form.classList.add(`form--${ChoiceData}`)
             WritingModeSelectorDialog.close();
             selectedWritingMode = ChoiceData;
+            WritingModeElem.value = ChoiceData;
         }
     });
 });

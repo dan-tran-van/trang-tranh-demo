@@ -131,7 +131,7 @@ def chapter_translation_detail(request, pk, lang):
             raise Http404()
 
 
-# @login_required
+@login_required
 def feed(request):
     page_number = request.GET.get("page", 1)
     paginator = Paginator(Post.objects.all().order_by("-created_time"), 5)
@@ -237,11 +237,6 @@ def activate(request, uidb64, token):
         return render(request, "registration/account_activation_invalid.html")
 
 
-@login_required
-def post_create(request):
-    render(request, "trang_tranh/post_form.html")
-
-
 class PostCreateView(LoginRequiredMixin, FormView):
     form_class = PostForm
     template_name = "trang_tranh/post_form.html"
@@ -258,9 +253,10 @@ class PostCreateView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         text_content = form.cleaned_data["text_content"]
         images = form.cleaned_data["media"]
+        writing_mode = form.cleaned_data["writing_mode"]
         try:
             user_profile = get_object_or_404(UserProfile, user=self.request.user)
-            new_post = Post(user_profile=user_profile, text_content=text_content)
+            new_post = Post(user_profile=user_profile, text_content=text_content, writing_mode=writing_mode)
             new_post.save()
             for i in images:
                 new_post_media = PostMedia(post=new_post, image=i, alt_text="test")

@@ -4,6 +4,7 @@ from .models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import PasswordInput, TextInput
 from django.utils.translation import gettext_lazy as _
+from .models import WRITING_MODE
 
 
 
@@ -47,4 +48,5 @@ class MultipleImageField(forms.FileField):
 
 class PostForm(forms.Form):
     text_content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': _("What's on your mind?"), 'dir': "auto", "rows": "1"}), max_length=500, required=True)
+    writing_mode = forms.ChoiceField(choices=WRITING_MODE)
     media = MultipleImageField(required=False)

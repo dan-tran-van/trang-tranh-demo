@@ -119,7 +119,7 @@ a {
     display: none;
   }
 
-  .nav__back {
+  .nav--my-profile .nav__back {
     display: none;
   }
 
@@ -132,13 +132,22 @@ a {
     justify-content: space-around;
   }
 
+  nav.nav--not-my-profile {
+    justify-content: start;
+  }
+
   .nav--not-my-profile .nav__home,
   .nav--not-my-profile .nav__feed,
   .nav--not-my-profile .nav__notifications,
   .nav--not-my-profile .nav__account,
   .nav--not-my-profile .nav__login,
-  .nav--not-my-profile .nav__settings {
+  .nav--not-my-profile .nav__settings,
+  .nav--not-my-profile .nav__create {
     display: none;
+  }
+
+  .nav--not-my-profile .nav__back img {
+    transform: rotate(90deg);
   }
 
   .user__avatar img {
@@ -148,10 +157,10 @@ a {
     object-fit: cover;
   }
 
-  .nav--my-profile .nav__account,
   .nav--my-profile .nav__login {
     display: none;
   }
+
 
   .main__profile.main__profile--my-profile {
     /* padding-block-start: 80px;
