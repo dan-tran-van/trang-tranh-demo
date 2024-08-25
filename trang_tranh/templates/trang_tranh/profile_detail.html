@@ -262,40 +262,41 @@
             {% empty %}
             {% endfor %}
         </div>
-        <div class="query {% if user.id == profile.user.id %}query--my-profile{% endif %}">
-            <div class="query__search">
-                <div class="search__search-bar">
-                    <form action="">
-                        <input type="search" placeholder="{% translate "Search in profile" %}">
-                    </form>
-                </div>
-                <div class="search__btn">
-                    <img src="{% static "images/icons/svgs/search_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Search icon" class="icon--filtered">
-                </div>
-            </div>
-            <div class="query__filters">
-                <div class="query__element query__to-you query__element--active">
-                    <div class="element__icon">
-                        <img src="{% static "images/icons/svgs/account_circle_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Account icon" class="icon--filtered">
-                    </div>
-                    <div class="element__description">{% translate "Account" %}</div>
-                </div>
-                <div class="query__element query__trending">
-                    <div class="element__icon">
-                        <img src="{% static "images/icons/svgs/calendar_month_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Update icon" class="icon--filtered">
-                    </div>
-                    <div class="element__description">{% translate "Updates" %}</div>
-                </div>
-                <div class="query__element query__following">
-                    <div class="element__icon">
-                        <img src="{% static "images/icons/svgs/library_books_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Library icon" class="icon--filtered">
-                    </div>
-                    <div class="element__description">{% translate "Library" %}</div>
-                </div>
-                </div>
-            
-        </div>
+        
     </main>
 {% endblock main %}
 
-{% block query %}{% endblock query %}
+{% block query %}
+    <div class="query {% if user.id == profile.user.id %}query--my-profile{% endif %}">
+        <div class="query__search">
+            <div class="search__search-bar">
+                <form action="">
+                    <input type="search" placeholder="{% translate "Search in profile" %}">
+                </form>
+            </div>
+            <div class="search__btn">
+                <img src="{% static "images/icons/svgs/search_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Search icon" class="icon--filtered">
+            </div>
+        </div>
+        <div class="query__filters">
+            <div class="query__element query__to-you query__element--active">
+                <div class="element__icon">
+                    <img src="{% static "images/icons/svgs/account_circle_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Account icon" class="icon--filtered">
+                </div>
+                <div class="element__description">{% translate "Account" %}</div>
+            </div>
+            <div class="query__element query__trending">
+                <div class="element__icon">
+                    <img src="{% static "images/icons/svgs/calendar_month_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Update icon" class="icon--filtered">
+                </div>
+                <div class="element__description">{% translate "Updates" %}</div>
+            </div>
+            <div class="query__element query__following">
+                <div class="element__icon">
+                    <img src="{% static "images/icons/svgs/library_books_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Library icon" class="icon--filtered">
+                </div>
+                <div class="element__description">{% translate "Library" %}</div>
+            </div>
+        </div>
+    </div>
+{% endblock query %}
