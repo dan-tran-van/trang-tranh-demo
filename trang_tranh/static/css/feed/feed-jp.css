@@ -385,7 +385,7 @@ a {
 
   main {
     inline-size: 100vh;
-    padding-inline-end: clamp(160px, calc(100vh - 100vw - 50px), 320px);
+    padding-inline-end: clamp(120px, calc(100vh - 100vw - 50px), 280px);
   }
 
   .main__posts {
@@ -397,7 +397,9 @@ a {
 
   .post__header {
     padding-block-start: 12px;
-    padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  ));
+    /* padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  )); */
+
+    padding-inline-start: min(calc((100vh - 330px - 100vw) / 2), calc((100vh - 100vw - 170px) / 2  ));
     display: flex;
     justify-content: center;
   }
@@ -438,7 +440,9 @@ a {
     overflow: scroll;
     /* padding-inline-start: min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  )); */
 
-    padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  ));
+    /* padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  )); */
+
+    padding-inline-start: min(calc((100vh - 330px - 100vw) / 2), calc((100vh - 100vw - 170px) / 2  ));
   }
 
   .post__content--v-rl .content__text {
@@ -446,7 +450,9 @@ a {
     justify-content: center;
     /* padding-inline-start: min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  )); */
 
-    padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  ));
+    /* padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  )); */
+
+    padding-inline-start: min(calc((100vh - 330px - 100vw) / 2), calc((100vh - 100vw - 170px) / 2  ));
   }
 
   .post__content--v-rl .content__text pre {
@@ -517,7 +523,7 @@ a {
     overflow: scroll;
     block-size: 100%;
 
-    padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  ));
+    padding-inline-start: min(calc((100vh - 330px - 100vw) / 2), calc((100vh - 100vw - 170px) / 2  ));
     /* padding-block-start:  min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  )); */
   }
 
@@ -554,8 +560,8 @@ a {
     background-color: var(--background-color);
     bottom: 0px;
     inline-size: calc(100vh - 100vw - 50px);
-    max-inline-size: 320px;
-    min-inline-size: 160px;
+    max-inline-size: 280px;
+    min-inline-size: 120px;
     border-inline-start-color: var(--gray-like-color);
     border-inline-start-width: 1px;
     border-inline-start-style: solid;

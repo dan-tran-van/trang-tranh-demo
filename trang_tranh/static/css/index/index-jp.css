@@ -316,7 +316,7 @@ a {
 
   main {
     padding-inline-start: 50px;
-    padding-inline-end: clamp(160px, calc(100vh - 100vw - 50px), 320px);
+    padding-inline-end: clamp(120px, calc(100vh - 100vw - 50px), 280px);
   }
 
   .update__chapters {
@@ -352,8 +352,8 @@ a {
     background-color: var(--background-color);
     bottom: 0px;
     inline-size: calc(100vh - 100vw - 50px);
-    max-inline-size: 320px;
-    min-inline-size: 160px;
+    max-inline-size: 280px;
+    min-inline-size: 120px;
     border-inline-start-color: var(--gray-like-color);
     border-inline-start-width: 1px;
     border-inline-start-style: solid;
