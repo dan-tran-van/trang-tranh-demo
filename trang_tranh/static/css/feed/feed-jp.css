@@ -11,7 +11,6 @@
 
 .gray--filtered {
   filter: invert(47%) sepia(0%) saturate(1%) hue-rotate(171deg) brightness(106%) contrast(88%);
-  ;
 }
 
 :root {
@@ -386,7 +385,7 @@ a {
 
   main {
     inline-size: 100vh;
-    padding-inline-end: clamp(80px, calc(100vh - 100vw - 50px), 200px);
+    padding-inline-end: clamp(160px, calc(100vh - 100vw - 50px), 320px);
   }
 
   .main__posts {
@@ -398,7 +397,7 @@ a {
 
   .post__header {
     padding-block-start: 12px;
-    padding-inline-start: min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  ));
+    padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  ));
     display: flex;
     justify-content: center;
   }
@@ -437,13 +436,17 @@ a {
 
   .content__media.content__media--v-rl {
     overflow: scroll;
-    padding-inline-start: min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  ));
+    /* padding-inline-start: min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  )); */
+
+    padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  ));
   }
 
   .post__content--v-rl .content__text {
     display: flex;
     justify-content: center;
-    padding-inline-start: min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  ));
+    /* padding-inline-start: min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  )); */
+
+    padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  ));
   }
 
   .post__content--v-rl .content__text pre {
@@ -513,7 +516,9 @@ a {
     inline-size: 100vw;
     overflow: scroll;
     block-size: 100%;
-    padding-block-start:  min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  ));
+
+    padding-inline-start: min(calc((100vh - 370px - 100vw) / 2), calc((100vh - 100vw - 210px) / 2  ));
+    /* padding-block-start:  min(calc((100vh - 250px - 100vw) / 2), calc((100vh - 100vw - 130px) / 2  )); */
   }
 
   .post__content--h-tb .content__text {
@@ -549,8 +554,8 @@ a {
     background-color: var(--background-color);
     bottom: 0px;
     inline-size: calc(100vh - 100vw - 50px);
-    max-inline-size: 200px;
-    min-inline-size: 80px;
+    max-inline-size: 320px;
+    min-inline-size: 160px;
     border-inline-start-color: var(--gray-like-color);
     border-inline-start-width: 1px;
     border-inline-start-style: solid;

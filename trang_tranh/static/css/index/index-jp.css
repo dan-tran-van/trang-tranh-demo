@@ -316,17 +316,20 @@ a {
 
   main {
     padding-inline-start: 50px;
-    padding-inline-end: clamp(80px, calc(100vh - 100vw - 50px), 200px);
+    padding-inline-end: clamp(160px, calc(100vh - 100vw - 50px), 320px);
   }
 
-  .main__update {
-    padding-inline: calc((25vw / 2) + 4px);
+  .update__chapters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .update__chapter {
     border-radius: 8px;
     display: flex;
     padding: 12px;
+    block-size: 90vw;
     flex-direction: column;
     aspect-ratio: 4 / 3;
   }
@@ -349,8 +352,8 @@ a {
     background-color: var(--background-color);
     bottom: 0px;
     inline-size: calc(100vh - 100vw - 50px);
-    max-inline-size: 200px;
-    min-inline-size: 80px;
+    max-inline-size: 320px;
+    min-inline-size: 160px;
     border-inline-start-color: var(--gray-like-color);
     border-inline-start-width: 1px;
     border-inline-start-style: solid;
