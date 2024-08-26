@@ -76,6 +76,11 @@ a {
   text-transform: full-width;
 }
 
+.reply-to__warper--before {
+  display: none;
+}
+
+
 @media (orientation: landscape) {
 
   .nav__description,

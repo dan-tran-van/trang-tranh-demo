@@ -205,10 +205,15 @@
                     {% if post.reply_to %}
                         <div class="post__reply-to">
                             <div class="reply-to__warper">
-                                {% translate "Replying to" %}
+                                <span class="reply-to__warper--before">
+                                    {% translate "Replying to" %} 
+                                </span>
                                 <a href="{{ post.reply_to.get_absolute_url }}">
                                     {{ post.reply_to.user_profile.name }}
                                 </a>
+                                <span class="reply-to__warper--after">
+                                    {% translate "." %}
+                                </span>
                             </div>
                         </div>
                     {% endif %}

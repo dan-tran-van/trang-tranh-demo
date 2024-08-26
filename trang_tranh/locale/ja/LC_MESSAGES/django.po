@@ -1,0 +1,596 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-26 07:28+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: trang_tranh/forms.py:50
+msgid "What's on your mind?"
+msgstr ""
+
+#: trang_tranh/models.py:20
+msgid "Adventure"
+msgstr ""
+
+#: trang_tranh/models.py:21
+msgid "Science Fiction"
+msgstr ""
+
+#: trang_tranh/models.py:22
+msgid "Mystery"
+msgstr ""
+
+#: trang_tranh/models.py:23
+msgid "Fantasy"
+msgstr ""
+
+#: trang_tranh/models.py:24
+msgid "Action"
+msgstr ""
+
+#: trang_tranh/models.py:25
+msgid "Romance"
+msgstr ""
+
+#: trang_tranh/models.py:29
+msgid "horizontal-tb"
+msgstr ""
+
+#: trang_tranh/models.py:30
+msgid "vertical-rl"
+msgstr ""
+
+#: trang_tranh/models.py:31
+msgid "vertical-lr"
+msgstr ""
+
+#: trang_tranh/models.py:36 trang_tranh/models.py:677
+msgid "name"
+msgstr ""
+
+#: trang_tranh/models.py:42
+msgid "Genre"
+msgstr ""
+
+#: trang_tranh/models.py:43
+#: trang_tranh/templates/trang_tranh/comic_detail.html:111
+#: trang_tranh/templates/trang_tranh/comic_translation_detail.html:103
+msgid "Genres"
+msgstr ""
+
+#: trang_tranh/models.py:57
+msgid "user"
+msgstr ""
+
+#: trang_tranh/models.py:59
+msgid "profile name"
+msgstr ""
+
+#: trang_tranh/models.py:63
+msgid "profile avatar"
+msgstr ""
+
+#: trang_tranh/models.py:68
+msgid "Upload profile avatar"
+msgstr ""
+
+#: trang_tranh/models.py:72
+msgid "profile bio"
+msgstr ""
+
+#: trang_tranh/models.py:73
+msgid "bio writing mode"
+msgstr ""
+
+#: trang_tranh/models.py:94 trang_tranh/models.py:375
+msgid "title"
+msgstr ""
+
+#: trang_tranh/models.py:97
+msgid "vertical cover"
+msgstr ""
+
+#: trang_tranh/models.py:105
+msgid "horizontal cover"
+msgstr ""
+
+#: trang_tranh/models.py:115
+msgid "square cover"
+msgstr ""
+
+#: trang_tranh/models.py:124 trang_tranh/models.py:240
+msgid "author"
+msgstr ""
+
+#: trang_tranh/models.py:126 trang_tranh/models.py:388
+#: trang_tranh/models.py:449
+msgid "read count"
+msgstr ""
+
+#: trang_tranh/models.py:129 trang_tranh/models.py:391
+#: trang_tranh/models.py:446
+msgid "published date"
+msgstr ""
+
+#: trang_tranh/models.py:133
+msgid "publisher"
+msgstr ""
+
+#: trang_tranh/models.py:136
+msgid "summary"
+msgstr ""
+
+#: trang_tranh/models.py:139 trang_tranh/models.py:227
+msgid "default language"
+msgstr ""
+
+#: trang_tranh/models.py:143
+msgid "Ongoing"
+msgstr ""
+
+#: trang_tranh/models.py:144
+msgid "Complete"
+msgstr ""
+
+#: trang_tranh/models.py:145
+msgid "Hiatus"
+msgstr ""
+
+#: trang_tranh/models.py:149
+msgid "Weekly"
+msgstr ""
+
+#: trang_tranh/models.py:150
+msgid "Monthly"
+msgstr ""
+
+#: trang_tranh/models.py:151
+msgid "Indefinite"
+msgstr ""
+
+#: trang_tranh/models.py:155
+msgid "schedule"
+msgstr ""
+
+#: trang_tranh/models.py:159
+msgid "Serializing schedule"
+msgstr ""
+
+#: trang_tranh/models.py:163
+msgid "status"
+msgstr ""
+
+#: trang_tranh/models.py:167
+msgid "Serializing status"
+msgstr ""
+
+#: trang_tranh/models.py:170
+msgid "genre"
+msgstr ""
+
+#: trang_tranh/models.py:223 trang_tranh/models.py:250
+msgid "pen name"
+msgstr ""
+
+#: trang_tranh/models.py:223
+msgid "Enter the (pen) name of the author"
+msgstr ""
+
+#: trang_tranh/models.py:244 trang_tranh/models.py:288
+msgid "translation language"
+msgstr ""
+
+#: trang_tranh/models.py:257
+msgid "Translation language can not be the same as the default language"
+msgstr ""
+
+#: trang_tranh/models.py:284 trang_tranh/models.py:365
+msgid "comic"
+msgstr ""
+
+#: trang_tranh/models.py:295 trang_tranh/models.py:443
+msgid "translated title"
+msgstr ""
+
+#: trang_tranh/models.py:297
+msgid "Enter a translated title for the comic"
+msgstr ""
+
+#: trang_tranh/models.py:301
+msgid "translated summary"
+msgstr ""
+
+#: trang_tranh/models.py:303
+msgid "Enter a translated summary for the comic"
+msgstr ""
+
+#: trang_tranh/models.py:332
+msgid "Translation language must not be the same as default language"
+msgstr ""
+
+#: trang_tranh/models.py:369
+msgid "cover"
+msgstr ""
+
+#: trang_tranh/models.py:378 trang_tranh/models.py:523
+msgid "number"
+msgstr ""
+
+#: trang_tranh/models.py:384
+msgid "counter"
+msgstr ""
+
+#: trang_tranh/models.py:386
+msgid "is extra chapter?"
+msgstr ""
+
+#: trang_tranh/models.py:399 trang_tranh/models.py:462
+msgid "Chapter "
+msgstr ""
+
+#: trang_tranh/models.py:434 trang_tranh/models.py:503
+msgid "chapter"
+msgstr ""
+
+#: trang_tranh/models.py:439
+msgid "comic translation"
+msgstr ""
+
+#: trang_tranh/models.py:478
+msgid "Chapter's comic must be the same as Comic translation's comic"
+msgstr ""
+
+#: trang_tranh/models.py:507 trang_tranh/models.py:656
+msgid "image"
+msgstr ""
+
+#: trang_tranh/models.py:531 trang_tranh/models.py:571
+msgid "Page "
+msgstr ""
+
+#: trang_tranh/models.py:547
+msgid "chapter translation"
+msgstr ""
+
+#: trang_tranh/models.py:552
+msgid "page image"
+msgstr ""
+
+#: trang_tranh/models.py:568
+msgid "page number"
+msgstr ""
+
+#: trang_tranh/models.py:586
+msgid "Public"
+msgstr ""
+
+#: trang_tranh/models.py:587
+#: trang_tranh/templates/trang_tranh/profile_detail.html:161
+msgid "Followers"
+msgstr "フォロワー"
+
+#: trang_tranh/models.py:588
+msgid "Following followers"
+msgstr ""
+
+#: trang_tranh/models.py:589
+msgid "Only me"
+msgstr ""
+
+#: trang_tranh/models.py:592 trang_tranh/models.py:697
+msgid "user profile"
+msgstr ""
+
+#: trang_tranh/models.py:594
+msgid "text content"
+msgstr ""
+
+#: trang_tranh/models.py:596
+msgid "created time"
+msgstr ""
+
+#: trang_tranh/models.py:599
+msgid "last modified"
+msgstr ""
+
+#: trang_tranh/models.py:605 trang_tranh/models.py:685
+msgid "writing mode"
+msgstr ""
+
+#: trang_tranh/models.py:611
+msgid "like count"
+msgstr ""
+
+#: trang_tranh/models.py:615
+msgid "reply to"
+msgstr ""
+
+#: trang_tranh/models.py:623
+msgid "about comic"
+msgstr ""
+
+#: trang_tranh/models.py:631
+msgid "about chapter"
+msgstr ""
+
+#: trang_tranh/models.py:652
+msgid "post media"
+msgstr ""
+
+#: trang_tranh/models.py:672
+msgid "alternative text"
+msgstr ""
+
+#: trang_tranh/templates/index.html:7 trang_tranh/templates/index.html:59
+#: trang_tranh/templates/trang_tranh/comic_detail.html:38
+#: trang_tranh/templates/trang_tranh/comic_translation_detail.html:33
+#: trang_tranh/templates/trang_tranh/feed.html:22
+#: trang_tranh/templates/trang_tranh/notifications.html:15
+#: trang_tranh/templates/trang_tranh/post_detail.html:34
+#: trang_tranh/templates/trang_tranh/post_form.html:34
+#: trang_tranh/templates/trang_tranh/profile_detail.html:47
+#: trang_tranh/templates/trang_tranh/settings.html:19
+msgid "Home"
+msgstr ""
+
+#: trang_tranh/templates/index.html:70
+#: trang_tranh/templates/trang_tranh/feed.html:6
+#: trang_tranh/templates/trang_tranh/feed.html:33
+#: trang_tranh/templates/trang_tranh/profile_detail.html:58
+msgid "Feed"
+msgstr ""
+
+#: trang_tranh/templates/index.html:82
+#: trang_tranh/templates/trang_tranh/profile_detail.html:70
+msgid "Create"
+msgstr ""
+
+#: trang_tranh/templates/index.html:93
+#: trang_tranh/templates/trang_tranh/notifications.html:26
+#: trang_tranh/templates/trang_tranh/profile_detail.html:81
+msgid "Notifications"
+msgstr ""
+
+#: trang_tranh/templates/index.html:105
+#: trang_tranh/templates/trang_tranh/profile_detail.html:93
+msgid "Profile avatar"
+msgstr ""
+
+#: trang_tranh/templates/index.html:110
+#: trang_tranh/templates/trang_tranh/profile_detail.html:98
+msgid "Profile"
+msgstr ""
+
+#: trang_tranh/templates/index.html:117
+#: trang_tranh/templates/trang_tranh/profile_detail.html:105
+msgid "Account icon"
+msgstr ""
+
+#: trang_tranh/templates/index.html:119
+#: trang_tranh/templates/trang_tranh/profile_detail.html:107
+msgid "Login"
+msgstr ""
+
+#: trang_tranh/templates/index.html:129 trang_tranh/templates/index.html:131
+#: trang_tranh/templates/trang_tranh/profile_detail.html:117
+#: trang_tranh/templates/trang_tranh/profile_detail.html:119
+#: trang_tranh/templates/trang_tranh/settings.html:28
+#: trang_tranh/templates/trang_tranh/settings.html:30
+#: trang_tranh/templates/trang_tranh/settings.html:39
+msgid "Settings"
+msgstr ""
+
+#: trang_tranh/templates/index.html:143
+#: trang_tranh/templates/trang_tranh/feed.html:133
+msgid "Search"
+msgstr ""
+
+#: trang_tranh/templates/index.html:155
+msgid "New"
+msgstr "新しい"
+
+#: trang_tranh/templates/index.html:161
+#: trang_tranh/templates/trang_tranh/feed.html:154
+msgid "Trending"
+msgstr "トレンド"
+
+#: trang_tranh/templates/index.html:167
+#: trang_tranh/templates/trang_tranh/feed.html:160
+#: trang_tranh/templates/trang_tranh/profile_detail.html:169
+msgid "Following"
+msgstr "フォロー"
+
+#: trang_tranh/templates/index.html:180
+msgid "Genre icon"
+msgstr ""
+
+#: trang_tranh/templates/index.html:182
+msgid "All genre"
+msgstr "全ジャンル"
+
+#: trang_tranh/templates/index.html:184
+msgid "Arrow drop down icon"
+msgstr ""
+
+#: trang_tranh/templates/index.html:277
+#: trang_tranh/templates/trang_tranh/post_form.html:98
+msgid "Post"
+msgstr ""
+
+#: trang_tranh/templates/index.html:280
+msgid "Comic"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail.html:27
+#: trang_tranh/templates/trang_tranh/comic_translation_detail.html:22
+#: trang_tranh/templates/trang_tranh/post_detail.html:23
+#: trang_tranh/templates/trang_tranh/post_form.html:23
+#: trang_tranh/templates/trang_tranh/profile_detail.html:26
+msgid "Back"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail.html:96
+#: trang_tranh/templates/trang_tranh/comic_translation_detail.html:88
+msgid "About"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail.html:99
+#: trang_tranh/templates/trang_tranh/comic_translation_detail.html:91
+msgid "Summary"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail.html:103
+#: trang_tranh/templates/trang_tranh/comic_translation_detail.html:95
+msgid "Status"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail.html:107
+#: trang_tranh/templates/trang_tranh/comic_translation_detail.html:99
+msgid "Schedule"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_not_available.html:6
+msgid "Comic only available in the following languages:"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/feed.html:63
+#: trang_tranh/templates/trang_tranh/post_detail.html:64
+#: trang_tranh/templates/trang_tranh/profile_detail.html:209
+msgid "Replying to"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/feed.html:69
+#: trang_tranh/templates/trang_tranh/profile_detail.html:215
+msgid "."
+msgstr "に返信"
+
+#: trang_tranh/templates/trang_tranh/notifications.html:42
+msgid "Search notifications"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_detail.html:6
+msgid " on"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_detail.html:187
+msgid "Share"
+msgstr "シェア"
+
+#: trang_tranh/templates/trang_tranh/post_form.html:6
+msgid "New Post"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_form.html:41
+msgid "New post"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_form.html:58
+msgid "Add photo button icon"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_form.html:61
+msgid "Add emoji button icon"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_form.html:68
+msgid "Horizontal | Top -> Bottom"
+msgstr "水平 | 上 -> 下"
+
+#: trang_tranh/templates/trang_tranh/post_form.html:69
+msgid "Vertical | Right -> Left"
+msgstr "垂直 | 右 -> 左"
+
+#: trang_tranh/templates/trang_tranh/post_form.html:70
+msgid "Vertical | Left -> Right"
+msgstr "垂直 | 左 -> 右"
+
+#: trang_tranh/templates/trang_tranh/post_form.html:74
+#: trang_tranh/templates/trang_tranh/post_form.html:81
+msgid "Close"
+msgstr "閉じる"
+
+#: trang_tranh/templates/trang_tranh/post_form.html:76
+msgid "You can only upload up to 10 photos!"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_form.html:83
+msgid "All files must be images"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_form.html:96
+msgid "Publish icon"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_form.html:102
+msgid "Writing mode icon"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/post_form.html:104
+msgid "Writing mode"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/profile_detail.html:6
+msgid "(@"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/profile_detail.html:6
+msgid ")"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/profile_detail.html:175
+msgid "Follow"
+msgstr "フォローする"
+
+#: trang_tranh/templates/trang_tranh/profile_detail.html:279
+msgid "Search in profile"
+msgstr "プロフィール内検索"
+
+#: trang_tranh/templates/trang_tranh/profile_detail.html:291
+msgid "Account"
+msgstr "アカウント"
+
+#: trang_tranh/templates/trang_tranh/profile_detail.html:297
+msgid "Updates"
+msgstr "アップデート"
+
+#: trang_tranh/templates/trang_tranh/profile_detail.html:303
+msgid "Library"
+msgstr "ライブラリ"
+
+#: trang_tranh/templates/trang_tranh/settings.html:44
+msgid "Log out"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/settings.html:49
+msgid "Edit profile"
+msgstr "プロフィールを編集"
+
+#: trang_tranh/templates/trang_tranh/settings.html:55
+msgid "Log in"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/settings.html:61
+msgid "Language"
+msgstr "言語"
+
+#: trang_tranh/templates/trang_tranh/settings.html:73
+msgid "Search settings"
+msgstr "設定で検索"
+
+#: trang_tranh/views.py:202
+msgid "Activate Your Trang tranh Account"
+msgstr ""

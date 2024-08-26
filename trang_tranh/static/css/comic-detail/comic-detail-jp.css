@@ -59,7 +59,7 @@ h2,
 h3,
 h4,
 h6 {
-  margin: 4px;
+  margin-block: 4px;
 }
 
 .first__comic-title h1 {
@@ -115,7 +115,8 @@ h6 {
   .nav__notifications,
   .nav__account,
   .nav__login,
-  .nav__settings {
+  .nav__settings,
+  .nav__create {
     display: none;
   }
 
@@ -174,15 +175,11 @@ h6 {
     inline-size: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
-    inline-size: 80px;
+    inline-size: 40px;
   }
 
   .start__more-info {
     display: none;
-  }
-
-  .last__read-count span {
-    text-transform: full-width;
   }
 
   .end__interactions {
@@ -221,10 +218,146 @@ h6 {
 
   }
 
-  .info__number {
-    text-transform: full-width;
+}
+
+.info__number {
+  text-transform: full-width;
+}
+
+.last__read-count span {
+  text-transform: full-width;
+}
+
+
+@media (orientation: portrait) {
+  nav {
+    block-size: 100vw;
+    background-color: var(--background-color);
+    /* display: grid; */
+    z-index: 3;
+    /* grid-template-rows: repeat(5, 1fr); */
+    /* align-items: center; */
+    /* justify-items: center; */
+    position: fixed;
+    top: 0px;
+    inline-size: 50px;
+    border-inline-end-color: var(--gray-like-color);
+    border-inline-end-width: 1px;
+    border-inline-end-style: solid;
   }
 
+  .nav__logo {
+    display: none;
+  }
+
+  .nav__description {
+    display: none;
+  }
+
+  .nav__element {
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  .nav__login {
+    display: none;
+  }
+
+  .nav__back img {
+    transform: rotate(90deg);
+  }
+
+  .nav__home,
+  .nav__feed,
+  .nav__notifications,
+  .nav__account,
+  .nav__login,
+  .nav__settings,
+  .nav__create {
+    display: none;
+  }
+
+  .nav__account .nav__icon img {
+    inline-size: 24px;
+    aspect-ratio: 1/1;
+  }
+
+  .nav__settings--authenticated {
+    display: none;
+  }
+
+  main {
+    inline-size: 100vh;
+  }
+
+  .main__content {
+    padding-inline-start: 50px;
+    display: grid;
+    grid-template-columns: 100vw 1fr;
+  }
+
+  .start__overview {
+    inline-size: 100vw;
+    display: grid;
+    padding: 4px;
+    grid-template-columns: 1fr 1fr;
+    aspect-ratio: 1 / 1;
+  }
+
+  .overview__comic-cover img {
+    inline-size: 100%;
+    border-radius: 4px;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+  }
+
+  .overview__at-glance {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .at-glance__first {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .at-glance__last {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .publisher__avatar img {
+    inline-size: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    inline-size: 40px;
+  }
+
+
+
+  .start__more-info {
+    display: none;
+  }
+
+  .end__interactions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    position: sticky;
+    right: 0px;
+  }
+
+  .chapter {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+  }
+
+  .chapter__cover img {
+    inline-size: 100%;
+    aspect-ratio: 1 /1;
+    object-fit: cover;
+  }
 }
 
 @media (pointer: fine) {

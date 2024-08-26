@@ -240,7 +240,7 @@ def activate(request, uidb64, token):
 class PostCreateView(LoginRequiredMixin, FormView):
     form_class = PostForm
     template_name = "trang_tranh/post_form.html"
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("feed")
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
