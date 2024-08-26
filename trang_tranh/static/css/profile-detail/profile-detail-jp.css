@@ -23,8 +23,13 @@
   --icon-filter: invert(0%) sepia(8%) saturate(7491%) hue-rotate(179deg) brightness(100%) contrast(100%);
   --primary-color-filter: invert(71%) sepia(20%) saturate(1192%) hue-rotate(307deg) brightness(120%) contrast(102%);
   --hover-color: rgb(222, 222, 222);
+  --profile-bio-color: rgb(238, 238, 238);
+  --profile-bio-stroke-color:  #6969697e;
 
   @media (prefers-color-scheme: dark) {
+
+    --profile-bio-stroke-color: #7E7E7E;
+    --profile-bio-color: #101010;
     --background-color: black;
     --text-color: white;
     --gray-like-color: rgb(39, 39, 39);
@@ -226,6 +231,7 @@ a {
   .end__bio--None,
   .end__bio--v-rl,
   .end__bio--v-lr {
+    inline-size: 100%;
     padding: 12px;
     aspect-ratio: 1 /1;
     background-color: var(--profile-bio-color);
