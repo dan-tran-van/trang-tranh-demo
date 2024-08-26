@@ -453,8 +453,7 @@ pre {
   .post__content--v-rl .content__text {
     display: flex;
     justify-content: center;
-
-    padding-inline-start: min(calc((100vh - 330px - 100vw) / 2), calc((100vh - 100vw - 170px) / 2  ));
+    padding-inline: min(calc((100vh - 330px - 100vw) / 2), calc((100vh - 100vw - 170px) / 2  ));
   }
 
   .post__content--v-rl .content__text pre {
