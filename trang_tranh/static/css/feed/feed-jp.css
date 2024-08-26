@@ -238,6 +238,7 @@ a {
   }
 
   .content__media.content__media--v-rl {
+    display: flex;
     overflow: scroll;
     padding-inline-start: calc((100vh - 500px) / 2);
   }
