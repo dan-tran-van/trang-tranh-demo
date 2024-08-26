@@ -458,7 +458,7 @@ pre {
   }
 
   .post__content--v-rl .content__text pre {
-    inline-size: 100vw;
+    inline-size: 100%;
   }
 
   .content__media--v-rl img {
