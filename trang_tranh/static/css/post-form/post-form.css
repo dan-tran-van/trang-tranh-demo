@@ -90,6 +90,26 @@ label {
   filter: var(--icon-filter);
 }
 
+#writing-mode-selector-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  gap: 12px;
+  border-color: var(--gray-like-color);
+  background-color: var(--gray-like-color);
+  color: var(--text-color);
+}
+
+#writing-mode-selector-dialog::backdrop {
+  background-color: var(--background-color);
+  opacity: 0.75;
+}
+
+.writing-mode-choice {
+  padding: 8px;
+  border-radius: 4px;
+}
+
 @media (orientation: landscape) {
   nav {
     inline-size: 280px;
@@ -512,4 +532,8 @@ label {
     cursor: pointer;
   }
 
+  .writing-mode-choice:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+  }
 }

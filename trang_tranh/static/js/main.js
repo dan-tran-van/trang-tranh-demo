@@ -20,6 +20,9 @@ window.addEventListener("load", (e) => {
     TextArea.value = '';
     FileElem.value = '';
     WritingModeElem.value = selectedWritingMode;
+    WritingModeSelectorDialog.close();
+    PhotoLimitErrorDialog.close();
+    NotImagesErrorDialog.close();
 })
 
 let selectedWritingMode = "h-tb";
