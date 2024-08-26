@@ -265,6 +265,7 @@ a {
   main {
     block-size: 100%;
     padding-block-start: 80px;
+    padding-block-end: 140px;
   }
 
 
