@@ -86,7 +86,9 @@ a {
   display: none;
 }
 
-
+pre {
+  white-space: pre-wrap;
+}
 @media (orientation: landscape) {
 
   .nav__description,

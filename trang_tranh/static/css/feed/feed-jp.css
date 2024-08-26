@@ -80,6 +80,10 @@ a {
   display: none;
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 
 @media (orientation: landscape) {
 
@@ -454,7 +458,7 @@ a {
   }
 
   .post__content--v-rl .content__text pre {
-    inline-size: 100%;
+    inline-size: 100vw;
   }
 
   .content__media--v-rl img {
