@@ -36,10 +36,104 @@ body {
   color: var(--primary-color);
 }
 
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+#login-btn {
+  block-size: 40px;
+  color: var(--text-color);
+  background-color: var(--gray-like-color);
+  font-size: 16px;
+  border-radius: 8px;
+  border-color: var(--gray-like-color);
+  /* inline-size: 500px; */
+  inline-size: 100%;
+  border-style: solid;
+}
+
+#signup-btn {
+  font-size: 16px;
+  block-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+  background-color: var(--gray-like-color);
+  border-radius: 8px;
+  border-color: var(--gray-like-color);
+  inline-size: 100%;
+}
+
+.main__decoration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__decoration img {
+  inline-size: 70%;
+}
+
+.login-form__logo img{
+  inline-size: 36px;
+}
+
+#lost-password a {
+  color: var(--strong-gray-color);
+}
+
 @media (orientation: landscape) {
 
+  main {
+    inline-size: 100vw;
+    block-size: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .main__login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   form {
-    inline-size: 500px;
+    inline-size: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .form__input {
+    inline-size: 100%;
+  }
+
+  .form__input input {
+    inline-size: 100%;
+    background-color: var(--gray-like-color);
+    border-radius: 8px;
+    padding: 8px;
+    border-style: solid;
+    border-color: var(--gray-like-color);
+    color: var(--text-color);
+  }
+
+
+}
+
+@media (orientation: portrait) {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  form {
+    inline-size: 100%;
     display: flex;
     flex-direction: column;
     padding: 12px;
@@ -55,13 +149,21 @@ body {
     border-color: var(--gray-like-color);
     color: var(--text-color);
   }
-
-}
-
-@media (orientation: portrait) {
-  
 }
 
 @media (pointer: fine) {
-  
+  #lost-password a:hover {
+    color: var(--text-color);
+  }
+
+  #login-btn:hover {
+    border-color: var(--hover-color);
+    background-color: var(--hover-color);
+    cursor: pointer;
+  }
+
+  #signup-btn:hover {
+    border-color: var(--hover-color);
+    background-color: var(--hover-color);   
+  }
 }

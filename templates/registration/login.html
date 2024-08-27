@@ -3,12 +3,7 @@
 {% load static %}
 
 {% block title %}
-  <title>
-    {% blocktranslate %}
-      Log in
-    {% endblocktranslate %}
-    | Trang tranh
-  </title>
+  <title>{% translate "Login | Trang tranh" %}</title>
 {% endblock title %}
 
 {% block stylesheets %}
@@ -18,40 +13,56 @@
 {% block meta %}{% endblock meta %}
 
 {% block content %}
-
-  {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
-
-  {% if next %}
-    {% if user.is_authenticated %}
-      <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
-    {% else %}
-      <p>Please login to see this page.</p>
-    {% endif %}
-  {% endif %}
-
-  {% if not user.is_authenticated %}
-
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <div class="form__input form__username">
-      {{ form.username }}
+  <main>
+    <div class="main__decoration">
+      <img src="{% static "images/icons/svgs/login/login-page-decoration.svg" %}" alt="{% translate "Decoration image" %}">
     </div>
-    <div class="form__input form__password">
-      {{ form.password }}
-      <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+    <div class="main__login-form">
+      <div class="login-form__logo">
+        <a href="{% url "index" %}">
+          <img src="{% static "images/icons/svgs/trang-tranh-logo.svg" %}" alt="{% translate "Logo image" %}">
+        </a>
+      </div>
+      {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+      {% endif %}
+
+      {% if next %}
+        {% if user.is_authenticated %}
+          <p>Your account doesn't have access to this page. To proceed,
+          please login with an account that has access.</p>
+        {% else %}
+          <p>Please login to see this page.</p>
+        {% endif %}
+      {% endif %}
+
+      {% if not user.is_authenticated %}
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <div class="form__input form__username">
+            {{ form.username }}
+          </div>
+          <div class="form__input form__password">
+            {{ form.password }}
+            <p id="lost-password"><a href="{% url 'password_reset' %}">Lost password?</a></p>
+          </div>
+
+          <input id="login-btn" type="submit" value="Login">
+          <input type="hidden" name="next" value="{{ next }}">
+          <div id="signup-btn">
+            <a href="{% url "signup" %}">Sign up</a>
+          </div>
+        </form>
+
+        {# Assumes you set up the password_reset view in your URLconf #}
+        
+      {% else %}
+        <p>You're alredy logged in as <a href="{{ user.userprofile.get_absolute_url }}">{{ user.username }}</a></p>
+        <a href="{% url "logout" %}">Log out?</a>
+      {% endif %}
     </div>
-    <input type="submit" value="login">
-    <input type="hidden" name="next" value="{{ next }}">
-  </form>
+  </main>
 
-  {# Assumes you set up the password_reset view in your URLconf #}
-  <p><a href="{% url "signup" %}">Sign up</a></p>
-
-  {% else %}
-    <p>You're alredy logged in as <a href="{{ user.userprofile.get_absolute_url }}">{{ user.username }}</a></p>
-    <a href="{% url "logout" %}">Log out?</a>
-  {% endif %}
+  
 {% endblock content %}
