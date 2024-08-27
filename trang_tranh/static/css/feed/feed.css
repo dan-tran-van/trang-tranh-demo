@@ -134,6 +134,9 @@ a {
   background-color: var(--gray-like-color);
 }
 
+pre {
+  white-space: pre-wrap;
+}
 
 @media (orientation: landscape) {
 

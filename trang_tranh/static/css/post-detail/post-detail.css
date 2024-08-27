@@ -9,6 +9,10 @@
   display: none;
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 :root {
   --primary-color: #FFB7C5;
   --background-color: white;
