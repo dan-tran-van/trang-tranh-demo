@@ -626,6 +626,11 @@ a {
     padding-block-start: 10px;
   }
 
+  .post__content--v-lr {
+    writing-mode: vertical-lr;
+    font-family: "Noto Sans Mongolian", sans-serif;
+  }
+
   .content__text {
     display: flex;
     justify-content: center;
