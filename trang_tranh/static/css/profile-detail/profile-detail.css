@@ -148,6 +148,10 @@ a {
   writing-mode: vertical-rl;
 }
 
+.container__end--v-lr {
+  writing-mode: vertical-lr;
+}
+
 .name__username {
   color: gray;
   font-size: 12px;
@@ -263,9 +267,10 @@ a {
 
   }
 
-  .container__end--v-rl {
+  .container__end--v-rl,
+  .container__end--v-lr {
     inline-size: 250px;
-  };
+  }
 
   .end__bio {
     padding: 12px;
@@ -377,12 +382,17 @@ a {
 
   .post__content {}
 
-  .post__content--v-rl {
+  .post__content--v-rl,
+  .post__content--v-lr {
     block-size: 100%;
     overflow: scroll;
     writing-mode: vertical-rl;
     inline-size: 500px;
     padding-block-start: calc((100% - 500px) / 2);
+  }
+
+  .post__content--v-lr {
+    writing-mode: vertical-lr;
   }
 
   .content__text {
@@ -409,7 +419,8 @@ a {
     border-style: solid;
   }
 
-  .content__media--v-rl {
+  .content__media--v-rl,
+  .content__media--v-lr {
     flex-direction: column;
   }
 
@@ -606,7 +617,8 @@ a {
     inline-size: calc(100vw - 20px);
   }
 
-  .post__content--v-rl {
+  .post__content--v-rl,
+  .post__content--v-lr {
     block-size: 100%;
     overflow: scroll;
     writing-mode: vertical-rl;
@@ -643,7 +655,8 @@ a {
     border-style: solid;
   }
 
-  .content__media--v-rl {
+  .content__media--v-rl,
+  .content__media--v-lr {
     flex-direction: column;
   }
 
@@ -727,7 +740,8 @@ a {
     inline-size: 100%;
   }
 
-  .container__end--v-rl {
+  .container__end--v-rl,
+  .container__end--v-lr {
     block-size: 100%;
     aspect-ratio: 1 / 1;
   }
