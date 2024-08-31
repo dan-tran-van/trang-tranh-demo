@@ -429,9 +429,11 @@ pre {
 
   .post__content--v-lr .content__text pre {
     writing-mode: vertical-lr;
-    border-block-start-width: 1px;
-    border-block-start-color: var(--strong-gray-color);
-    border-block-start-style: solid;
+    max-block-size: 500px;
+    overflow: scroll;
+    border-block-width: 1px;
+    border-block-color: var(--primary-color);
+    border-block-style: solid;
   }
 
   .content__media--v-rl img,
