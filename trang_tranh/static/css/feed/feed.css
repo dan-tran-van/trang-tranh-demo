@@ -466,6 +466,7 @@ pre {
     flex: none;
     overflow: scroll;
     flex-direction: row;
+    z-index: 3;
     inline-size: 100%;
     block-size: 80px;
     align-items: center;

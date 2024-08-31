@@ -493,6 +493,7 @@ a {
     bottom: 0px;
     flex-direction: row;
     position: fixed;
+    z-index: 3;
     background-color: var(--background-color);
     border-block-start-width: 1px;
     border-block-start-color: var(--gray-like-color);
