@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-26 07:28+0700\n"
+"POT-Creation-Date: 2024-09-05 20:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -337,7 +337,9 @@ msgstr ""
 
 #: trang_tranh/templates/index.html:7 trang_tranh/templates/index.html:59
 #: trang_tranh/templates/trang_tranh/comic_detail.html:38
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:34
 #: trang_tranh/templates/trang_tranh/comic_translation_detail.html:33
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:34
 #: trang_tranh/templates/trang_tranh/feed.html:22
 #: trang_tranh/templates/trang_tranh/notifications.html:15
 #: trang_tranh/templates/trang_tranh/post_detail.html:34
@@ -436,7 +438,9 @@ msgid "Comic"
 msgstr ""
 
 #: trang_tranh/templates/trang_tranh/comic_detail.html:27
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:23
 #: trang_tranh/templates/trang_tranh/comic_translation_detail.html:22
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:23
 #: trang_tranh/templates/trang_tranh/post_detail.html:23
 #: trang_tranh/templates/trang_tranh/post_form.html:23
 #: trang_tranh/templates/trang_tranh/profile_detail.html:26
@@ -444,9 +448,11 @@ msgid "Back"
 msgstr ""
 
 #: trang_tranh/templates/trang_tranh/comic_detail.html:96
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:46
 #: trang_tranh/templates/trang_tranh/comic_translation_detail.html:88
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:46
 msgid "About"
-msgstr ""
+msgstr "について"
 
 #: trang_tranh/templates/trang_tranh/comic_detail.html:99
 #: trang_tranh/templates/trang_tranh/comic_translation_detail.html:91
@@ -461,6 +467,52 @@ msgstr ""
 #: trang_tranh/templates/trang_tranh/comic_detail.html:107
 #: trang_tranh/templates/trang_tranh/comic_translation_detail.html:99
 msgid "Schedule"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:21
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:21
+msgid "Left arrow icon"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:32
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:32
+msgid "Home icon"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:44
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:50
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:56
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:62
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:68
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:44
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:50
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:56
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:62
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:68
+msgid "Info icon"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:64
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:64
+#: trang_tranh/templates/trang_tranh/post_detail.html:187
+msgid "Share"
+msgstr "シェア"
+
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:70
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:70
+msgid "Add to library"
+msgstr "ライブラリに追加"
+
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:82
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:84
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:82
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:84
+msgid "Comic cover"
+msgstr ""
+
+#: trang_tranh/templates/trang_tranh/comic_detail_new.html:96
+#: trang_tranh/templates/trang_tranh/comic_translation_detail_new.html:96
+msgid "Chart icon"
 msgstr ""
 
 #: trang_tranh/templates/trang_tranh/comic_not_available.html:6
@@ -485,10 +537,6 @@ msgstr ""
 #: trang_tranh/templates/trang_tranh/post_detail.html:6
 msgid " on"
 msgstr ""
-
-#: trang_tranh/templates/trang_tranh/post_detail.html:187
-msgid "Share"
-msgstr "シェア"
 
 #: trang_tranh/templates/trang_tranh/post_form.html:6
 msgid "New Post"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-26 07:24+0700\n"
+"POT-Creation-Date: 2024-09-05 20:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
 #: templates/registration/logged_out.html:8
 msgid "Go to home page"
 msgstr ""
@@ -25,11 +26,16 @@ msgstr ""
 msgid "Click here to login again."
 msgstr ""
 
-#: templates/registration/login.html:7
-msgid ""
-"\n"
-"      Log in\n"
-"    "
+#: templates/registration/login.html:6
+msgid "Login | Trang tranh"
+msgstr ""
+
+#: templates/registration/login.html:18
+msgid "Decoration image"
+msgstr ""
+
+#: templates/registration/login.html:24
+msgid "Logo image"
 msgstr ""
 
 #: templates/registration/signup.html:8

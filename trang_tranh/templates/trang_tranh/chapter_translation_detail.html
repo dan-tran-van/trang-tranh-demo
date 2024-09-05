@@ -3,7 +3,11 @@
 {% load static %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static "css/chapter-detail/chapter-detail.css" %}">
+    {% if LANGUAGE_CODE == 'ja' %}
+        <link rel="stylesheet" href="{% static "css/chapter-detail/chapter-detail-jp.css" %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static "css/chapter-detail/chapter-detail.css" %}">
+    {% endif %}
 {% endblock stylesheets %}
 {% block title %}
     <title>#{{ chapter_translation.chapter.number }} - {{ chapter_translation.comic_translation.title }} | Trang tranh</title>
