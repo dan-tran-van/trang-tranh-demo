@@ -104,6 +104,7 @@ a {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   padding: 12px;
+  aspect-ratio: 2 / 1;
 }
 
 .at-glance__cover img {
@@ -116,18 +117,35 @@ a {
 .at-glance__info {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .at-glance__info .info__title {
-  font-size: x-large;
-  font-weight: 600;
+  font-size: large;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info__authors {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .info__publisher {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 4fr;
   align-items: center;
   gap: 12px;
+}
+
+.publisher__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 
@@ -245,10 +263,6 @@ a {
     }
   }
 
-  .main__at-glance {
-    display: flex;
-    justify-content: center;
-  }
 
   .at-glance__wrapper {
     inline-size: 800px;
@@ -258,48 +272,17 @@ a {
     padding: 12px;
   }
 
-  .at-glance__cover img {
-    inline-size: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-
-  .at-glance__info {
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-  }
+  
 
   .at-glance__info .info__title {
-    font-size: x-large;
-    font-weight: 600;
+    white-space: wrap;
   }
 
-  .info__publisher {
-    display: grid;
-    grid-template-columns: 52px 1fr;
-    align-items: center;
-    gap: 12px;
+  .info__authors {
+    overflow: hidden;
+    white-space: wrap;
   }
 
-
-  .views__wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-  }
-
-
-  .publisher__avatar img {
-    display: flex;
-    inline-size: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .publisher__name {}
 
   .main__chapters {
     display: flex;
@@ -396,6 +379,7 @@ a {
   .main__at-glance {
     inline-size: 100%;
   }
+
   .at-glance__wrapper {
     inline-size: 100%;
   }
