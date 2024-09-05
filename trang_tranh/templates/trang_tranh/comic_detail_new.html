@@ -117,7 +117,7 @@
     </div>
     <div class="main__chapters">
         <div class="chapters__wrapper">
-            {% for chapter in comic.chapter_set.all %}
+            {% for chapter in comic.chapter_set.all|dictsortreversed:"counter" %}
                 {% if chapter.is_valid %}
                     <a href="{{ chapter.get_absolute_url }}">
                         <div class="chapter">

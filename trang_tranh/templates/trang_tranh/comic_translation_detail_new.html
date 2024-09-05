@@ -117,7 +117,7 @@
     </div>
     <div class="main__chapters">
         <div class="chapters__wrapper">
-            {% for chapter_translation in comic_translation.chaptertranslation_set.all %}
+            {% for chapter_translation in comic_translation.chaptertranslation_set.all|dictsortreversed:"chapter.counter" %}
                 {% if chapter_translation.is_valid %}
                     <a href="{{ chapter_translation.get_absolute_url }}">
                         <div class="chapter">
