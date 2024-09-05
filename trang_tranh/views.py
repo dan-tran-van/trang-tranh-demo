@@ -39,7 +39,7 @@ def comic_detail(request, pk):
         context = {
             "comic": comic,
         }
-        return render(request, "trang_tranh/comic_detail.html", context=context)
+        return render(request, "trang_tranh/comic_detail_new.html", context=context)
     else:
         if comic.comictranslation_set.all():
             found = False
@@ -54,7 +54,7 @@ def comic_detail(request, pk):
                     }
                     return render(
                         request,
-                        "trang_tranh/comic_translation_detail.html",
+                        "trang_tranh/comic_translation_detail_new.html",
                         context=context,
                     )
             if not found:
