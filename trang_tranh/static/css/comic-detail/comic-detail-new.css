@@ -389,7 +389,6 @@ a {
 
   main {
     inline-size: 100%;
-    padding: 12px;
     padding-block-start: 50px;
     padding-block-end: 80px;
   }
@@ -397,7 +396,9 @@ a {
   .main__at-glance {
     inline-size: 100%;
   }
-
+  .at-glance__wrapper {
+    inline-size: 100%;
+  }
 
   .chapters__wrapper {
     inline-size: 100%;
