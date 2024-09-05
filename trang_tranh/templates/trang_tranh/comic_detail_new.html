@@ -1,0 +1,142 @@
+{% extends "index.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    <title>{{ comic.title }} | Trang tranh</title>
+{% endblock title %}
+
+{% block stylesheets %}
+    {% if LANGUAGE_CODE == 'ja' %}
+        <link rel="stylesheet" href="{% static "css/comic-detail/comic-detail-new-jp.css" %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static "css/comic-detail/comic-detail-new.css" %}">
+    {% endif %}
+{% endblock stylesheets %}
+
+{% block nav__start %}
+    <div class="nav__element nav__back">
+        <a href="javascript:history.go(-1)">
+            <div class="nav__icon">
+                <img src="{% static "images/icons/svgs/arrow_back_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Left arrow icon" %}">
+            </div>
+            <div class="nav__description">{% translate "Back" %}</div>
+        </a>
+    </div>
+{% endblock nav__start %}
+
+{% block nav__home %}
+    <div class="nav__element nav__home">
+        <a href="{% url "index" %}">
+            <div class="nav__icon">
+                <img src="{% static "images/icons/svgs/nav/home_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Home icon" %}">
+            </div>
+            <div class="nav__description">{% translate "Home" %}</div>
+        </a>
+    </div>
+{% endblock nav__home %}
+
+{% block query %}
+    <div class="query">
+        <div class="query__interactions">
+            <div class="interactions__item interactions__about">
+                <div class="item__icon">
+                    <img src="{% static "images/icons/svgs/info_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Info icon" %}" class="icon--filtered">
+                </div>
+                <div class="item__description">{% translate "About" %}</div>
+            </div>
+            <div class="interactions__item interactions__like">
+                <div class="item__icon">
+                    <img src="{% static "images/icons/svgs/favorite_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Info icon" %}" class="icon--filtered">
+                </div>
+                <div class="item__description">0</div>
+            </div>
+            <div class="interactions__item interactions__feed">
+                <div class="item__icon">
+                    <img src="{% static "images/icons/svgs/nav/alternate_email_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Info icon" %}" class="icon--filtered">
+                </div>
+                <div class="item__description">0</div>
+            </div>
+            <div class="interactions__item interactions__share">
+                <div class="item__icon">
+                    <img src="{% static "images/icons/svgs/share_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Info icon" %}" class="icon--filtered">
+                </div>
+                <div class="item__description">{% translate "Share" %}</div>
+            </div>
+            <div class="interactions__item interactions__add-to-library">
+                <div class="item__icon">
+                    <img src="{% static "images/icons/svgs/library_add_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Info icon" %}" class="icon--filtered">
+                </div>
+                <div class="item__description">{% translate "Add to library" %}</div>
+            </div>
+        </div>
+    </div>
+{% endblock query %}
+
+{% block main %}
+<main>
+    <div class="main__at-glance">
+        <div class="at-glance__wrapper">
+            <div class="at-glance__cover">
+                {% if comic.square_cover %}
+                    <img loading='lazy' src="{{ comic.square_cover.url }}" alt="{% translate "Comic cover" %}">
+                {% else %}
+                    <img loading='lazy' src="{{ comic.vertical_cover.url }}" alt="{% translate "Comic cover" %}">
+                {% endif %}
+            </div>
+            <div class="at-glance__info">
+                <div class="info__title">
+                    {{ comic.title }}
+                </div>
+                <div class="info__authors">
+                    {{ comic.display_authors }}
+                </div>
+                <div class="info__views">
+                    <div class="views__wrapper">
+                        <img src="{% static "images/icons/svgs/bar_chart_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="{% translate "Chart icon" %}" class="icon--filtered">
+                        <span>
+                            {{ comic.read_count }}
+                        </span>
+                    </div>
+                </div>
+                <div class="info__publisher">
+                    <div class="publisher__avatar">
+                        <a href="{{ comic.publisher.get_absolute_url }}">
+                            <img loading='lazy' src="{{ comic.publisher.avatar.url }}" alt="Publisher avatar">
+                        </a>
+                    </div>
+                    <div class="publisher__name">
+                        <a href="{{ comic.publisher.get_absolute_url }}">
+                            {{ comic.publisher.name }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="main__chapters">
+        <div class="chapters__wrapper">
+            {% for chapter in comic.chapter_set.all %}
+                {% if chapter.is_valid %}
+                    <a href="{{ chapter.get_absolute_url }}">
+                        <div class="chapter">
+                            <div class="chapter__cover">
+                                <img loading='lazy' src="{{ chapter.cover.url }}" alt="Chapter cover">
+                            </div>
+                            <div class="chapter__info">
+                                <div class="info__number">
+                                    #{{ chapter.number }}
+                                </div>
+                                <div class="info__title">
+                                    {{ chapter.title }}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock main %}
