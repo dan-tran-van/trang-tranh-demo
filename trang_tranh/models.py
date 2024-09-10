@@ -169,6 +169,12 @@ class Comic(models.Model):
 
     genre = models.ManyToManyField("Genre", verbose_name=_("genre"))
 
+    liked_by = models.ManyToManyField(
+        "UserProfile", 
+        verbose_name=_("liked by"),
+        related_name="liked_comics"
+    )
+
     def __str__(self):
         """String for representing the comic"""
         return f"{self.title} - {self.publisher}"
@@ -610,10 +616,17 @@ class Post(models.Model):
 
     like = models.IntegerField(_("like count"), editable=False, default=0)
 
+    liked_by = models.ManyToManyField(
+        "UserProfile", 
+        verbose_name=_("liked by"),
+        related_name="liked_posts",
+    )
+
     reply_to = models.ForeignKey(
         "self",
         verbose_name=_("reply to"),
         on_delete=models.CASCADE,
+        related_name="replies",
         blank=True,
         null=True,
     )

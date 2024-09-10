@@ -93,14 +93,14 @@
                             <div class="warper__interaction warper__like">
                                 <img src="{% static "images/icons/svgs/favorite_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Favorite icon" class="gray--filtered">
                                 <div class="like__count">
-                                    {{ post.like }}
+                                    {{ post.liked_by.count }}
                                 </div>
                             </div>
                             <a href="{{ post.get_absolute_url }}">
                                 <div class="warper__interaction warper__reply">
                                     <img src="{% static "images/icons/svgs/reply_24dp_FILL0_wght400_GRAD0_opsz24.svg" %}" alt="Reply icon" class="gray--filtered">
                                     <div class="reply__count">
-                                        {{ post.post_set.all.count }}
+                                        {{ post.replies.all.count }}
                                     </div>
                                 </div>
                             </a>

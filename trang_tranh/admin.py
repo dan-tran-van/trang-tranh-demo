@@ -176,7 +176,6 @@ class PostAdmin(admin.ModelAdmin):
         "writing_mode",
         "created_time",
         "last_modified",
-        "like",
         "reply_to",
     )
     inlines = [PostMediaInline, PostInline]

@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required 
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.paginator import Paginator
@@ -30,6 +31,7 @@ def index(request):
     return render(request, "index.html", context=context)
 
 
+@ensure_csrf_cookie
 def comic_detail(request, pk):
     comic = get_object_or_404(Comic, pk=pk)
     if not comic.is_valid():
@@ -132,6 +134,7 @@ def chapter_translation_detail(request, pk, lang):
 
 
 @login_required
+@ensure_csrf_cookie
 def feed(request):
     page_number = request.GET.get("page", 1)
     paginator = Paginator(Post.objects.all().order_by("-created_time"), 5)
@@ -144,10 +147,11 @@ def feed(request):
     return render(request, "trang_tranh/feed.html", context=context)
 
 
+@ensure_csrf_cookie
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     page_number = request.GET.get("page", 1)
-    paginator = Paginator(post.post_set.all().order_by("-created_time"), 3)
+    paginator = Paginator(post.replies.all().order_by("-created_time"), 3)
     new_replies = paginator.get_page(page_number)
 
     context = {
@@ -158,6 +162,7 @@ def post_detail(request, pk):
     return render(request, "trang_tranh/post_detail.html", context=context)
 
 
+@ensure_csrf_cookie
 def profile_detail(request, pk):
     profile = get_object_or_404(UserProfile, pk=pk)
     page_number = request.GET.get("page", 1)
@@ -183,6 +188,7 @@ def profile_chapter_updates(request, pk):
 
 
 @login_required
+@ensure_csrf_cookie
 def notification(request):
     return render(request, "trang_tranh/notifications.html")
 
